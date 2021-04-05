@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix
+    .sourceMaps(false, 'source-map')
     .copyDirectory('resources/_public', 'public')
     .js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [])
