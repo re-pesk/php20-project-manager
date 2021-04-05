@@ -19,7 +19,8 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "veewee/composer-run-parallel": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +44,14 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "npm-run-watch-poll": [
+            "npm run watch-poll"
+        ],
+        "php-artisan-serve": [
+            "@php artisan serve"
+        ],
+        "start": "@parallel npm-run-watch-poll php-artisan-serve"
     },
     "extra": {
         "laravel": {
