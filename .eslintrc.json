@@ -1,0 +1,64 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "function-paren-newline": ["error", "consistent"],
+        "indent": ["error", 4],
+        "max-len": ["error", {
+            "code": 120,
+            "ignoreComments": true
+        }],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": {
+                "consistent": true
+            },
+            "ObjectPattern": {
+                "consistent": true
+            },
+            "ImportDeclaration": {
+                "consistent": true
+            },
+            "ExportDeclaration": {
+                "consistent": true
+            }
+        }],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/prop-types": "off"
+    },
+    "ignorePatterns": [
+        "temp.js",
+        "**/vendor/**/*.js",
+        "*.min.js",
+        "**/*.code-workspace",
+        ".vscode/*"
+    ],
+    "overrides": [{
+        "files": [
+            "*.test.jsx",
+            "*.spec.jsx",
+            "*.test.js",
+            "*.spec.js"
+        ],
+        "rules": {
+            "no-undef": "off"
+        }
+    }]
+}

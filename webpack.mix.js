@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const mix = require('laravel-mix');
+const ESLintPlugin = require('eslint-webpack-plugin'); // +++
 
 /*
  |--------------------------------------------------------------------------
@@ -12,6 +14,7 @@ const mix = require('laravel-mix');
  */
 
 mix
+    .webpackConfig({ plugins: [new ESLintPlugin()] })
     .sourceMaps(false, 'source-map')
     .copyDirectory('resources/_public', 'public')
     .js('resources/js/app.js', 'public/js')
