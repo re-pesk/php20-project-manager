@@ -14,6 +14,5 @@ const mix = require('laravel-mix');
 mix
     .copyDirectory('resources/_public', 'public')
     .js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+    .postCss('resources/css/app.css', 'public/css', [])
+    .browserSync({ proxy: '127.0.0.1:8000', ui: false });
