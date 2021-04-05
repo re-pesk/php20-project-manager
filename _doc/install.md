@@ -302,3 +302,23 @@ npm install -g react-devtools
       .webpackConfig({ plugins: [new ESLintPlugin()] })
       <...>
   ```
+
+## Sanctum
+
+- Diegimas, konfigūracijos viešinimas, migracija
+
+  ```yaml
+  composer require laravel/sanctum
+  php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+  php artisan migrate
+  ```
+
+- `app/Http/Kernel.php` pridėti
+
+  ```php
+  'api' => [
+      \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+      'throttle:api',
+      \Illuminate\Routing\Middleware\SubstituteBindings::class,
+  ],
+  ```
