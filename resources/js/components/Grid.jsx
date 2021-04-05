@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Panel from './Panel';
 
-export default function Grid({ data }) {
+function Grid({ data }) {
     return (
-        <>
+        <div className="grid grid-cols-1 md:grid-cols-2">
             {data.map(
                 (panelData, index) => {
                     const { link, description } = panelData;
@@ -12,7 +12,7 @@ export default function Grid({ data }) {
                     return (<Panel key={key} link={link} description={description} />);
                 },
             )}
-        </>
+        </div>
     );
 }
 
