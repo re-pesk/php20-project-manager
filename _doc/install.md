@@ -186,13 +186,7 @@ Atnaujinamas tinklalalpis matomas `http://127.0.0.1:3000` adresu
       <...>;
   ```
 
-### `react-devtools`
-
-- Įdiegti paketą
-
-```yml
-npm install -g react-devtools
-```
+### React'o programuotojo įrankiai
 
 - Chrome įdiegti [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) plėtinį
 
