@@ -6,7 +6,7 @@ import App from './App';
 
 const router = (
     <Router>
-        <App data={window.welcomeData} />
+        <App />
     </Router>
 );
 
