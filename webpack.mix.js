@@ -17,7 +17,7 @@ mix
     .webpackConfig({ plugins: [new ESLintPlugin()] })
     .sourceMaps(false, 'source-map')
     .copyDirectory('resources/_public', 'public')
-    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/main.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [])
     .react()
     .browserSync({ proxy: '127.0.0.1:8000', ui: false });
