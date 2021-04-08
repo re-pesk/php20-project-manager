@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
-function User() {
+export default function User() {
     return (
         <Container className="mt-5">
             <Row className="justify-content-center">
@@ -16,7 +15,3 @@ function User() {
         </Container>
     );
 }
-
-export default User;
-
-ReactDOM.render(<User />, document.getElementById('user'));
