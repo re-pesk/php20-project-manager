@@ -12,5 +12,5 @@ const router = (
 
 render(
     router,
-    document.getElementById('root'),
+    document.getElementById('app'),
 );
