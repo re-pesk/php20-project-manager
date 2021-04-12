@@ -2,12 +2,14 @@
 
 # Laravelis su Sanctum API ir React'u
 
+Veiksmai, atlikti kuriant paruoštuką
+
 ## Backendas
 
 ### `Laravel'io` instaliavimas
 
   ```yaml
-  composer create-project laravel/laravel research-db
+  composer create-project laravel/laravel php20-project-manager
   cd reasearch-db
   mv README.md README-orig.md
   echo '# research-db' > README.md
