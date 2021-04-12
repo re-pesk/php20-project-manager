@@ -18,9 +18,15 @@ export default function Navigation() {
                 </LinkContainer>
             </Nav>
             <Nav>
-                <Nav.Link href="login">Login</Nav.Link>
-                <Nav.Link href="register">Register</Nav.Link>
-                <Nav.Link href="logout">Logout</Nav.Link>
+                <LinkContainer to="/login">
+                    <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/register">
+                    <Nav.Link>Register</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/logout">
+                    <Nav.Link>Logout</Nav.Link>
+                </LinkContainer>
             </Nav>
         </Navbar>
 
