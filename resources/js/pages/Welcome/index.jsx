@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import User from './welcome/User';
-import LaravelLogo from './welcome/LaravelLogo';
-import Grid from './welcome/Grid';
-import Footer from './welcome/Footer';
+import User from './User';
+import LaravelLogo from './LaravelLogo';
+import Grid from './Grid';
+import Footer from './Footer';
 
 export default function Welcome() {
     const { isAuthenticated, laravelVersion, phpVersion, url, urlRegister } = window.welcomeData;
