@@ -40,32 +40,25 @@ export default function Grid() {
                     Laravel&apos;s robust library of first-party tools and libraries, such as
                     {' '}
                     <a href="https://forge.laravel.com" className="underline">Forge</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://vapor.laravel.com" className="underline">Vapor</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://nova.laravel.com" className="underline">Nova</a>
-                    , and
-                    {' '}
+                    {', and '}
                     <a href="https://envoyer.io" className="underline">Envoyer</a>
                     {' '}
                     help you take your projects to the next level. Pair them with powerful open source libraries like
+                    {' '}
                     <a href="https://laravel.com/docs/billing" className="underline">Cashier</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://laravel.com/docs/dusk" className="underline">Dusk</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://laravel.com/docs/broadcasting" className="underline">Echo</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://laravel.com/docs/horizon" className="underline">Horizon</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://laravel.com/docs/sanctum" className="underline">Sanctum</a>
-                    ,
-                    {' '}
+                    {', '}
                     <a href="https://laravel.com/docs/telescope" className="underline">Telescope</a>
                     , and more.
                 </>

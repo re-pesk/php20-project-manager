@@ -1,5 +1,5 @@
 import React from 'react';
-import TestBar from '../components/TestBar';
+import TestBar from '../shared/TestBar';
 
 export default function Dashboard() {
     return <TestBar />;

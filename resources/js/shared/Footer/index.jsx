@@ -1,10 +1,11 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import FooterLink from './FooterLink';
 
-export default function Footer({ data }) {
-    const { laravelVersion, phpVersion } = data;
+export default function Footer() {
+    const { laravelVersion, phpVersion } = window.welcomeData;
     return (
-        <div id="footer" className="flex justify-center mt-4 sm:items-center sm:justify-between">
+        <Container id="footer" className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between">
             <div className="text-center text-sm text-gray-500 sm:text-left">
                 <div className="flex items-center">
                     <FooterLink url="https://laravel.bigcartel.com" text="Shop" />
@@ -16,6 +17,6 @@ export default function Footer({ data }) {
                 {' '}
                 {`(PHP v${phpVersion})`}
             </div>
-        </div>
+        </Container>
     );
 }
