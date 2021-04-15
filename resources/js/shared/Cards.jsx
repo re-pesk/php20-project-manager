@@ -8,7 +8,7 @@ const Cards = () => (
             <Card.Body>
                 <Card.Title>Developerio padėjėja</Card.Title>
                 <Card.Text>
-                    Prilaikysius letenyte, kad patyliukais nepabėgtų
+                    Prilaikysiu letenyte, kad patyliukais nepabėgtų
                     {' :)'}
                 </Card.Text>
             </Card.Body>
