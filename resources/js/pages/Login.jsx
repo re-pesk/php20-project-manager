@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { useUserContext } from '../context/UserContext';
+
+const { axios } = window;
 
 const Login = () => {
     const [userData, setUserData] = useState({
@@ -8,26 +11,34 @@ const Login = () => {
         password: '',
     });
     const [state, setState] = useState(false);
-    const [responseData, setResponseData] = useState({});
+    const { userContext, setUserContext } = useUserContext();
+    const { token } = userContext;
 
-    useEffect(async () => {
-        if (state) {
-            const csrfUrl = `${process.env.MIX_BACK_URL}/sanctum/csrf-cookie`;
-            axios.get(csrfUrl)
-                .then((response) => setResponseData({ _error: false, response }))
-                .catch((error) => setResponseData({ _error: true, ...error }));
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const headers = {
-                // 'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRF-TOKEN': csrfToken,
-            };
-            const url = `${process.env.MIX_BACK_URL}/api/login`;
-            axios.post(url, userData, headers)
-                .then((response) => setResponseData({ _error: false, ...response.data }))
-                .catch((error) => setResponseData({ _error: true, ...error }));
+    useEffect(() => {
+        if (!state) {
+            return;
         }
+
+        const config = {
+            method: 'post',
+            url: '/api/login',
+            headers: {
+                Accept: 'application/json',
+            },
+            data: userData,
+        };
+
+        axios(config)
+            .then((response) => {
+                // eslint-disable-next-line no-console
+                console.log(response.data);
+                setUserContext(response.data);
+            })
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
+
         setState(false);
     }, [state]);
 
@@ -45,7 +56,7 @@ const Login = () => {
 
     return (
         <>
-            <pre>{JSON.stringify(responseData, null, 4)}</pre>
+            { token && <Redirect to="/dashboard" /> }
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}

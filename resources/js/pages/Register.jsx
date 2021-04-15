@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import { useUserContext } from '../context/UserContext';
 
 const Register = () => {
     const [userData, setUserData] = useState({
@@ -10,25 +12,37 @@ const Register = () => {
         password_confirmation: '',
     });
     const [state, setState] = useState(false);
-    const [responseData, setResponseData] = useState({});
+    const { userContext, setUserContext } = useUserContext();
+    const { token } = userContext;
 
-    useEffect(async () => {
-        if (state) {
-            const headers = {
-                Accept: 'application/json',
-            };
-            const url = `${window.location.origin}/api/register`;
-            axios.post(url, userData, { headers })
-                .then((response) => setResponseData({ _error: false, ...response.data }))
-                .catch((error) => setResponseData({ _error: true, ...error }));
+    useEffect(() => {
+        if (!state) {
+            return;
         }
+        const config = {
+            method: 'post',
+            url: '/api/register',
+            headers: {
+                Accept: 'application/json',
+            },
+            data: userData,
+        };
+
+        axios(config)
+            .then((response) => {
+                // eslint-disable-next-line no-console
+                console.log(response.data);
+                setUserContext(response.data);
+            })
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
         setState(false);
     }, [state]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // eslint-disable-next-line no-alert
-        alert(JSON.stringify(userData));
         setState(true);
     };
 
@@ -39,7 +53,9 @@ const Register = () => {
 
     return (
         <>
-            <pre>{JSON.stringify(responseData, null, 4)}</pre>
+            {
+                token && <Redirect to="/dashboard" />
+            }
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}

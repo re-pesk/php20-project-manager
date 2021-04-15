@@ -1,6 +1,6 @@
 import React from 'react';
-import TestBar from '../shared/TestBar';
+import Cards from '../shared/Cards';
 
 export default function Dashboard() {
-    return <TestBar />;
+    return <Cards />;
 }

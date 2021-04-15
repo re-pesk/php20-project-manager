@@ -28,7 +28,9 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $tokenName = env('APP_ID', 'myapp') . '-token';
+
+        $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -49,11 +51,14 @@ class AuthController extends Controller
             'email' => $request->email,
         ])->first();
 
-        if (!$user || !Hash::check($user->password, $request->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response(['message' => "Bad credencials"], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $tokenName = env('APP_ID', 'myapp') . '-token';
+
+
+        $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -65,8 +70,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-
+        auth()->user()->tokens()->delete();
         return response(['message' => 'Logged out']);
     }
 }
