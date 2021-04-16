@@ -1,17 +1,15 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import User from './welcome/User';
-import LaravelLogo from './welcome/LaravelLogo';
-import Grid from './welcome/Grid';
-import Footer from './welcome/Footer';
+import User from './User';
+import LaravelLogo from './LaravelLogo';
+import Grid from './Grid';
 
 export default function Welcome() {
-    const { isAuthenticated, laravelVersion, phpVersion, url, urlRegister } = window.welcomeData;
+    const { isAuthenticated, url, urlRegister } = window.welcomeData;
     let linkText = 'Home';
     if (isAuthenticated) {
         linkText = 'Log in';
     }
-    const footerData = { laravelVersion, phpVersion };
     return (
         <>
             <User />
@@ -41,7 +39,6 @@ export default function Welcome() {
                 <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
                     <LaravelLogo />
                     <Grid />
-                    <Footer data={footerData} />
                 </div>
             </Container>
         </>
