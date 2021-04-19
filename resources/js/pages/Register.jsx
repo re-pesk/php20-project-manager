@@ -5,30 +5,30 @@ import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../context/UserContext';
 
 const Register = () => {
+    const { userContext, setUserContext } = useUserContext();
+    const { token } = userContext;
     const [userData, setUserData] = useState({
-        name: '',
+        username: '',
         email: '',
         password: '',
         password_confirmation: '',
     });
     const [state, setState] = useState(false);
-    const { userContext, setUserContext } = useUserContext();
-    const { token } = userContext;
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!state) {
             return;
         }
         const config = {
             method: 'post',
             url: '/api/register',
-            headers: {
-                Accept: 'application/json',
-            },
+            // headers: {
+            //     Accept: 'application/json',
+            // },
             data: userData,
         };
 
-        axios(config)
+        await axios(config)
             .then((response) => {
                 // eslint-disable-next-line no-console
                 console.log(response.data);
@@ -62,9 +62,9 @@ const Register = () => {
             >
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                    name="name"
+                    name="username"
                     type="text"
-                    value={userData.name}
+                    value={userData.username}
                     onChange={handleChange}
                 />
                 <Form.Label className="mt-3">Email</Form.Label>

@@ -12,18 +12,19 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['cors']);
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
@@ -71,6 +72,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         auth()->user()->tokens()->delete();
+
         return response(['message' => 'Logged out']);
     }
 }

@@ -10,7 +10,7 @@ export default function Navigation() {
     // const { loggedOut, setLoggedOut } = useState(false);
 
     const redirectToMain = () => {
-        window.location.replace(`${process.env.MIX_BACK_URL}/`);
+        window.location.replace('/');
     };
 
     const logout = () => {
