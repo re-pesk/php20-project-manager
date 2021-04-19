@@ -6,15 +6,15 @@ import { useUserContext } from '../context/UserContext';
 const { axios } = window;
 
 const Login = () => {
+    const { userContext, setUserContext } = useUserContext();
+    const { token } = userContext;
     const [userData, setUserData] = useState({
         email: '',
         password: '',
     });
     const [state, setState] = useState(false);
-    const { userContext, setUserContext } = useUserContext();
-    const { token } = userContext;
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!state) {
             return;
         }
@@ -22,13 +22,13 @@ const Login = () => {
         const config = {
             method: 'post',
             url: '/api/login',
-            headers: {
-                Accept: 'application/json',
-            },
+            /* headers: {
+                 Accept: 'application/json',
+            }, */
             data: userData,
         };
 
-        axios(config)
+        await axios(config)
             .then((response) => {
                 // eslint-disable-next-line no-console
                 console.log(response.data);
