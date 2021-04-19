@@ -70,8 +70,8 @@ export default function Navigation() {
                     <LinkContainer to="/dashboard">
                         <Nav.Link>Dashboard</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/test">
-                        <Nav.Link>Test</Nav.Link>
+                    <LinkContainer to="/paperbase">
+                        <Nav.Link>Paperbase</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 <Nav>
