@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
 import Footer from './shared/Footer';
+import CreateTaskForm from './shared/CreateTaskForm';
 
 export default function App() {
     return (
@@ -15,6 +16,7 @@ export default function App() {
             <Switch>
                 <Route exact path="/" component={Welcome} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/create-task/:project" children={<CreateTaskForm/>} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route component={Error} />
