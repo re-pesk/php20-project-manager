@@ -14,6 +14,7 @@ class AuthController extends Controller
     {
         $this->middleware(['auth:sanctum'])->only(['logout']);
         $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
     }
 
     public function register(Request $request)
@@ -38,8 +39,6 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token,
         ];
-
-        Log::debug('User registered:', $response);
 
         return response($response, 201);
     }
@@ -69,15 +68,11 @@ class AuthController extends Controller
             'token' => $token,
         ];
 
-        Log::debug('User logged in:', $response);
-
         return response($response, 201);
     }
 
     public function logout(Request $request)
     {
-        Log::debug('User logged out:', ['user' => auth()->user(), 'token' => $request->header('Authorization')]);
-
         auth()->user()->tokens()->delete();
 
         return response(['message' => 'Logged out']);
