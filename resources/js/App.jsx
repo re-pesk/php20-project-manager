@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Navigation from './shared/Navigation';
+import Navigation from './components/Navigation';
 import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Error from './pages/Error';
-import Footer from './shared/Footer';
+import Footer from './components/Footer';
 
 export default function App() {
     return (

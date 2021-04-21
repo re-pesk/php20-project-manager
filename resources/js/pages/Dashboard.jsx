@@ -1,5 +1,5 @@
 import React from 'react';
-import Cards from '../shared/Cards';
+import Cards from '../components/Cards';
 
 export default function Dashboard() {
     return <Cards />;
