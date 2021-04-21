@@ -44,7 +44,7 @@ export default function App() {
     });
 
     return (
-        <div className="App wrapper">
+        <div className="App wrapper min-vh-100">
             <Sidebar />
             <Switch>
                 <Route exact path="/" component={Welcome} />
