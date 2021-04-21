@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useUserContext } from '../context/UserContext';
 
-export default function Navigation() {
+export default function Header() {
     const { userContext, setUserContext } = useUserContext();
     const { token } = userContext;
     // const { loggedOut, setLoggedOut } = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import Header from './components/Header';
 import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 export default function App() {
     return (
         <>
-            <Navigation />
+            <Header />
             <Switch>
                 <Route exact path="/" component={Welcome} />
                 <Route exact path="/dashboard" component={Dashboard} />
