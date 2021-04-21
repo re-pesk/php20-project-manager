@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../context/UserContext';
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
+import { Form, Button } from "react-bootstrap";
+import { useUserContext } from "../context/UserContext";
 
 const Register = () => {
     const { userContext, setUserContext } = useUserContext();
     const { token } = userContext;
     const [userData, setUserData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        username: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
     });
     const [state, setState] = useState(false);
 
@@ -20,8 +20,8 @@ const Register = () => {
             return;
         }
         const config = {
-            method: 'post',
-            url: '/api/register',
+            method: "post",
+            url: "/api/register",
             // headers: {
             //     Accept: 'application/json',
             // },
@@ -46,20 +46,16 @@ const Register = () => {
         setState(true);
     };
 
-    const handleChange = (event) => setUserData({
-        ...userData,
-        [event.target.name]: event.target.value,
-    });
+    const handleChange = (event) =>
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value,
+        });
 
     return (
         <>
-            {
-                token && <Redirect to="/dashboard" />
-            }
-            <Form
-                className="w-25 mx-auto mt-5"
-                onSubmit={handleSubmit}
-            >
+            {token && <Redirect to="/dashboard" />}
+            <Form className="w-25 mx-auto mt-5" onSubmit={handleSubmit}>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                     name="username"
@@ -90,11 +86,7 @@ const Register = () => {
                     value={userData.password_confirmation}
                     onChange={handleChange}
                 />
-                <Button
-                    className="mt-3"
-                    variant="primary"
-                    type="submit"
-                >
+                <Button className="mt-3" variant="primary" type="submit">
                     Register
                 </Button>
             </Form>
