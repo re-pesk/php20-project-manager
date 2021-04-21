@@ -46,16 +46,16 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         // KAROLIS
-        $request->validate([
+       $validation = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'priority_id' => 'required',
+            'priority_id' => 'required|integer|min:1|max:3',
             'project_id' => 'required',
         ]);
         
-        $task = Task::create($request->all());
+        Task::create($request->all());
 
-        return $task;
+        return $validation;
     }
 
     /**
@@ -94,8 +94,8 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'priority_id' => 'required',
-            'task_state_id' => 'required',
+            'priority_id' => 'required|integer',
+            'task_state_id' => 'required|integer',
         ]);
 
         $task->update($request->all());

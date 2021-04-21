@@ -4,24 +4,49 @@ import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 import { useUserContext } from '../context/UserContext'
 
-export default function CreateTaskForm() {
-  // const { userContext, setUserContext } = useUserContext();
-  // const { token } = userContext;
+export default function EditTaskForm() {
 
-  let { project } = useParams()
-  // console.log(project);
+//get task id from params
+  let { task } = useParams()
 
+  //get editable task data from API
+  useEffect(async () => {
+
+    const config = {
+      method: 'get',
+      url: `/api/tasks/${task}`,
+    }
+
+    await axios(config)
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        setTaskData({
+            name: response.data.name,
+            description: response.data.description,
+            priority_id: response.data.priority_id,
+            task_state_id: response.data.task_state_id,
+        });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      })
+  }, []);
+
+// current task data
   const [taskData, setTaskData] = useState({
     name: '',
     description: '',
     priority_id: '',
-    project_id: project,
+    task_state_id: '',
   })
 
+  //validation errors from API
   const [validationErrors, setErrors] = useState({
     name: '',
     description: '',
     priority_id: '',
+    task_state_id: '',
   })
 
   const [state, setState] = useState(false)
@@ -32,8 +57,8 @@ export default function CreateTaskForm() {
       return
     }
     const config = {
-      method: 'post',
-      url: '/api/tasks',
+      method: 'put',
+      url: `/api/tasks/${task}`,
       // headers: {
       //     Accept: 'application/json',
       // },
@@ -47,10 +72,11 @@ export default function CreateTaskForm() {
         // eslint-disable-next-line no-console
         // console.log(response.data)
         // setUserContext(response.data);
-        setSuccesMessage("Task created succesfully");
+        setSuccesMessage("Task updated succesfully");
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
+        // console.log(error.response.data.errors);
         // console.log(error.response.data.errors);
         setErrors({
           name: error.response.data.errors.name
@@ -61,6 +87,9 @@ export default function CreateTaskForm() {
             : '',
           priority_id: error.response.data.errors.priority_id
             ? error.response.data.errors.priority_id[0]
+            : '',
+            task_state_id: error.response.data.errors.task_state_id
+            ? error.response.data.errors.task_state_id[0]
             : '',
         })
         // console.log(true);
@@ -80,7 +109,8 @@ export default function CreateTaskForm() {
     setTaskData({
       ...taskData,
       [event.target.name]: event.target.value,
-    })
+    },
+    console.log(taskData))
 
   return (
     <>
@@ -109,7 +139,7 @@ export default function CreateTaskForm() {
           {validationErrors.description}
         </div>
         <Form.Label className="mt-3">Priority</Form.Label>
-        <Form.Control name="priority_id" onChange={handleChange} as="select" custom>
+        <Form.Control name="priority_id" onChange={handleChange} as="select" custom value={taskData.priority_id}>
           <option>--- SELECT PRIORITY ---</option>
           <option value="1">low</option>
           <option value="2">medium</option>
@@ -118,8 +148,18 @@ export default function CreateTaskForm() {
         <div style={{ fontSize: 12 }} className="text-danger">
           {validationErrors.priority_id}
         </div>
+        <Form.Label className="mt-3">State</Form.Label>
+        <Form.Control name="task_state_id" onChange={handleChange} as="select" custom value={taskData.task_state_id}>
+          <option>--- SELECT STATE ---</option>
+          <option value="1">to do</option>
+          <option value="2">in progress</option>
+          <option value="3">done</option>
+        </Form.Control>
+        <div style={{ fontSize: 12 }} className="text-danger">
+          {validationErrors.task_state_id}
+        </div>
         <Button className="mt-3" variant="primary" type="submit">
-          Create Task
+          Update Task
         </Button>
         <div style={{ fontSize: 15 }} className="text-success my-3">
           {succesMessage}
