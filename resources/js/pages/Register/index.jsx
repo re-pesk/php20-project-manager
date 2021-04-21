@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import classNames from 'classnames';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../context/UserContext';
+import { Container, Form, Button } from 'react-bootstrap';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { useUserContext } from '../../context/UserContext';
+import { useSidebarContext } from '../../context/SidebarContext';
+
+const { axios } = window;
 
 const Register = () => {
+    const { isOpen } = useSidebarContext;
     const { userContext, setUserContext } = useUserContext();
     const { token } = userContext;
     const [userData, setUserData] = useState({
@@ -52,10 +58,14 @@ const Register = () => {
     });
 
     return (
-        <>
+        <Container
+            fluid
+            className={classNames('content', { 'is-open': isOpen })}
+        >
             {
                 token && <Redirect to="/dashboard" />
             }
+            <Header title="Register" />
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}
@@ -98,7 +108,8 @@ const Register = () => {
                     Register
                 </Button>
             </Form>
-        </>
+            <Footer />
+        </Container>
     );
 };
 
