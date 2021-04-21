@@ -36,6 +36,11 @@ a:focus {
   transition: all 0.5s;
 }
 
+.sticky-sidebar {
+  position: sticky;
+  top: 0;
+}
+
 .sidebar.is-open {
   margin-left: 0;
   transition: .5s;
@@ -111,7 +116,7 @@ li a.dropdown-toggle::after {
 .content {
   padding: 20px;
   margin-left: 0;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 @media only screen and (max-width: 575.98px) {

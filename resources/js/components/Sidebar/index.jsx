@@ -18,7 +18,8 @@ const SideBar = () => {
     // const { isOpen } = props;
     const { isOpen } = useSidebarContext();
     return (
-        <div className={classNames('sidebar', { 'is-open': isOpen })}>
+        <div className={classNames("sidebar", { 'is-open': isOpen })}>
+            <div className="sticky-sidebar">
             <div className="sidebar-header">
                 <h3>PHProjectMan</h3>
             </div>
@@ -74,6 +75,7 @@ const SideBar = () => {
                     items={['Link', 'Link2', 'Active']}
                 />
             </Nav>
+            </div>
         </div>
     );
 };
