@@ -131,7 +131,9 @@ export default function EditTaskForm() {
         <Form.Label className="mt-3">Description</Form.Label>
         <Form.Control
           name="description"
-          type="text"
+          as="textarea"
+          rows={5}
+          style={{'resize': 'none'}}
           value={taskData.description}
           onChange={handleChange}
         />
@@ -140,7 +142,7 @@ export default function EditTaskForm() {
         </div>
         <Form.Label className="mt-3">Priority</Form.Label>
         <Form.Control name="priority_id" onChange={handleChange} as="select" custom value={taskData.priority_id}>
-          <option>--- SELECT PRIORITY ---</option>
+          <option value="">--- SELECT PRIORITY ---</option>
           <option value="1">low</option>
           <option value="2">medium</option>
           <option value="3">high</option>
@@ -150,7 +152,7 @@ export default function EditTaskForm() {
         </div>
         <Form.Label className="mt-3">State</Form.Label>
         <Form.Control name="task_state_id" onChange={handleChange} as="select" custom value={taskData.task_state_id}>
-          <option>--- SELECT STATE ---</option>
+          <option value="">--- SELECT STATE ---</option>
           <option value="1">to do</option>
           <option value="2">in progress</option>
           <option value="3">done</option>

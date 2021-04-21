@@ -101,7 +101,9 @@ export default function CreateTaskForm() {
         <Form.Label className="mt-3">Description</Form.Label>
         <Form.Control
           name="description"
-          type="text"
+          as="textarea"
+          rows={5}
+          style={{'resize': 'none'}}
           value={taskData.description}
           onChange={handleChange}
         />

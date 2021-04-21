@@ -94,8 +94,8 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'priority_id' => 'required|integer',
-            'task_state_id' => 'required|integer',
+            'priority_id' => 'required|integer|min:1|max:3',
+            'task_state_id' => 'required|integer|min:1|max:3',
         ]);
 
         $task->update($request->all());
