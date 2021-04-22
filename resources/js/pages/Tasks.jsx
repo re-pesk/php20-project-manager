@@ -33,7 +33,7 @@ const Tasks = () => {
         <Container>
             {project.map((projectInfo) => {
                 return (
-                    <h2>
+                    <h2 key={projectInfo.id}>
                         {projectInfo.id} {projectInfo.name}
                     </h2>
                 );
