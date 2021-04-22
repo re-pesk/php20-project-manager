@@ -6,29 +6,34 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $tokenName = env('APP_ID', 'myapp') . '-token';
+
+        $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -49,11 +54,14 @@ class AuthController extends Controller
             'email' => $request->email,
         ])->first();
 
-        if (!$user || !Hash::check($user->password, $request->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response(['message' => "Bad credencials"], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $tokenName = env('APP_ID', 'myapp') . '-token';
+
+
+        $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -65,7 +73,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        auth()->user()->tokens()->delete();
 
         return response(['message' => 'Logged out']);
     }

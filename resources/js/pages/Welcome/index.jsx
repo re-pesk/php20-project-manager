@@ -1,20 +1,27 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Container } from 'react-bootstrap';
-import User from './welcome/User';
-import LaravelLogo from './welcome/LaravelLogo';
-import Grid from './welcome/Grid';
-import Footer from './welcome/Footer';
+import ReactComponentSample from './ReactComponentSample';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import LaravelLogo from './LaravelLogo';
+import Grid from './Grid';
+import { useSidebarContext } from '../../context/SidebarContext';
 
 export default function Welcome() {
-    const { isAuthenticated, laravelVersion, phpVersion, url, urlRegister } = window.welcomeData;
+    const { isOpen } = useSidebarContext;
+    const { isAuthenticated, url, urlRegister } = window.welcomeData;
     let linkText = 'Home';
     if (isAuthenticated) {
         linkText = 'Log in';
     }
-    const footerData = { laravelVersion, phpVersion };
     return (
-        <>
-            <User />
+        <Container
+            fluid
+            className={classNames('content', { 'is-open': isOpen })}
+        >
+            <Header title="Welcome" />
+            <ReactComponentSample />
             <Container
                 // eslint-disable-next-line max-len
                 className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"
@@ -41,9 +48,9 @@ export default function Welcome() {
                 <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
                     <LaravelLogo />
                     <Grid />
-                    <Footer data={footerData} />
                 </div>
             </Container>
-        </>
+            <Footer />
+        </Container>
     );
 }
