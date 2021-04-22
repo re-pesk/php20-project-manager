@@ -22,31 +22,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $project_task_count = Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-                    ->select('projects.id as id', 'tasks.id as task_id', '')
-                    // ->select('*')
-                    ->get();
-                    // print_r($project_task_count);
-                    
-        return 
-        // Project::all();
-        $project_task_count;
-        // $projectData = array(
-        //     'project_state' => Project::leftJoin('project_states', 'projects.project_state_id', '=', 'project_states.id')
-        //     ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-        //     ->select('projects.id','project_states.name as state_name','projects.name', 'projects.description') 
-        //         ->get(),
-                
-        //         'project_task_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-        //             ->select('tasks.name as task_name')
-        //             ->count(),
-
-        //         'project_unfinished_tasks_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-        //             ->select('tasks.name as task_name')
-        //             ->where('task_state_id', '!=', 3)
-        //             ->count(),
-        // );
+    {            
+        return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->get();
     }
 
     /**

@@ -10,7 +10,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ErrorPage from './pages/Error';
 import { useSidebarContext } from './context/SidebarContext';
-import Test from './components/Projects_info';
 
 export default function App() {
     // open first
@@ -53,7 +52,6 @@ export default function App() {
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/test" component={Test} />
                 <Route component={ErrorPage} />
             </Switch>
         </div>

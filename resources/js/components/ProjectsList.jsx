@@ -22,23 +22,25 @@ const Projects = () => {
             });
     }, []);
     console.log(projectsData);
+
+    // console.log();
     return (
 
             <Accordion>
                 {projectsData.map(project => (
-                    <Card>
+                    <Card key={project.id}>
                         <Accordion.Toggle as={Card.Header} eventKey={project.id} className="bg-light d-flex justify-content-between">
                             <span className="text-capitalize">Project Name: {project.name}</span>
                             <div>
-                            <a class="btn btn-primary mr-1" href="#" role="button">View tasks</a>
-                            <a class="btn btn-primary mr-1" href="#" role="button">Show Board</a>
-                            <a class="btn btn-primary mr-1" href="#" role="button">Edit</a>
-                            <a class="btn btn-danger" href="#" role="button">Delete</a>
+                            <a className="btn btn-primary mr-1" href="#" role="button">View tasks</a>
+                            <a className="btn btn-primary mr-1" href="#" role="button">Show Board</a>
+                            <a className="btn btn-primary mr-1" href="#" role="button">Edit</a>
+                            <a className="btn btn-danger" href="#" role="button">Delete</a>
                             </div>
         </Accordion.Toggle>
                         <Accordion.Collapse eventKey={project.id}>
                             <Card.Body className="bg-secondary"><span className="text-capitalize">{project.description}</span>
-                            <p>Status:</p></Card.Body>
+                            <p className="text-capitalize">Status: {project.state.name}</p></Card.Body>
                         </Accordion.Collapse>
                     </Card>
                 ))}
