@@ -32,7 +32,7 @@ export default function App() {
             setPreviousWidth(width);
         };
 
-        updateWidth();
+        // updateWidth();
         /**
         * Add event listener
         */
