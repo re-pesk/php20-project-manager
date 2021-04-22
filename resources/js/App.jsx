@@ -6,11 +6,11 @@ import Sidebar from './components/Sidebar';
 import Empty from './pages/Empty';
 import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';
-import Projects from './components/ProjectsList';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ErrorPage from './pages/Error';
 import { useSidebarContext } from './context/SidebarContext';
+import Test from './components/Projects_info';
 
 export default function App() {
     // open first
@@ -50,10 +50,10 @@ export default function App() {
             <Switch>
                 <Route exact path="/" component={Welcome} />
                 <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/projects" component={Projects} />
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/test" component={Test} />
                 <Route component={ErrorPage} />
             </Switch>
         </div>

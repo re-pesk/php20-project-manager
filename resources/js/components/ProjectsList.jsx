@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Accordion, Card } from 'react-bootstrap';
 
 const Projects = () => {
     const [projectsData, setProjectsData] = useState([]);
@@ -22,18 +23,28 @@ const Projects = () => {
     }, []);
     console.log(projectsData);
     return (
-        <>
-            <ul className="list-group">
+
+            <Accordion>
                 {projectsData.map(project => (
-                    <li className="list-group-item d-flex justify-content-between"><span className="font-weight-bold">{project.id}. </span> Project name: {project.name}, Description: {project.description}
-                        <button className="btn btn-primary mr-2">View tasks</button>
-                        <button className="btn btn-primary mr-2">Show board</button>
-                        <button className="btn btn-primary mr-2">Edit</button>
-                        <button className="btn btn-danger">Delete</button>
-                    </li>
+                    <Card>
+                        <Accordion.Toggle as={Card.Header} eventKey={project.id} className="bg-light d-flex justify-content-between">
+                            <span className="text-capitalize">Project Name: {project.name}</span>
+                            <div>
+                            <a class="btn btn-primary mr-1" href="#" role="button">View tasks</a>
+                            <a class="btn btn-primary mr-1" href="#" role="button">Show Board</a>
+                            <a class="btn btn-primary mr-1" href="#" role="button">Edit</a>
+                            <a class="btn btn-danger" href="#" role="button">Delete</a>
+                            </div>
+        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey={project.id}>
+                            <Card.Body className="bg-secondary"><span className="text-capitalize">{project.description}</span>
+                            <p>Status:</p></Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
                 ))}
-            </ul>
-        </>
+
+            </Accordion>
+
     );
 };
 export default Projects;

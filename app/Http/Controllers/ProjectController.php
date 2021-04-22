@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware(['auth:sanctum']);
+        $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,30 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::all();
+        $project_task_count = Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+                    ->select('projects.id as id', 'tasks.id as task_id', '')
+                    // ->select('*')
+                    ->get();
+                    // print_r($project_task_count);
+                    
+        return 
+        // Project::all();
+        $project_task_count;
+        // $projectData = array(
+        //     'project_state' => Project::leftJoin('project_states', 'projects.project_state_id', '=', 'project_states.id')
+        //     ->leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+        //     ->select('projects.id','project_states.name as state_name','projects.name', 'projects.description') 
+        //         ->get(),
+                
+        //         'project_task_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+        //             ->select('tasks.name as task_name')
+        //             ->count(),
+
+        //         'project_unfinished_tasks_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+        //             ->select('tasks.name as task_name')
+        //             ->where('task_state_id', '!=', 3)
+        //             ->count(),
+        // );
     }
 
     /**
@@ -46,7 +78,22 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        return
+            $projectData = array(
+                'project_state' => Project::leftJoin('project_states', 'projects.project_state_id', '=', 'project_states.id')
+                    ->select('project_states.name')
+                    ->where('projects.id', $id)
+                    ->get(),
+                'project_task_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+                    ->select('tasks.name as task_name')
+                    ->where('projects.id', $id)
+                    ->count(),
+                'project_unfinished_tasks_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
+                    ->select('tasks.name as task_name')
+                    ->where('projects.id', $id)
+                    ->where('task_state_id', '!=', 3)
+                    ->count(),
+            );
     }
 
     /**
