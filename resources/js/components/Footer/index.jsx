@@ -5,7 +5,10 @@ import FooterLink from './FooterLink';
 export default function Footer() {
     const { laravelVersion, phpVersion } = window.welcomeData;
     return (
-        <Container id="footer" className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between">
+        <Container
+            id="footer"
+            className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between fixed-bottom"
+        >
             <Col className="text-center text-sm text-gray-500 text-left mr-auto">
                 <div className="flex items-center">
                     <FooterLink url="https://laravel.bigcartel.com" text="Shop" />
