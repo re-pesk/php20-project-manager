@@ -24,11 +24,12 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "@material-ui/core": "^4.11.3",
-        "@material-ui/icons": "^4.11.2",
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@fortawesome/react-fontawesome": "^0.1.14",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
-        "clsx": "^1.1.1",
+        "classnames": "^2.3.1",
         "lodash": "^4.17.19",
         "prop-types": "^15.7.2",
         "react": "^17.0.2",
