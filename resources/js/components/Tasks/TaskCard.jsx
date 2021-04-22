@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import axios from "axios";
-import { Forum } from "@material-ui/icons";
 
 const TaskCard = ({ name, id, priority, state, description }) => {
     const [deleting, setDeleting] = useState(false);
