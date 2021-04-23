@@ -9,8 +9,10 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ErrorPage from "./pages/Error";
-import Task from "./pages/Task";
 import { useSidebarContext } from "./context/SidebarContext";
+import Task from "./pages/Task";
+import EditTask from "./pages/EditTask";
+import CreateTask from "./pages/CreateTask";
 
 export default function App() {
     // open first
@@ -50,6 +52,12 @@ export default function App() {
             <Switch>
                 <Route exact path="/" component={Welcome} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route
+                    exact
+                    path="/create-task/:project"
+                    children={<CreateTask />}
+                />
+                <Route exact path="/edit-task/:task" children={<EditTask />} />
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
