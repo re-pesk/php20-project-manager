@@ -12,15 +12,16 @@ import { useSidebarContext } from '../context/SidebarContext';
 export default function Header(props) {
     const { title } = props;
     const { isOpen, toggle } = useSidebarContext();
-    const { userContext, setUserContext } = useUserContext();
+    const { userContext, setUserContext } = useUserContext({});
     const { token } = userContext;
-    // const { loggedOut, setLoggedOut } = useState(false);
 
-    const redirectToMain = () => {
-        window.location.replace('/');
+    const redirectToLogin = () => {
+        window.location.replace('/login');
     };
 
-    const logout = () => {
+    const logout = (event) => {
+        event.preventDefault();
+
         if (!token) {
             return;
         }
@@ -38,9 +39,8 @@ export default function Header(props) {
             .then((response) => {
                 // eslint-disable-next-line no-console
                 console.log(JSON.stringify(response.data));
-                setUserContext('');
-                // setLoggedOut(true);
-                redirectToMain();
+                setUserContext({});
+                redirectToLogin();
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -67,30 +67,32 @@ export default function Header(props) {
                     </Button>
                 </Nav>
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
-                <Nav className="col-1 justify-content-end" navbar>
-                    {
-                        token
-                            ? (
-                                <Nav.Link to="#" onClick={() => logout()}>
-                                    <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                                </Nav.Link>
-                            )
-                            : (
-                                <>
-                                    <LinkContainer to="/login">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
-                                        </Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/register">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
-                                        </Nav.Link>
-                                    </LinkContainer>
-                                </>
-                            )
-                    }
-                </Nav>
+                {
+                    token
+                        ? (
+                            <Nav className="col-1 justify-content-end" navbar>
+                                <LinkContainer to="#" onClick={(event) => logout(event)}>
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                        )
+                        : (
+                            <Nav className="col-1 justify-content-end" navbar>
+                                <LinkContainer to="/login">
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/register">
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                        )
+                }
             </Navbar>
         </Container>
     );

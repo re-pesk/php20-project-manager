@@ -11,7 +11,7 @@ const { axios } = window;
 
 const Login = () => {
     const { isOpen } = useSidebarContext;
-    const { userContext, setUserContext } = useUserContext();
+    const { userContext, setUserContext } = useUserContext({});
     const { token } = userContext;
     const [userData, setUserData] = useState({
         email: '',
