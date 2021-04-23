@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/App.css';
-import { Route, Switch } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Empty from './pages/Empty';
-import Welcome from './pages/Welcome';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ErrorPage from './pages/Error';
-import { useSidebarContext } from './context/SidebarContext';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/App.css";
+import { Route, Switch } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Empty from "./pages/Empty";
+import Welcome from "./pages/Welcome";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ErrorPage from "./pages/Error";
+import Task from "./pages/Task";
+import { useSidebarContext } from "./context/SidebarContext";
 
 export default function App() {
     // open first
@@ -32,14 +33,14 @@ export default function App() {
 
         // updateWidth();
         /**
-        * Add event listener
-        */
-        window.addEventListener('resize', updateWidth);
+         * Add event listener
+         */
+        window.addEventListener("resize", updateWidth);
         /**
-        * Remove event listener
-        */
+         * Remove event listener
+         */
         return () => {
-            window.removeEventListener('resize', updateWidth);
+            window.removeEventListener("resize", updateWidth);
         };
     });
 
@@ -52,6 +53,7 @@ export default function App() {
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/task/:project" component={Task} />
                 <Route component={ErrorPage} />
             </Switch>
         </div>
