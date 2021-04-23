@@ -108,7 +108,7 @@ const Register = () => {
                     Register
                 </Button>
             </Form>
-            <Footer />
+            <Footer  fixedBottom={true} />
         </Container>
     );
 };

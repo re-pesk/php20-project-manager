@@ -93,7 +93,7 @@ const Login = () => {
                     Login
                 </Button>
             </Form>
-            <Footer />
+            <Footer  fixedBottom={true} />
         </Container>
     );
 };

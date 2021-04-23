@@ -15,8 +15,10 @@ export default function ErrorPage() {
         <Container
             fluid
             className={classNames('content', { 'is-open': isOpen })}
+            style={{minHeight: "100vh"}}
         >
             <Header title="Error" />
+            <div className="w-50 mx-auto">
             <h3>Error</h3>
             <p>
                 Page does not exist!
@@ -27,7 +29,8 @@ export default function ErrorPage() {
                     <Nav.Link href="#" onClick={goBack}>Go back</Nav.Link>
                 </Nav.Item>
             </Nav>
-            <Footer />
+            </div>
+            <Footer fixedBottom={true} />
         </Container>
     );
 }
