@@ -12,7 +12,7 @@ export default function EditTask() {
     <Container fluid className={classNames('content', { 'is-open': isOpen })}>
       <Header title="Edit Task" />
       <EditTaskForm />
-      <Footer />
+      <Footer fixedBottom={true} />
     </Container>
   )
 }
