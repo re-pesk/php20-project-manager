@@ -18,6 +18,6 @@ mix
     .sourceMaps(false, 'source-map')
     .copyDirectory('resources/_public', 'public')
     .js('resources/js/main.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [])
+    .postCss('resources/css/main.css', 'public/css', [])
     .react()
     .browserSync({ proxy: '127.0.0.1:8000', ui: false });
