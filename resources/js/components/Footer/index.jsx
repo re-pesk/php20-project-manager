@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <Container
             id="footer"
-            className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between fixed-bottom"
+            className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between"
         >
             <Col className="text-center text-sm text-gray-500 text-left mr-auto">
                 <div className="flex items-center">

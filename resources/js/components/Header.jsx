@@ -14,39 +14,6 @@ export default function Header(props) {
     const { isOpen, toggle } = useSidebarContext();
     const { userContext } = useUserContext({});
 
-    // const redirectToLogin = () => {
-    //     window.location.replace('/login');
-    // };
-
-    // const logout = (event) => {
-    //     event.preventDefault();
-
-    //     if (!token) {
-    //         return;
-    //     }
-
-    //     const config = {
-    //         method: 'post',
-    //         url: '/api/logout',
-    //         headers: {
-    //             Accept: 'application/json',
-    //             Authorization: `Bearer ${token}`,
-    //         },
-    //     };
-
-    //     window.axios(config)
-    //         .then((response) => {
-    //             // eslint-disable-next-line no-console
-    //             console.log(JSON.stringify(response.data));
-    //             setUserContext({});
-    //             redirectToLogin();
-    //         })
-    //         .catch((error) => {
-    //             // eslint-disable-next-line no-console
-    //             console.log(error);
-    //         });
-    // };
-
     return (
         <Container fluid>
             {/* { token ? '' : <Redirect to="/" /> } */}
@@ -54,7 +21,7 @@ export default function Header(props) {
                 bg="light"
                 // variant="white"
                 // sticky="top"
-                className="navbar shadow-sm p-3 mb-5 bg-white rounded"
+                className="navbar shadow-sm p-3 mb-5 rounded"
                 expand
             >
                 <Nav className="col-1" navbar>
