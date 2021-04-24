@@ -7,6 +7,7 @@ import Empty from './pages/Empty';
 import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import IsLoggedIn from './pages/IsLoggedIn';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
 import ErrorPage from './pages/Error';
@@ -55,6 +56,7 @@ export default function App() {
                 <Route exact path="/create-task/:project" component={CreateTask} />
                 <Route exact path="/edit-task/:task" component={EditTask} />
                 <Route exact path="/empty" component={Empty} />
+                <Route exact path="/logged-in" component={IsLoggedIn} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/logout" component={Logout} />

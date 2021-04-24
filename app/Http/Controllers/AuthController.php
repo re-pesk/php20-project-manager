@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['auth:sanctum'])->only(['logout', 'isLoggedIn']);
         $this->middleware(['cors']);
         $this->middleware(['log.routes']);
     }
@@ -76,5 +76,10 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
 
         return response(['message' => 'Logged out']);
+    }
+
+    public function isLoggedIn(Request $request)
+    {
+        return response(['user' => auth()->user(), 'message' => 'The uswer is logged on!']);
     }
 }
