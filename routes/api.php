@@ -32,6 +32,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::resource('users', UserController::class);
+Route::apiResource('users', UserController::class);
 
-Route::resource('projects', ProjectController::class);
+Route::apiResource('projects', ProjectController::class);
