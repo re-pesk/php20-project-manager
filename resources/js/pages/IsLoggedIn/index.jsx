@@ -9,16 +9,18 @@ const { axios } = window;
 
 const IsLoggedIn = () => {
     const { isOpen } = useSidebarContext;
-    const { userContext } = useUserContext({});
+    const { userContext, setUserContext } = useUserContext({});
     const [state, setState] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
+    const { token } = userContext;
 
     useEffect(async () => {
-        const { token } = userContext;
-
+        if (!state) {
+            return;
+        }
         const config = {
             method: 'post',
-            url: '/api/logout',
+            url: '/api/logged-in',
             headers: {
                 Accept: 'application/json',
                 Authorization: `Bearer ${token}`,
@@ -29,6 +31,7 @@ const IsLoggedIn = () => {
             .then((response) => {
                 // eslint-disable-next-line no-console
                 console.log(JSON.stringify(response.data));
+                setUserContext(response.data);
                 setLoggedIn(true);
             })
             .catch((error) => {
@@ -36,6 +39,7 @@ const IsLoggedIn = () => {
                 console.log(error);
                 setLoggedIn(false);
             });
+        setState(false);
     }, [state]);
 
     return (
@@ -45,7 +49,7 @@ const IsLoggedIn = () => {
         >
             <Header title="Is logged in?" />
             <pre id="output">
-                {`Is user logged in? ${isLoggedIn}`}
+                {`Is user logged in? ${isLoggedIn || !!userContext.token}`}
                 <br />
                 User data:
                 <br />

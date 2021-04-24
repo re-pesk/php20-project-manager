@@ -13,7 +13,6 @@ export default function Header(props) {
     const { title } = props;
     const { isOpen, toggle } = useSidebarContext();
     const { userContext } = useUserContext({});
-    const { token } = userContext;
 
     // const redirectToLogin = () => {
     //     window.location.replace('/login');
@@ -68,7 +67,7 @@ export default function Header(props) {
                 </Nav>
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
                 {
-                    token
+                    userContext.token
                         ? (
                             <Nav className="col-1 justify-content-end" navbar>
                                 <LinkContainer to="/logout">
