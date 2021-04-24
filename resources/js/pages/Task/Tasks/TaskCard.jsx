@@ -19,16 +19,17 @@ const TaskCard = ({
     Moment.locale("en");
     return (
         <Card key={id} id={id}>
-            <Card.Header as="h4">
-                <Accordion.Toggle
-                    className="text-capitalize"
-                    as={Button}
-                    variant="link"
-                    eventKey={id}
-                >
+            <Accordion.Toggle
+                className="text-capitalize"
+                as={Button}
+                variant="link"
+                eventKey={id}
+            >
+                <Card.Header as="h4">
                     {id} {name}
-                </Accordion.Toggle>
-            </Card.Header>
+                </Card.Header>
+            </Accordion.Toggle>
+
             <Accordion.Collapse eventKey={id}>
                 <Card.Body className="bg-white">
                     <Card.Title className="text-capitalize">
