@@ -12,7 +12,7 @@ export default function Dashboard() {
     return (
         <Container
             fluid
-            className={classNames('content', { 'is-open': isOpen })}
+            className={classNames("content", { "is-open": isOpen })}
         >
             <Header title="Dashboard" />
             {/* <Cards /> */}

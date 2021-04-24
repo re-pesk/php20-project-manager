@@ -14,10 +14,10 @@ const Register = () => {
     const { userContext, setUserContext } = useUserContext();
     const { token } = userContext;
     const [userData, setUserData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        username: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
     });
     const [state, setState] = useState(false);
 
@@ -26,8 +26,8 @@ const Register = () => {
             return;
         }
         const config = {
-            method: 'post',
-            url: '/api/register',
+            method: "post",
+            url: "/api/register",
             // headers: {
             //     Accept: 'application/json',
             // },
@@ -52,10 +52,11 @@ const Register = () => {
         setState(true);
     };
 
-    const handleChange = (event) => setUserData({
-        ...userData,
-        [event.target.name]: event.target.value,
-    });
+    const handleChange = (event) =>
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value,
+        });
 
     return (
         <Container
@@ -100,15 +101,11 @@ const Register = () => {
                     value={userData.password_confirmation}
                     onChange={handleChange}
                 />
-                <Button
-                    className="mt-3"
-                    variant="primary"
-                    type="submit"
-                >
+                <Button className="mt-3" variant="primary" type="submit">
                     Register
                 </Button>
             </Form>
-            <Footer />
+            <Footer  fixedBottom={true} />
         </Container>
     );
 };

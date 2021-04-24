@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/App.css';
-import { Route, Switch } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Empty from './pages/Empty';
-import Welcome from './pages/Welcome';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ErrorPage from './pages/Error';
-import { useSidebarContext } from './context/SidebarContext';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/App.css";
+import { Route, Switch } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Empty from "./pages/Empty";
+import Welcome from "./pages/Welcome";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ErrorPage from "./pages/Error";
+import { useSidebarContext } from "./context/SidebarContext";
+import Task from "./pages/Task";
+import EditTask from "./pages/EditTask";
+import CreateTask from "./pages/CreateTask";
 
 export default function App() {
     // open first
@@ -30,16 +33,16 @@ export default function App() {
             setPreviousWidth(width);
         };
 
-        updateWidth();
+        // updateWidth();
         /**
-        * Add event listener
-        */
-        window.addEventListener('resize', updateWidth);
+         * Add event listener
+         */
+        window.addEventListener("resize", updateWidth);
         /**
-        * Remove event listener
-        */
+         * Remove event listener
+         */
         return () => {
-            window.removeEventListener('resize', updateWidth);
+            window.removeEventListener("resize", updateWidth);
         };
     });
 
@@ -49,9 +52,16 @@ export default function App() {
             <Switch>
                 <Route exact path="/" component={Welcome} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route
+                    exact
+                    path="/create-task/:project"
+                    children={<CreateTask />}
+                />
+                <Route exact path="/edit-task/:task" children={<EditTask />} />
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/task/:project" component={Task} />
                 <Route component={ErrorPage} />
             </Switch>
         </div>
