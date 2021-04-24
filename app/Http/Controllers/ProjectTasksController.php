@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Task;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class ProjectTasksController extends Controller
 {
-
-    public function __construct()
-    {
-        // $this->middleware(['auth:sanctum']);
-        $this->middleware(['cors']);
-        $this->middleware(['log.routes']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -44,17 +36,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // KAROLIS
-        $validation = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'priority_id' => 'required|integer|min:1|max:3',
-            'project_id' => 'required',
-        ]);
-
-        Task::create($request->all());
-
-        return $validation;
+        //
     }
 
     /**
@@ -63,10 +45,18 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        //KAROLIS
-        return $task;
+
+        $dataForTasks = array(
+            'tasksData' => Task::leftJoin('priorities', 'tasks.priority_id', '=', 'priorities.id')
+                ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
+                ->select('tasks.id', 'tasks.name', 'tasks.description', 'priorities.name as priority', 'task_states.name as state', 'tasks.created_at', 'tasks.updated_at')
+                ->where('project_id', $id)
+                ->get(),
+            'projectData' => Project::where('id', $id)->select('projects.id', 'projects.name')->get(),
+        );
+        return $dataForTasks;
     }
 
     /**
@@ -87,18 +77,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //KAROLIS
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'priority_id' => 'required|integer|min:1|max:3',
-            'task_state_id' => 'required|integer|min:1|max:3',
-        ]);
-
-        $task->update($request->all());
-        return $task;
+        //
     }
 
     /**
@@ -109,6 +90,6 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Task::destroy($id);
     }
 }
