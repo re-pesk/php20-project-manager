@@ -1,13 +1,24 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Container, Nav } from 'react-bootstrap';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { useSidebarContext } from '../../context/SidebarContext';
 
-export default function Error() {
+export default function ErrorPage() {
     const goBack = (event) => {
         event.preventDefault();
         window.history.back();
     };
+    const { isOpen } = useSidebarContext;
     return (
-        <Container>
+        <Container
+            fluid
+            className={classNames('content', { 'is-open': isOpen })}
+            style={{minHeight: "100vh"}}
+        >
+            <Header title="Error" />
+            <div className="w-50 mx-auto">
             <h3>Error</h3>
             <p>
                 Page does not exist!
@@ -18,6 +29,8 @@ export default function Error() {
                     <Nav.Link href="#" onClick={goBack}>Go back</Nav.Link>
                 </Nav.Item>
             </Nav>
+            </div>
+            <Footer fixedBottom={true} />
         </Container>
     );
 }

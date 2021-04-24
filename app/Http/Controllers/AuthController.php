@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -13,6 +14,7 @@ class AuthController extends Controller
     {
         $this->middleware(['auth:sanctum'])->only(['logout']);
         $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
     }
 
     public function register(Request $request)
