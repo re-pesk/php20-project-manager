@@ -64,7 +64,7 @@ const Login = () => {
             fluid
             className={classNames('content', { 'is-open': isOpen })}
         >
-            { token && <Redirect to="/dashboard" /> }
+            { token ? <Redirect to="/dashboard" /> : '' }
             <Header title="Login" />
             <Form
                 className="w-25 mx-auto mt-5"

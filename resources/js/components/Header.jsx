@@ -12,41 +12,41 @@ import { useSidebarContext } from '../context/SidebarContext';
 export default function Header(props) {
     const { title } = props;
     const { isOpen, toggle } = useSidebarContext();
-    const { userContext, setUserContext } = useUserContext({});
+    const { userContext } = useUserContext({});
     const { token } = userContext;
 
-    const redirectToLogin = () => {
-        window.location.replace('/login');
-    };
+    // const redirectToLogin = () => {
+    //     window.location.replace('/login');
+    // };
 
-    const logout = (event) => {
-        event.preventDefault();
+    // const logout = (event) => {
+    //     event.preventDefault();
 
-        if (!token) {
-            return;
-        }
+    //     if (!token) {
+    //         return;
+    //     }
 
-        const config = {
-            method: 'post',
-            url: '/api/logout',
-            headers: {
-                Accept: 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        };
+    //     const config = {
+    //         method: 'post',
+    //         url: '/api/logout',
+    //         headers: {
+    //             Accept: 'application/json',
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     };
 
-        window.axios(config)
-            .then((response) => {
-                // eslint-disable-next-line no-console
-                console.log(JSON.stringify(response.data));
-                setUserContext({});
-                redirectToLogin();
-            })
-            .catch((error) => {
-                // eslint-disable-next-line no-console
-                console.log(error);
-            });
-    };
+    //     window.axios(config)
+    //         .then((response) => {
+    //             // eslint-disable-next-line no-console
+    //             console.log(JSON.stringify(response.data));
+    //             setUserContext({});
+    //             redirectToLogin();
+    //         })
+    //         .catch((error) => {
+    //             // eslint-disable-next-line no-console
+    //             console.log(error);
+    //         });
+    // };
 
     return (
         <Container fluid>
@@ -71,7 +71,7 @@ export default function Header(props) {
                     token
                         ? (
                             <Nav className="col-1 justify-content-end" navbar>
-                                <LinkContainer to="#" onClick={(event) => logout(event)}>
+                                <LinkContainer to="/logout">
                                     <Nav.Link>
                                         <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                                     </Nav.Link>

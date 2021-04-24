@@ -3,10 +3,12 @@ import React, { createContext, useState, useContext } from 'react';
 const UserContext = createContext();
 const { Provider } = UserContext;
 
+const storage = window.sessionStorage;
+
 const getValue = () => {
     try {
-        // Get from local storage by key
-        const item = window.localStorage.getItem('userData');
+        // Get from storage by key
+        const item = storage.getItem('userData');
         // Parse stored json or if none return initialValue
         return item ? JSON.parse(item) : {};
     } catch (error) {
@@ -27,7 +29,7 @@ const UserContextProvider = ({ children }) => {
             // Save state
             setContextValue(valueToStore);
             // Save to local storage
-            window.localStorage.setItem('userData', JSON.stringify(valueToStore));
+            storage.setItem('userData', JSON.stringify(valueToStore));
         } catch (error) {
         // A more advanced implementation would handle the error case
         // eslint-disable-next-line no-console
