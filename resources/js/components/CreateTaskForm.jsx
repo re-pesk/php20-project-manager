@@ -87,7 +87,7 @@ export default function CreateTaskForm() {
       {/* {
                 token && <Redirect to="/dashboard" />
             } */}
-      <Form className="w-25 mx-auto mt-5" onSubmit={handleSubmit}>
+      <Form className="w-25 mx-auto mt-5 mb-5" onSubmit={handleSubmit}>
         <Form.Label>Name</Form.Label>
         <Form.Control
           name="name"
