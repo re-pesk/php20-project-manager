@@ -24,7 +24,7 @@ export default function Header(props) {
                 className="navbar shadow-sm p-3 mb-5 text-info"
                 expand
             >
-                <Nav className="col-1" navbar>
+                <Nav className="col-2" navbar>
                     <Button
                         variant="outline-info"
                         onClick={toggle}
