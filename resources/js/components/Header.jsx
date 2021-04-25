@@ -12,50 +12,16 @@ import { useSidebarContext } from '../context/SidebarContext';
 export default function Header(props) {
     const { title } = props;
     const { isOpen, toggle } = useSidebarContext();
-    const { userContext, setUserContext } = useUserContext({});
-    const { token } = userContext;
-
-    const redirectToLogin = () => {
-        window.location.replace('/login');
-    };
-
-    const logout = (event) => {
-        event.preventDefault();
-
-        if (!token) {
-            return;
-        }
-
-        const config = {
-            method: 'post',
-            url: '/api/logout',
-            headers: {
-                Accept: 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        };
-
-        window.axios(config)
-            .then((response) => {
-                // eslint-disable-next-line no-console
-                console.log(JSON.stringify(response.data));
-                setUserContext({});
-                redirectToLogin();
-            })
-            .catch((error) => {
-                // eslint-disable-next-line no-console
-                console.log(error);
-            });
-    };
+    const { userContext } = useUserContext({});
 
     return (
         <Container fluid>
             {/* { token ? '' : <Redirect to="/" /> } */}
             <Navbar
                 bg="light"
-                // variant="white"
+                // variant="info"
                 // sticky="top"
-                className="navbar shadow-sm p-3 mb-5 bg-white rounded"
+                className="navbar shadow-sm p-3 mb-5 text-info"
                 expand
             >
                 <Nav className="col-1" navbar>
@@ -68,12 +34,12 @@ export default function Header(props) {
                 </Nav>
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
                 {
-                    token
+                    userContext.token
                         ? (
                             <Nav className="col-1 justify-content-end" navbar>
-                                <LinkContainer to="#" onClick={(event) => logout(event)}>
+                                <LinkContainer to="/logout">
                                     <Nav.Link>
-                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 text-info" />
                                     </Nav.Link>
                                 </LinkContainer>
                             </Nav>
@@ -82,12 +48,12 @@ export default function Header(props) {
                             <Nav className="col-1 justify-content-end" navbar>
                                 <LinkContainer to="/login">
                                     <Nav.Link>
-                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
+                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-2 text-info" />
                                     </Nav.Link>
                                 </LinkContainer>
                                 <LinkContainer to="/register">
                                     <Nav.Link>
-                                        <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
+                                        <FontAwesomeIcon icon={faUserPlus} className="mr-2 text-info" />
                                     </Nav.Link>
                                 </LinkContainer>
                             </Nav>

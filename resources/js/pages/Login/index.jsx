@@ -27,9 +27,9 @@ const Login = () => {
         const config = {
             method: 'post',
             url: '/api/login',
-            /* headers: {
-                 Accept: 'application/json',
-            }, */
+            headers: {
+                Accept: 'application/json',
+            },
             data: userData,
         };
 
@@ -64,7 +64,7 @@ const Login = () => {
             fluid
             className={classNames('content', { 'is-open': isOpen })}
         >
-            { token && <Redirect to="/dashboard" /> }
+            { token ? <Redirect to="/dashboard" /> : '' }
             <Header title="Login" />
             <Form
                 className="w-25 mx-auto mt-5"

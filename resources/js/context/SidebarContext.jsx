@@ -9,13 +9,11 @@ const SidebarContextProvider = ({ children }) => {
     const toggle = () => setSidebarContext(!isOpen);
 
     return (
-        <Provider value={{ isOpen, setSidebarContext, toggle }}>
+        <Provider value={{ isOpen, setSidebarContext, toggle }} displayName="SidebarContext">
             {children}
         </Provider>
     );
 };
-
-SidebarContext.displayName = 'SidebarContext';
 
 export default SidebarContextProvider;
 
