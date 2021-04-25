@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
 import { Redirect } from 'react-router-dom';
-import { Container, Form, Button } from 'react-bootstrap';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
-import { useSidebarContext } from '../../context/SidebarContext';
 
 const { axios } = window;
 
 const Login = () => {
-    const { isOpen } = useSidebarContext;
     const { userContext, setUserContext } = useUserContext({});
     const { token } = userContext;
     const [userData, setUserData] = useState({
@@ -60,12 +55,8 @@ const Login = () => {
     });
 
     return (
-        <Container
-            fluid
-            className={classNames('content', { 'is-open': isOpen })}
-        >
+        <>
             { token ? <Redirect to="/dashboard" /> : '' }
-            <Header title="Login" />
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}
@@ -93,8 +84,7 @@ const Login = () => {
                     Login
                 </Button>
             </Form>
-            <Footer  fixedBottom={true} />
-        </Container>
+        </>
     );
 };
 

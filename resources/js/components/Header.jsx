@@ -24,7 +24,7 @@ export default function Header(props) {
                 className="navbar shadow-sm p-3 mb-5 text-info"
                 expand
             >
-                <Nav className="col-1" navbar>
+                <Nav className="col-2" navbar>
                     <Button
                         variant="outline-info"
                         onClick={toggle}
@@ -36,7 +36,8 @@ export default function Header(props) {
                 {
                     userContext.token
                         ? (
-                            <Nav className="col-1 justify-content-end" navbar>
+                            <Nav className="col-2 justify-content-end" navbar>
+                                <Nav.Link><p>{userContext.user.username}</p></Nav.Link>
                                 <LinkContainer to="/logout">
                                     <Nav.Link>
                                         <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 text-info" />
@@ -45,7 +46,7 @@ export default function Header(props) {
                             </Nav>
                         )
                         : (
-                            <Nav className="col-1 justify-content-end" navbar>
+                            <Nav className="col-2 justify-content-end" navbar>
                                 <LinkContainer to="/login">
                                     <Nav.Link>
                                         <FontAwesomeIcon icon={faSignInAlt} className="mr-2 text-info" />
