@@ -27,9 +27,9 @@ const Login = () => {
         const config = {
             method: 'post',
             url: '/api/login',
-            /* headers: {
-                 Accept: 'application/json',
-            }, */
+            headers: {
+                Accept: 'application/json',
+            },
             data: userData,
         };
 

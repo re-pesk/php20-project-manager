@@ -80,10 +80,9 @@ class AuthController extends Controller
 
     public function isLoggedIn(Request $request)
     {
-        $user = auth()->user();
+        $user = $request->user();
 
-        $tokenName = env('APP_ID', 'myapp') . '-token';
-        $token = $user->createToken($tokenName)->plainTextToken;
+        $token = $request->bearerToken();
 
         return response(['user' => $user, 'token' => $token, 'message' => 'The user is logged on!']);
     }

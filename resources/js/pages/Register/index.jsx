@@ -28,9 +28,9 @@ const Register = () => {
         const config = {
             method: 'post',
             url: '/api/register',
-            // headers: {
-            //     Accept: 'application/json',
-            // },
+            headers: {
+                Accept: 'application/json',
+            },
             data: userData,
         };
 
