@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/App.css";
-import { Route, Switch } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import Empty from "./pages/Empty";
-import Welcome from "./pages/Welcome";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ErrorPage from "./pages/Error";
-import { useSidebarContext } from "./context/SidebarContext";
-import Task from "./pages/Task";
-import EditTask from "./pages/EditTask";
-import CreateTask from "./pages/CreateTask";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import '../css/App.css';
+import Sidebar from './components/Sidebar';
+import { useSidebarContext } from './context/SidebarContext';
+import CreateTask from './pages/CreateTask';
+import Dashboard from './pages/Dashboard';
+import EditTask from './pages/EditTask';
+import Empty from './pages/Empty';
+import ErrorPage from './pages/Error';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Task from './pages/Task';
+import Welcome from './pages/Welcome';
 
 export default function App() {
     // open first
@@ -37,12 +37,12 @@ export default function App() {
         /**
          * Add event listener
          */
-        window.addEventListener("resize", updateWidth);
+        window.addEventListener('resize', updateWidth);
         /**
          * Remove event listener
          */
         return () => {
-            window.removeEventListener("resize", updateWidth);
+            window.removeEventListener('resize', updateWidth);
         };
     });
 
