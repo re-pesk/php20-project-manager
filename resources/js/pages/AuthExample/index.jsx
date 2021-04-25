@@ -1,4 +1,5 @@
 import React, { useContext, createContext, useState } from 'react';
+import Container from 'react-bootstrap';
 import {
     BrowserRouter as Router,
     Switch,
@@ -26,34 +27,36 @@ import {
 
 export default function AuthExample() {
     return (
-        <ProvideAuth>
-            <Router>
-                <div>
-                    <AuthButton />
+        <Container>
+            <ProvideAuth>
+                <Router>
+                    <div>
+                        <AuthButton />
 
-                    <ul>
-                        <li>
-                            <Link to="/public">Public Page</Link>
-                        </li>
-                        <li>
-                            <Link to="/protected">Protected Page</Link>
-                        </li>
-                    </ul>
+                        <ul>
+                            <li>
+                                <Link to="/public">Public Page</Link>
+                            </li>
+                            <li>
+                                <Link to="/protected">Protected Page</Link>
+                            </li>
+                        </ul>
 
-                    <Switch>
-                        <Route path="/public">
-                            <PublicPage />
-                        </Route>
-                        <Route path="/login">
-                            <LoginPage />
-                        </Route>
-                        <PrivateRoute path="/protected">
-                            <ProtectedPage />
-                        </PrivateRoute>
-                    </Switch>
-                </div>
-            </Router>
-        </ProvideAuth>
+                        <Switch>
+                            <Route path="/public">
+                                <PublicPage />
+                            </Route>
+                            <Route path="/login">
+                                <LoginPage />
+                            </Route>
+                            <PrivateRoute path="/protected">
+                                <ProtectedPage />
+                            </PrivateRoute>
+                        </Switch>
+                    </div>
+                </Router>
+            </ProvideAuth>
+        </Container>
     );
 }
 
