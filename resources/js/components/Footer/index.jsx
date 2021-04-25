@@ -1,36 +1,19 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 
-export default function Footer({ fixedBottom = false }) {
-    // const style = (fixedBottom) => {
-    //     if (fixedBottom) {
-    //         return {
-    //             backgroundColor: '#17a2b8',
-    //             color: 'white',
-    //             position: 'absolute',
-    //             bottom: 0,
-    //             right: 0,
-    //             left: 0,
-    //         };
-    //     }
-    //     return {
-    //         backgroundColor: '#17a2b8',
-    //         color: 'white',
-    //     };
-    // };
-
+export default function Footer() {
     return (
         <Container
             fluid
             bg="info"
             id="footer"
-            className="px-0"
-            // style={style(fixedBottom)}
+            className="px-0 mt-auto"
         >
             <Navbar
                 id="navbar"
                 bg="info"
-                className="navbar text-light shadow-sm p-3 m-0"
+                sticky="bottom"
+                className="navbar text-light shadow-sm p-3 m-0 mt-5"
                 expand
             >
                 <footer className="footer mx-auto">

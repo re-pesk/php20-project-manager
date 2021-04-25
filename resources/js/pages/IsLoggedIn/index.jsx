@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { Container, Button } from 'react-bootstrap';
-import Header from '../../components/Header';
 import { useUserContext } from '../../context/UserContext';
-import { useSidebarContext } from '../../context/SidebarContext';
 
 const { axios } = window;
 
 const IsLoggedIn = () => {
-    const { isOpen } = useSidebarContext;
     const { userContext, setUserContext } = useUserContext({});
     const [state, setState] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -43,12 +39,8 @@ const IsLoggedIn = () => {
     }, [state]);
 
     return (
-        <Container
-            fluid
-            className={classNames('content', { 'is-open': isOpen })}
-        >
-            <Header title="Is logged in?" />
-            <pre id="output">
+        <Container>
+            <pre id="output" className="mx-auto">
                 {`Is user logged in? ${isLoggedIn || !!userContext.token}`}
                 <br />
                 User data:
@@ -56,7 +48,7 @@ const IsLoggedIn = () => {
                 {JSON.stringify(userContext, null, 4)}
             </pre>
             <Button
-                className="mt-3"
+                className="mt-3 mx-auto"
                 variant="primary"
                 type="submit"
                 onClick={() => setState(true)}

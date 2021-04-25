@@ -15,15 +15,15 @@ import CreateTask from '../../pages/CreateTask';
 const routeListData = [
     { exact: true, path: '/', content: Welcome },
     { exact: true, path: '/dashboard', content: Dashboard },
-    { exact: true, path: '/create-task/:project', content: CreateTask },
-    { exact: true, path: '/edit-task/:task', content: EditTask },
+    { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Edit task' },
+    { exact: true, path: '/edit-task/:task', content: EditTask, title: 'Edit task' },
     { exact: true, path: '/empty', content: Empty },
-    { exact: true, path: '/example', content: AuthExample },
-    { exact: true, path: '/logged-in', content: IsLoggedIn },
+    { exact: true, path: '/example', content: AuthExample, page: true },
+    { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?' },
     { exact: true, path: '/login', content: Login },
     { exact: true, path: '/register', content: Register },
     { exact: true, path: '/logout', content: Logout },
-    { exact: false, path: '', content: ErrorPage },
+    { exact: false, path: '', content: ErrorPage, title: 'Error' },
 ];
 
 export default routeListData;
