@@ -54,18 +54,21 @@ const Logout = () => {
         >
             <h1>Do you really want to logout?</h1>
             <div>
-                <Nav className="col-1 justify-content-end" navbar>
-                    <LinkContainer to="" onClick={() => history.goBack()}>
-                        <Button>
-                            Cancel
-                        </Button>
-                    </LinkContainer>
-
-                    <LinkContainer to="/login" onClick={handleClick}>
-                        <Button>
-                            Yes
-                        </Button>
-                    </LinkContainer>
+                <Nav className="row justify-content-center" navbar>
+                    <Nav.Item>
+                        <LinkContainer to="" onClick={() => history.goBack()}>
+                            <Button>
+                                Cancel
+                            </Button>
+                        </LinkContainer>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <LinkContainer to="" onClick={handleClick}>
+                            <Button>
+                                OK
+                            </Button>
+                        </LinkContainer>
+                    </Nav.Item>
                 </Nav>
             </div>
         </Container>
