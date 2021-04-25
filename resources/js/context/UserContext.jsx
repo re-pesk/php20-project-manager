@@ -38,13 +38,11 @@ const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <Provider value={{ userContext, setUserContext }}>
+        <Provider value={{ userContext, setUserContext }} displayName="UserContextProvider">
             {children}
         </Provider>
     );
 };
-
-UserContext.displayName = 'UserContextProvider';
 
 export default UserContextProvider;
 
