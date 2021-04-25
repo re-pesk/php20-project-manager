@@ -12,7 +12,7 @@ import AuthExample from '../../pages/AuthExample';
 import EditTask from '../../pages/EditTask';
 import CreateTask from '../../pages/CreateTask';
 
-const routeDataList = [
+const routeListData = [
     { exact: true, path: '/', content: Welcome },
     { exact: true, path: '/dashboard', content: Dashboard },
     { exact: true, path: '/create-task/:project', content: CreateTask },
@@ -22,8 +22,8 @@ const routeDataList = [
     { exact: true, path: '/logged-in', content: IsLoggedIn },
     { exact: true, path: '/login', content: Login },
     { exact: true, path: '/register', content: Register },
-    { exact: true, path: '/logout', content: () => Logout },
+    { exact: true, path: '/logout', content: Logout },
     { exact: false, path: '', content: ErrorPage },
 ];
 
-export default routeDataList;
+export default routeListData;

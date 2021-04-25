@@ -75,15 +75,6 @@ const fakeAuth = {
  */
 const authContext = createContext();
 
-function ProvideAuth({ children }) {
-    const auth = useProvideAuth();
-    return (
-        <authContext.Provider value={auth}>
-            {children}
-        </authContext.Provider>
-    );
-}
-
 function useAuth() {
     return useContext(authContext);
 }
@@ -108,6 +99,15 @@ function useProvideAuth() {
     };
 }
 
+function ProvideAuth({ children }) {
+    const auth = useProvideAuth();
+    return (
+        <authContext.Provider value={auth}>
+            {children}
+        </authContext.Provider>
+    );
+}
+
 function AuthButton() {
     const history = useHistory();
     const auth = useAuth();
@@ -117,6 +117,7 @@ function AuthButton() {
             Welcome!
             {' '}
             <button
+                type="button"
                 onClick={() => {
                     auth.signout(() => history.push('/'));
                 }}
@@ -135,6 +136,7 @@ function PrivateRoute({ children, ...rest }) {
     const auth = useAuth();
     return (
         <Route
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
             render={({ location }) => (auth.user ? (
                 children
@@ -176,7 +178,7 @@ function LoginPage() {
                 You must log in to view the page at
                 {from.pathname}
             </p>
-            <button onClick={login}>Log in</button>
+            <button type="button" onClick={login}>Log in</button>
         </div>
     );
 }
