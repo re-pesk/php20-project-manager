@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { Nav } from 'react-bootstrap';
-import navItemListData from './NavItemListData';
+import navItemListData from './data/NavItemListData';
 import SubMenu from './SubMenu';
 import NavItem from './NavItem';
 

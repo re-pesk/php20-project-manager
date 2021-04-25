@@ -1,16 +1,16 @@
 // import React from 'react';
 
-import Empty from '../../pages/Empty';
-import Welcome from '../../pages/Welcome';
-import Dashboard from '../../pages/Dashboard';
-import Login from '../../pages/Login';
-import IsLoggedIn from '../../pages/IsLoggedIn';
-import Register from '../../pages/Register';
-import Logout from '../../pages/Logout';
-import ErrorPage from '../../pages/Error';
-import AuthExample from '../../pages/AuthExample';
-import EditTask from '../../pages/EditTask';
-import CreateTask from '../../pages/CreateTask';
+import Empty from '../../../pages/Empty';
+import Welcome from '../../../pages/Welcome';
+import Dashboard from '../../../pages/Dashboard';
+import Login from '../../../pages/Login';
+import IsLoggedIn from '../../../pages/IsLoggedIn';
+import Register from '../../../pages/Register';
+import Logout from '../../../pages/Logout';
+import ErrorPage from '../../../pages/Error';
+import AuthExample from '../../../pages/AuthExample';
+import EditTask from '../../../pages/EditTask';
+import CreateTask from '../../../pages/CreateTask';
 
 const routeListData = [
     { exact: true, path: '/', content: Welcome },

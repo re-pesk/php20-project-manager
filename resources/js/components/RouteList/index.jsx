@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom';
-import routeListData from './RouteListData';
+import routeListData from './data/RouteListData';
 
 import Page from '../Page';
 
