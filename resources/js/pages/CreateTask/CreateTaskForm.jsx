@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../../context/UserContext';
 
 export default function CreateTaskForm() {
     // const { userContext, setUserContext } = useUserContext();
@@ -43,7 +42,7 @@ export default function CreateTaskForm() {
         // console.log(taskData)
 
         await axios(config)
-            .then((response) => {
+            .then(() => {
                 // eslint-disable-next-line no-console
                 // console.log(response.data)
                 // setUserContext(response.data);
