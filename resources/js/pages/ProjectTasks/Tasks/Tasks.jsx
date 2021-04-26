@@ -1,25 +1,25 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Badge, Button, Container } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Accordion, Badge, Button } from 'react-bootstrap';
+import { useHistory, useParams } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
-const Tasks = ({ id }) => {
+const Tasks = () => {
     const [tasksData, setTasksData] = useState([]);
     const [projectData, setProjectData] = useState([]);
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const history = useHistory();
+    const { project } = useParams();
 
     const getProjectTasks = async () => {
         const config = {
             method: 'GET',
-            url: `/api/projectTasks/${id}`,
+            url: `/api/projectTasks/${project}`,
             headers: {
                 Accept: 'Application/json',
             },
         };
-        console.log(`/api/projectTasks/${id}`);
         await axios(config)
             .then((response) => {
                 setTasksData(response.data.tasksData);
@@ -56,7 +56,7 @@ const Tasks = ({ id }) => {
     );
 
     return (
-        <Container>
+        <>
             {projectData.map((projectInfo) => (
                 <h2 className="text-capitalize" key={projectInfo.id}>
                     <Badge variant="secondary">{projectInfo.id}</Badge>
@@ -72,6 +72,16 @@ const Tasks = ({ id }) => {
                         }}
                     >
                         Create Task
+                    </Button>
+                    <Button
+                        className="ml-5"
+                        variant="primary"
+                        type="submit"
+                        onClick={() => {
+                            history.goBack();
+                        }}
+                    >
+                        Back
                     </Button>
                 </h2>
             ))}
@@ -94,7 +104,7 @@ const Tasks = ({ id }) => {
                     />
                 ))}
             </Accordion>
-        </Container>
+        </>
     );
 };
 export default Tasks;

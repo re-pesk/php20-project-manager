@@ -1,15 +1,14 @@
 import {
-    Welcome,
-    Dashboard,
-    CreateTask,
+    AuthExample, CreateTask, Dashboard,
+
     EditTask,
     Empty,
-    AuthExample,
-    IsLoggedIn,
+
+    ErrorPage, IsLoggedIn,
     Login,
-    Register,
+
     Logout,
-    ErrorPage,
+    ProjectTasks, Register, Welcome,
 } from '../../../pages';
 
 const routeListData = [
@@ -17,6 +16,7 @@ const routeListData = [
     { exact: true, path: '/dashboard', content: Dashboard },
     { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Edit task' },
     { exact: true, path: '/edit-task/:task', content: EditTask, title: 'Edit task' },
+    { exact: true, path: '/task/:project', content: ProjectTasks, title: 'Project Tasks' },
     { exact: true, path: '/empty', content: Empty },
     { exact: true, path: '/example', content: AuthExample, title: 'Authentication Example' },
     { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?' },

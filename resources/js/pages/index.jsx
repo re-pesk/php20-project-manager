@@ -7,8 +7,8 @@ import ErrorPage from './ErrorPage';
 import IsLoggedIn from './IsLoggedIn';
 import Login from './Login';
 import Logout from './Logout';
+import ProjectTasks from './ProjectTasks';
 import Register from './Register';
-import Task from './Task';
 import Welcome from './Welcome';
 
 export {
@@ -22,7 +22,7 @@ export {
     Login,
     Logout,
     Register,
-    Task,
+    ProjectTasks,
     Welcome,
 };
 
@@ -37,7 +37,7 @@ const Pages = {
     Login,
     Logout,
     Register,
-    Task,
+    ProjectTasks,
     Welcome,
 };
 

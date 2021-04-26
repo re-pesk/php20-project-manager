@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import EditTaskForm from './EditTaskForm';
 
