@@ -13,6 +13,7 @@ import { useSidebarContext } from "./context/SidebarContext";
 import Task from "./pages/Task";
 import EditTask from "./pages/EditTask";
 import CreateTask from "./pages/CreateTask";
+import Projects from "./pages/Project";
 
 export default function App() {
     // open first
@@ -62,6 +63,7 @@ export default function App() {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/task/:project" component={Task} />
+                <Route exact path="/projects" component={Projects} />
                 <Route component={ErrorPage} />
             </Switch>
         </div>

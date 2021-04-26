@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Cards from '../../components/Cards';
 import Footer from '../../components/Footer';
 import { useSidebarContext } from '../../context/SidebarContext';
-import Projects from '../../components/ProjectsList';
+
 
 export default function Dashboard() {
     const { isOpen } = useSidebarContext;
@@ -15,8 +15,7 @@ export default function Dashboard() {
             className={classNames("content", { "is-open": isOpen })}
         >
             <Header title="Dashboard" />
-            {/* <Cards /> */}
-            <Projects/>
+            <Cards />
             <Footer />
         </Container>
     );

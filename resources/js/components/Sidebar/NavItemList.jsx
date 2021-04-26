@@ -9,6 +9,7 @@ import {
     faCopy,
     faInfoCircle,
     faChartLine,
+    faProjectDiagram,
 } from '@fortawesome/free-solid-svg-icons';
 import { Nav } from 'react-bootstrap';
 import SubMenu from './SubMenu';
@@ -17,6 +18,7 @@ import NavItem from './NavItem';
 const itemListData = [
     { href: '/', icon: faHome, text: 'Home' },
     { href: '/dashboard', icon: faChartLine, text: 'Dashboard' },
+    { href: '/projects', icon: faProjectDiagram, text: 'Projects' },
     { href: '/empty', icon: faInfoCircle, text: 'About' },
     { href: '/test', icon: faBug, text: 'Error' },
     { href: '/faq', icon: faQuestion, text: 'FAQ' },
