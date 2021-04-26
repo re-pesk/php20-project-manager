@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import { Container, Button, Accordion, Card } from 'react-bootstrap';
-import Moment from "moment";
+import Moment from 'moment';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Accordion, Button, Card, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const Projects = () => {
@@ -10,10 +10,10 @@ const Projects = () => {
     const [idDelete, setIdDelete] = useState(0);
     useEffect(async () => {
         const config = {
-            method: "GET",
-            url: "/api/projects",
+            method: 'GET',
+            url: '/api/projects',
             headers: {
-                Accept: "application/json",
+                Accept: 'application/json',
             },
         };
         await axios(config)
@@ -30,9 +30,9 @@ const Projects = () => {
     const deleteProject = useCallback(
         async (deleteId) => {
             const config = {
-                _method: "DELETE",
+                _method: 'DELETE',
                 headers: {
-                    Accept: "application/json",
+                    Accept: 'application/json',
                 },
             };
             await axios
@@ -43,7 +43,7 @@ const Projects = () => {
                     console.log(error);
                 });
         },
-        []
+        [],
     );
 
     // console.log();
@@ -59,10 +59,10 @@ const Projects = () => {
                     }}
                 >
                     Back
-                    </Button>
+                </Button>
             </div>
             <Accordion>
-                {projectsData.map(project => (
+                {projectsData.map((project) => (
                     <Card key={project.id} id={project.id}>
                         <Accordion.Toggle
                             className="text-capitalize"
@@ -78,14 +78,20 @@ const Projects = () => {
                         <Accordion.Collapse eventKey={project.id}>
                             <Card.Body className="bg-white">
                                 <Card.Title className="text-capitalize">
-                                    State: {project.state.name}
+                                    State:
+                                    {' '}
+                                    {project.state.name}
                                 </Card.Title>
 
                                 <Card.Title className="text-capitalize">
-                                    Tasks assigned: {project.tasks_count}
+                                    Tasks assigned:
+                                    {' '}
+                                    {project.tasks_count}
                                 </Card.Title>
                                 <Card.Title className="text-capitalize">
-                                    Unfinished tasks: {project.unfinished_tasks_count}
+                                    Unfinished tasks:
+                                    {' '}
+                                    {project.unfinished_tasks_count}
                                 </Card.Title>
 
                                 <Card.Text>{project.description}</Card.Text>
@@ -108,26 +114,28 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                if (confirm("Are you sure want to delete project?")) {
+                                                if (confirm('Are you sure want to delete project?')) {
                                                     deleteProject(project.id);
                                                     setIdDelete(project.id);
                                                 } else {
                                                     setIdDelete(project.id);
                                                     return false;
                                                 }
-
-                                            }
-                                            }
+                                            }}
                                         >
                                             Delete
                                         </Button>
                                     </div>
                                     <div>
                                         <Card.Text>
-                                            Created date: {Moment(project.created_at).format("YYYY-MM-DD HH:mm:ss")}
+                                            Created date:
+                                            {' '}
+                                            {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
                                         </Card.Text>
                                         <Card.Text>
-                                            Updated date: {Moment(project.updated_at).format("YYYY-MM-DD HH:mm:ss")}
+                                            Updated date:
+                                            {' '}
+                                            {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
                                         </Card.Text>
                                     </div>
                                 </div>
@@ -141,4 +149,3 @@ const Projects = () => {
     );
 };
 export default Projects;
-

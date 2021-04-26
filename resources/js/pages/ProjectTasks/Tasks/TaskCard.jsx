@@ -71,9 +71,14 @@ const TaskCard = ({
                                 type="submit"
                                 value={id}
                                 onClick={() => {
-                                    setDeleting(true);
-                                    deleteTask(id);
-                                    setIdDelete(id);
+                                    if (confirm(`Are you sure want to delete ${name} task?`)) {
+                                        setDeleting(true);
+                                        deleteTask(id);
+                                        setIdDelete(id);
+                                    } else {
+                                        setIdDelete(id);
+                                        return false;
+                                    }
                                 }}
                             >
                                 {deleting ? 'Loading...' : 'Delete'}
