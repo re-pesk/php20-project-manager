@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTasksController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -33,6 +34,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
 
-Route::resource('users', UserController::class);
+Route::apiResource('projects', ProjectController::class);
+Route::apiResource('users', UserController::class);
 Route::apiResource('tasks', TaskController::class);
 Route::apiResource('projectTasks', ProjectTasksController::class);

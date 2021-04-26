@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Nav } from 'react-bootstrap';
-import classNames from 'classnames';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
