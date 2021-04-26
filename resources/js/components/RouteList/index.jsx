@@ -4,11 +4,12 @@ import { Route, Switch } from 'react-router-dom';
 import routeListData from './data/RouteListData';
 
 import Page from '../Page';
+import PrivateRoute from '../PrivateRoute';
 
 const RouteList = () => (
     <Switch>
         {routeListData.map((item, index) => {
-            const { exact, path, content, page } = item;
+            const { exact, path, content, page, requiresLogin } = item;
             let { title } = item;
             if (!title) {
                 title = content.name;
@@ -16,6 +17,9 @@ const RouteList = () => (
             const key = `id-${index + 1}`;
             if (page) {
                 return <Route key={key} exact={exact} path={path}>{content()}</Route>;
+            }
+            if (requiresLogin) {
+                return <PrivateRoute key={key} exact={exact} path={path}>{content()}</PrivateRoute>;
             }
             return <Route key={key} exact={exact} path={path}><Page title={title}>{content()}</Page></Route>;
         })}
