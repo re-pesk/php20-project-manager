@@ -1,18 +1,17 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faHome,
-    faPaperPlane,
-    faQuestion,
     faBug,
-    faCopy,
-    faInfoCircle,
-    faChartLine,
+
+    faChartLine, faCopy, faHome,
+
+    faInfoCircle, faPaperPlane,
+    faQuestion,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import { Nav } from 'react-bootstrap';
-import SubMenu from './SubMenu';
+import { withRouter } from 'react-router-dom';
 import NavItem from './NavItem';
+import SubMenu from './SubMenu';
 
 const itemListData = [
     { href: '/', icon: faHome, text: 'Home' },
