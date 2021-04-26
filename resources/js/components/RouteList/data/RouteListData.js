@@ -8,6 +8,7 @@ import {
     Login,
 
     Logout,
+    Project,
     ProjectTasks, Register, Welcome,
 } from '../../../pages';
 
@@ -23,7 +24,8 @@ const routeListData = [
     { exact: true, path: '/login', content: Login },
     { exact: true, path: '/register', content: Register },
     { exact: true, path: '/logout', content: Logout },
-    { exact: false, path: '', content: ErrorPage, title: 'Error' },
+    { exact: true, path: '/projects', content: Project },
+    { exact: false, path: '', content: ErrorPage, title: 'Error' }, 
 ];
 
 export default routeListData;

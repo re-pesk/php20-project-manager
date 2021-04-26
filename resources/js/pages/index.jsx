@@ -10,8 +10,10 @@ import Logout from './Logout';
 import ProjectTasks from './ProjectTasks';
 import Register from './Register';
 import Welcome from './Welcome';
+import Project from './Project';
 
 export {
+    Project,
     AuthExample,
     CreateTask,
     Dashboard,
@@ -27,6 +29,7 @@ export {
 };
 
 const Pages = {
+    Project,
     AuthExample,
     CreateTask,
     Dashboard,
