@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
+
+const { axios } = window;
 
 const Register = () => {
     const { userContext, setUserContext } = useUserContext();
@@ -22,9 +23,9 @@ const Register = () => {
         const config = {
             method: 'post',
             url: '/api/register',
-            // headers: {
-            //     Accept: 'application/json',
-            // },
+            headers: {
+                Accept: 'application/json',
+            },
             data: userData,
         };
 
@@ -53,9 +54,7 @@ const Register = () => {
 
     return (
         <>
-            {
-                token && <Redirect to="/dashboard" />
-            }
+            {token && <Redirect to="/dashboard" />}
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}
@@ -90,11 +89,7 @@ const Register = () => {
                     value={userData.password_confirmation}
                     onChange={handleChange}
                 />
-                <Button
-                    className="mt-3"
-                    variant="primary"
-                    type="submit"
-                >
+                <Button className="mt-3" variant="primary" type="submit">
                     Register
                 </Button>
             </Form>

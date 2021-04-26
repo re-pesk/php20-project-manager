@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import User from './User';
+import ReactComponentSample from './ReactComponentSample';
 import LaravelLogo from './LaravelLogo';
 import Grid from './Grid';
 
@@ -12,7 +12,7 @@ export default function Welcome() {
     }
     return (
         <>
-            <User />
+            <ReactComponentSample />
             <Container
                 // eslint-disable-next-line max-len
                 className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"

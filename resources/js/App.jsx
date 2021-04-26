@@ -1,25 +1,46 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import Welcome from './pages/Welcome';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Error from './pages/Error';
-import Footer from './components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import '../css/App.css';
+import RouteList from './components/RouteList';
+import Sidebar from './components/Sidebar';
+import { useSidebarContext } from './context/SidebarContext';
 
 export default function App() {
+    // open first
+    const { setSidebarContext } = useSidebarContext();
+    const [previousWidth, setPreviousWidth] = useState(-1);
+
+    useEffect(() => {
+        const updateWidth = () => {
+            const width = window.innerWidth;
+            const widthLimit = 576;
+            const isMobile = width <= widthLimit;
+            const wasMobile = previousWidth <= widthLimit;
+
+            if (isMobile !== wasMobile) {
+                setSidebarContext(!isMobile);
+            }
+
+            setPreviousWidth(width);
+        };
+
+        // updateWidth();
+        /**
+         * Add event listener
+         */
+        window.addEventListener('resize', updateWidth);
+        /**
+         * Remove event listener
+         */
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+        };
+    });
+
     return (
-        <>
-            <Navigation />
-            <Switch>
-                <Route exact path="/" component={Welcome} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route component={Error} />
-            </Switch>
-            <Footer />
-        </>
+        <div className="App wrapper min-vh-100">
+            <Sidebar />
+            <RouteList />
+        </div>
     );
 }

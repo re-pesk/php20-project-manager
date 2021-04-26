@@ -1,22 +1,27 @@
 import React from 'react';
-import { Container, Col } from 'react-bootstrap';
-import FooterLink from './FooterLink';
+import { Container, Navbar } from 'react-bootstrap';
 
 export default function Footer() {
-    const { laravelVersion, phpVersion } = window.welcomeData;
     return (
-        <Container id="footer" className="flex justify-center mt-4 mb-4 sm:items-center sm:justify-between">
-            <Col className="text-center text-sm text-gray-500 text-left mr-auto">
-                <div className="flex items-center">
-                    <FooterLink url="https://laravel.bigcartel.com" text="Shop" />
-                    <FooterLink url="https://github.com/sponsors/taylorotwell" text="Sponsor" classTxt="ml-4" />
-                </div>
-            </Col>
-            <Col className="ml-auto text-right text-sm text-gray-500 sm:text-right sm:ml-0">
-                {`Laravel v${laravelVersion}`}
-                {' '}
-                {`(PHP v${phpVersion})`}
-            </Col>
+        <Container
+            fluid
+            bg="info"
+            id="footer"
+            className="px-0 mt-auto"
+        >
+            <Navbar
+                id="navbar"
+                bg="info"
+                sticky="bottom"
+                className="navbar text-light shadow-sm p-3 m-0 mt-5"
+                expand
+            >
+                <footer className="footer mx-auto">
+                    <span>
+                        &copy; 2021 PHProjectMan team.
+                    </span>
+                </footer>
+            </Navbar>
         </Container>
     );
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 
 const { axios } = window;
 
 const Login = () => {
-    const { userContext, setUserContext } = useUserContext();
+    const { userContext, setUserContext } = useUserContext({});
     const { token } = userContext;
     const [userData, setUserData] = useState({
         email: '',
@@ -22,9 +22,9 @@ const Login = () => {
         const config = {
             method: 'post',
             url: '/api/login',
-            /* headers: {
-                 Accept: 'application/json',
-            }, */
+            headers: {
+                Accept: 'application/json',
+            },
             data: userData,
         };
 
@@ -56,7 +56,7 @@ const Login = () => {
 
     return (
         <>
-            { token && <Redirect to="/dashboard" /> }
+            { token ? <Redirect to="/dashboard" /> : '' }
             <Form
                 className="w-25 mx-auto mt-5"
                 onSubmit={handleSubmit}
