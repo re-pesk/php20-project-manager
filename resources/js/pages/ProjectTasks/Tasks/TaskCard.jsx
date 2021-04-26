@@ -83,12 +83,12 @@ const TaskCard = ({
                             <Card.Text>
                                 Created date:
                                 {' '}
-                                {Moment(created).format('YYYY-MM-DD HH:m:s')}
+                                {Moment(created).format('YYYY-MM-DD HH:mm:ss')}
                             </Card.Text>
                             <Card.Text>
                                 Updated date:
                                 {' '}
-                                {Moment(updated).format('YYYY-MM-DD HH:m:s')}
+                                {Moment(updated).format('YYYY-MM-DD HH:mm:ss')}
                             </Card.Text>
                         </div>
                     </div>

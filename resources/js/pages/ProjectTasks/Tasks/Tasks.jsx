@@ -35,7 +35,6 @@ const Tasks = () => {
 
     const deleteTask = useCallback(
         async (deleteId) => {
-            setDeleting;
             const config = {
                 _method: 'DELETE',
                 headers: {
@@ -44,15 +43,12 @@ const Tasks = () => {
             };
             await axios
                 .post(`/api/projectTasks/${deleteId}`, config)
-                .then((response) => {
-                    setDeleting(false);
-                })
                 .catch((error) => {
                     console.log(error);
-                    setDeleting(false);
                 });
+            setDeleting(false);
         },
-        [idDelete],
+        [],
     );
 
     return (
