@@ -12,6 +12,7 @@ import ErrorPage from './pages/Error';
 import { useSidebarContext } from './context/SidebarContext';
 import EditTask from './pages/EditTask';
 import CreateTask from './pages/CreateTask';
+import Board from './pages/Board';
 
 export default function App() {
     // open first
@@ -53,6 +54,7 @@ export default function App() {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/create-task/:project" children={<CreateTask/>} />
                 <Route exact path="/edit-task/:task" children={<EditTask/>} />
+                <Route exact path="/board" children={<Board/>} />
                 <Route exact path="/empty" component={Empty} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
