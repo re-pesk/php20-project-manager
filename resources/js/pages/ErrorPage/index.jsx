@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav } from 'react-bootstrap';
 
-export default function Error() {
+export default function ErrorPage() {
     const goBack = (event) => {
         event.preventDefault();
         window.history.back();
