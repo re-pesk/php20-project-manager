@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Badge, Container } from 'react-bootstrap';
+import { Accordion, Badge, Button, Container } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
 const Tasks = ({ id }) => {
@@ -8,6 +9,7 @@ const Tasks = ({ id }) => {
     const [projectData, setProjectData] = useState([]);
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
+    const history = useHistory();
 
     const getProjectTasks = async () => {
         const config = {
@@ -17,6 +19,7 @@ const Tasks = ({ id }) => {
                 Accept: 'Application/json',
             },
         };
+        console.log(`/api/projectTasks/${id}`);
         await axios(config)
             .then((response) => {
                 setTasksData(response.data.tasksData);
@@ -32,6 +35,7 @@ const Tasks = ({ id }) => {
 
     const deleteTask = useCallback(
         async (deleteId) => {
+            setDeleting;
             const config = {
                 _method: 'DELETE',
                 headers: {
@@ -40,11 +44,15 @@ const Tasks = ({ id }) => {
             };
             await axios
                 .post(`/api/projectTasks/${deleteId}`, config)
+                .then((response) => {
+                    setDeleting(false);
+                })
                 .catch((error) => {
                     console.log(error);
+                    setDeleting(false);
                 });
-            setDeleting(false);
         },
+        [idDelete],
     );
 
     return (
@@ -54,6 +62,17 @@ const Tasks = ({ id }) => {
                     <Badge variant="secondary">{projectInfo.id}</Badge>
                     {' '}
                     {projectInfo.name}
+                    <Button
+                        className="m-2"
+                        variant="primary"
+                        type="submit"
+                        value={projectInfo.id}
+                        onClick={() => {
+                            history.push(`/create-task/${projectInfo.id}`);
+                        }}
+                    >
+                        Create Task
+                    </Button>
                 </h2>
             ))}
             <Accordion>

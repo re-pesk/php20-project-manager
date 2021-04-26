@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['auth:sanctum'])->only(['logout', 'isLoggedIn']);
         $this->middleware(['cors']);
         $this->middleware(['log.routes']);
     }
@@ -38,34 +39,27 @@ class AuthController extends Controller
         $response = [
             'user' => $user,
             'token' => $token,
+            'message' => 'The user is registered!'
         ];
 
-        return response($response, 201);
+        return response($response);
     }
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
-
-        $user = User::where([
-            'email' => $request->email,
-        ])->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(['message' => "Bad credencials"], 401);
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Bad credencials'], 401);
         }
 
+        $user = auth()->user();
+
         $tokenName = env('APP_ID', 'myapp') . '-token';
-
-
         $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
             'user' => $user,
             'token' => $token,
+            'message' => 'The user logged in!'
         ];
 
         return response($response, 201);
@@ -75,6 +69,15 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return response(['message' => 'Logged out']);
+        return response()->json(['message' => 'The user logged out']);
+    }
+
+    public function isLoggedIn(Request $request)
+    {
+        $user = $request->user();
+
+        $token = $request->bearerToken();
+
+        return response(['user' => $user, 'token' => $token, 'message' => 'The user is logged in!']);
     }
 }

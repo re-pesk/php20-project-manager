@@ -1,6 +1,7 @@
 import Moment from 'moment';
 import React from 'react';
 import { Accordion, Button, Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const TaskCard = ({
     name,
@@ -15,16 +16,17 @@ const TaskCard = ({
     setDeleting,
     deleting,
 }) => {
+    const history = useHistory();
     Moment.locale('en');
     return (
         <Card key={id} id={id}>
             <Accordion.Toggle
                 className="text-capitalize"
-                // as={Button}
-                // variant="link"
+                as={Button}
+                variant="link"
                 eventKey={id}
             >
-                <Card.Header as="h4" className="text-dark cursor-pointer">
+                <Card.Header as="h4">
                     {id}
                     {' '}
                     {name}
@@ -54,17 +56,15 @@ const TaskCard = ({
                     <div className="d-flex justify-content-between">
                         <div>
                             <Button
-                                variant="success"
-                                href={`/edit-task/${id}`}
+                                className="mr-2"
+                                variant="primary"
                                 type="submit"
                                 value={id}
-                                // onClick={() => {
-                                //     setDeleting(true);
-                                //     deleteTask(id);
-                                //     setIdDelete(id);
-                                // }}
+                                onClick={() => {
+                                    history.push(`/edit-task/${id}`);
+                                }}
                             >
-                                Edite
+                                Edit
                             </Button>
                             <Button
                                 variant="danger"
@@ -79,7 +79,6 @@ const TaskCard = ({
                                 {deleting ? 'Loading...' : 'Delete'}
                             </Button>
                         </div>
-
                         <div>
                             <Card.Text>
                                 Created date:
