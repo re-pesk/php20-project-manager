@@ -24,7 +24,7 @@ const routeListData = [
     { exact: true, path: '/login', content: Login },
     { exact: true, path: '/register', content: Register },
     { exact: true, path: '/logout', content: Logout },
-    { exact: true, path: '/projects', content: Project },
+    { exact: true, path: '/projects', content: Project, title: 'Projects list' },
     { exact: false, path: '', content: ErrorPage, title: 'Error' }, 
 ];
 
