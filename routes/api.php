@@ -31,6 +31,7 @@ return $request->user();
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
 
 Route::resource('users', UserController::class);
 Route::apiResource('tasks', TaskController::class);

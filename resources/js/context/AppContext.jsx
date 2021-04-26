@@ -7,13 +7,11 @@ const AppContext = ({ children }) => {
     const [appLikes, setAppLikes] = useState(0);
 
     return (
-        <Provider value={{ appLikes, setAppLikes }}>
+        <Provider value={{ appLikes, setAppLikes }} displayName="AppContext">
             {children}
         </Provider>
     );
 };
-
-AppContext.displayName = 'AppContext';
 
 export default AppContext;
 
