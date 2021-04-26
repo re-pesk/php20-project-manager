@@ -51,7 +51,7 @@ const Projects = () => {
         <Container>
             <Accordion>
             {projectsData.map(project => ( 
-                let CreatedDate = project.created_at;
+                // let CreatedDate = project.created_at;
             <Card key={project.id} id={project.id}>
             <Accordion.Toggle
                 className="text-capitalize"
