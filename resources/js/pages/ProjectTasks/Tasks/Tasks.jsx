@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Badge, Button } from 'react-bootstrap';
+import { Accordion, Badge, Button, Card, Container } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
@@ -23,6 +23,7 @@ const Tasks = () => {
         await axios(config)
             .then((response) => {
                 setTasksData(response.data.tasksData);
+
                 setProjectData(response.data.projectData);
             })
             .catch((error) => {
@@ -52,25 +53,11 @@ const Tasks = () => {
     );
 
     return (
-        <>
+        <Container>
             {projectData.map((projectInfo) => (
-                <h2 className="text-capitalize" key={projectInfo.id}>
-                    <Badge variant="secondary">{projectInfo.id}</Badge>
-                    {' '}
-                    {projectInfo.name}
+                <div className="d-flex flex-sm-row flex-column justify-content-between" key={projectInfo.id}>
                     <Button
                         className="m-2"
-                        variant="primary"
-                        type="submit"
-                        value={projectInfo.id}
-                        onClick={() => {
-                            history.push(`/create-task/${projectInfo.id}`);
-                        }}
-                    >
-                        Create Task
-                    </Button>
-                    <Button
-                        className="ml-5"
                         variant="primary"
                         type="submit"
                         onClick={() => {
@@ -79,10 +66,33 @@ const Tasks = () => {
                     >
                         Back
                     </Button>
-                </h2>
+                    <h2 className="text-capitalize">
+
+                        <Badge variant="secondary">{projectInfo.id}</Badge>
+                        {' '}
+                        {projectInfo.name}
+                    </h2>
+                    <div className="d-flex justify-content-between">
+
+                        <Button
+                            className="m-2"
+                            variant="primary"
+                            type="submit"
+                            value={projectInfo.id}
+                            onClick={() => {
+                                history.push(`/create-task/${projectInfo.id}`);
+                            }}
+                        >
+                            Create Task
+                        </Button>
+
+                    </div>
+                </div>
+
             ))}
+
             <Accordion>
-                {tasksData.map((task) => (
+                { tasksData.length > 0 ? tasksData.map((task) => (
                     <TaskCard
                         key={task.id}
                         name={task.name}
@@ -98,9 +108,20 @@ const Tasks = () => {
                         setDeleting={setDeleting}
                         deleting={deleting}
                     />
-                ))}
+                ))
+                    : (
+                        <Card>
+                            <Accordion.Toggle
+                                as={Card.Header}
+                                variant="link"
+                                className="text-center"
+                            >
+                                There are no tasks in this project.
+                            </Accordion.Toggle>
+                        </Card>
+                    )}
             </Accordion>
-        </>
+        </Container>
     );
 };
 export default Tasks;

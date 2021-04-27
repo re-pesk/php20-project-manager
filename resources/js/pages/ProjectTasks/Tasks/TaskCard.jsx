@@ -18,10 +18,10 @@ const TaskCard = ({
 }) => {
     const history = useHistory();
     Moment.locale('en');
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
     return (
         <Card key={id} id={id}>
             <Accordion.Toggle
-                className="text-capitalize"
                 as={Button}
                 variant="link"
                 eventKey={id}
@@ -29,16 +29,16 @@ const TaskCard = ({
                 <Card.Header as="h4">
                     {id}
                     {' '}
-                    {name}
+                    {capitalize(name)}
                 </Card.Header>
             </Accordion.Toggle>
 
             <Accordion.Collapse eventKey={id}>
                 <Card.Body className="bg-white">
-                    <Card.Title className="text-capitalize">
+                    <Card.Title>
                         Title:
                         {' '}
-                        {name}
+                        {capitalize(name)}
                     </Card.Title>
 
                     <Card.Title className="text-capitalize">
@@ -71,9 +71,14 @@ const TaskCard = ({
                                 type="submit"
                                 value={id}
                                 onClick={() => {
-                                    setDeleting(true);
-                                    deleteTask(id);
-                                    setIdDelete(id);
+                                    if (confirm(`Are you sure want to delete ${capitalize(name)} task?`)) {
+                                        setDeleting(true);
+                                        deleteTask(id);
+                                        setIdDelete(id);
+                                    } else {
+                                        setIdDelete(id);
+                                        return false;
+                                    }
                                 }}
                             >
                                 {deleting ? 'Loading...' : 'Delete'}
