@@ -44,7 +44,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'project_state_id' => 'required|integer|min:1|max:2',
+        ]);
+
+        Project::create($request->all());
+
+        return $validation;
     }
 
     /**
@@ -73,6 +81,10 @@ class ProjectController extends Controller
             );
     }
 
+    public function showData($id){
+        return Project::find($id);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,7 +105,9 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+        $project->update($request->all());
+        return $project;
     }
 
     /**
