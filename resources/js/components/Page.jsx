@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { useSidebarContext } from '../context/SidebarContext';
 
-const Page = ({ children, title }) => {
+const Page = ({ content, title }) => {
     const { isOpen } = useSidebarContext;
 
     return (
@@ -14,7 +14,7 @@ const Page = ({ children, title }) => {
             className={classNames('content', 'd-flex', 'flex-column', 'min-vh-100', { 'is-open': isOpen })}
         >
             <Header title={title} />
-            {children}
+            {content()}
             <Footer />
         </Container>
     );

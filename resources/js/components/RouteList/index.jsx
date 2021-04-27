@@ -24,7 +24,7 @@ const RouteList = () => (
             }
             return (
                 <CheckedRoute key={key} exact={exact} path={path} accessibility={accessibility}>
-                    <Page title={title}>{content()}</Page>
+                    <Page title={title} content={content} />
                 </CheckedRoute>
             );
         })}

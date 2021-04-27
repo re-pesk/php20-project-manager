@@ -13,20 +13,16 @@ export default function CheckedRoute({ accessibility, children, exact, key, path
     );
 
     return (
-        <Route
-            key={key}
-            exact={exact}
-            path={path}
-            render={({ location }) => (canAccess ? (
-                children
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: '/',
-                        state: { from: location },
-                    }}
-                />
-            ))}
-        />
+        canAccess ? (
+            <Route
+                key={key}
+                exact={exact}
+                path={path}
+            >
+                {children}
+            </Route>
+        ) : (
+            <Redirect to="/" />
+        )
     );
 }
