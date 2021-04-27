@@ -11,22 +11,24 @@ import {
     ProjectTasks, Register, Welcome, CreateProject, UpdateProject, ProjectList,
 } from '../../../pages';
 
+const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3});
+
 const routeListData = [
-    { exact: true, path: '/', content: Welcome },
-    { exact: true, path: '/dashboard', content: Dashboard, requiresLogin: true },
-    { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Edit task', requiresLogin: true },
-    { exact: true, path: '/edit-task/:task', content: EditTask, title: 'Edit task', requiresLogin: true },
-    { exact: true, path: '/task/:project', content: ProjectTasks, title: 'Project Tasks', requiresLogin: true },
-    { exact: true, path: '/empty', content: Empty, requiresLogin: true },
-    { exact: true, path: '/example', content: AuthExample, title: 'Authentication Example', requiresLogin: true },
-    { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?', requiresLogin: true },
-    { exact: true, path: '/login', content: Login, publicOnly: true },
-    { exact: true, path: '/register', content: Register, publicOnly: true },
-    { exact: true, path: '/logout', content: Logout, requiresLogin: true },
-    { exact: true, path: '/projects', content: ProjectList, title: 'Projects list', requiresLogin: true },
-    { exact: true, path: '/create-project', content: CreateProject, title: 'Create Project', requiresLogin: true },
-    { exact: true, path: '/update-project/:project', content: UpdateProject, title: 'Update Project', requiresLogin: true },
-    { exact: false, path: '', content: ErrorPage, title: 'Error' },
+    { exact: true, path: '/', content: Welcome, accessibility: accessType.both },
+    { exact: true, path: '/dashboard', content: Dashboard, accessibility: accessType.requiresLogin },
+    { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Edit task', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/edit-task/:task', content: EditTask, title: 'Edit task', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/task/:project', content: ProjectTasks, title: 'Project Tasks', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/empty', content: Empty, accessibility: accessType.requiresLogin },
+    { exact: true, path: '/example', content: AuthExample, title: 'Authentication Example', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/login', content: Login, accessibility: accessType.publicOnly},
+    { exact: true, path: '/register', content: Register, accessibility: accessType.publicOnly },
+    { exact: true, path: '/logout', content: Logout, accessibility: accessType.requiresLogin },
+    { exact: true, path: '/projects', content: ProjectList, title: 'Projects list', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/create-project', content: CreateProject, title: 'Create Project', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/update-project/:project', content: UpdateProject, title: 'Update Project', accessibility: accessType.requiresLogin },
+    { exact: false, path: '', content: ErrorPage, title: 'Error', accessibility: accessType.both },
 ];
 
 export default routeListData;
