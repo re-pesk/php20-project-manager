@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
 import '../css/App.css';
-import { Route, Switch } from 'react-router-dom';
+import RouteList from './components/RouteList';
 import Sidebar from './components/Sidebar';
-import Empty from './pages/Empty';
-import Welcome from './pages/Welcome';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ErrorPage from './pages/Error';
 import { useSidebarContext } from './context/SidebarContext';
-import EditTask from './pages/EditTask';
-import CreateTask from './pages/CreateTask';
-import Board from './pages/Board';
 
 export default function App() {
     // open first
@@ -35,12 +26,12 @@ export default function App() {
 
         // updateWidth();
         /**
-        * Add event listener
-        */
+         * Add event listener
+         */
         window.addEventListener('resize', updateWidth);
         /**
-        * Remove event listener
-        */
+         * Remove event listener
+         */
         return () => {
             window.removeEventListener('resize', updateWidth);
         };
@@ -49,17 +40,7 @@ export default function App() {
     return (
         <div className="App wrapper min-vh-100">
             <Sidebar />
-            <Switch>
-                <Route exact path="/" component={Welcome} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/create-task/:project" children={<CreateTask/>} />
-                <Route exact path="/edit-task/:task" children={<EditTask/>} />
-                <Route exact path="/board" children={<Board/>} />
-                <Route exact path="/empty" component={Empty} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route component={ErrorPage} />
-            </Switch>
+            <RouteList />
         </div>
     );
 }

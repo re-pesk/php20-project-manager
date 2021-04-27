@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Priority;
 use App\Models\Task;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
@@ -46,13 +45,13 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         // KAROLIS
-       $validation = $request->validate([
+        $validation = $request->validate([
             'name' => 'required',
             'description' => 'required',
             'priority_id' => 'required|integer|min:1|max:3',
             'project_id' => 'required',
         ]);
-        
+
         Task::create($request->all());
 
         return $validation;

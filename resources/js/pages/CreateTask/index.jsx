@@ -1,18 +1,23 @@
-import React from 'react'
-import classNames from 'classnames'
-import { Container } from 'react-bootstrap'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import { useSidebarContext } from '../../context/SidebarContext'
-import CreateTaskForm from '../../components/CreateTaskForm'
+import React from 'react';
+import { Container, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import CreateTaskForm from './CreateTaskForm';
 
 export default function CreateTask() {
-  const { isOpen } = useSidebarContext
-  return (
-    <Container fluid className={classNames('content', { 'is-open': isOpen })}>
-      <Header title="Create Task" />
-      <CreateTaskForm />
-      <Footer fixedBottom={true} />
-    </Container>
-  )
+    const history = useHistory();
+    return (
+        <Container>
+            <Button
+                className="ml-5"
+                variant="primary"
+                type="submit"
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Back
+            </Button>
+            <CreateTaskForm />
+        </Container>
+    );
 }
