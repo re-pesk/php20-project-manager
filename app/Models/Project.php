@@ -26,4 +26,10 @@ class Project extends Model
     {
         return $this->hasMany(Task::class, 'project_id', 'id');
     }
+
+    //Get project unfinished tasks
+    public function unfinishedTasks()
+    {
+        return $this->tasks()->where('task_state_id', '!=', 3);
+    }
 }

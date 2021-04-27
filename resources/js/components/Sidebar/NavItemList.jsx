@@ -1,10 +1,10 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import { Nav } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import navItemListData from './data/NavItemListData';
-import SubMenu from './SubMenu';
 import NavItem from './NavItem';
+import SubMenu from './SubMenu';
 
 const NavItemList = () => (
     <Nav className="flex-column pt-2">

@@ -1,9 +1,8 @@
-import React from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import EditTaskForm from './EditTaskForm';
+import CreateProjectForm from './CreateProjectForm';
 
-export default function EditTask() {
+export default function CreateProject() {
     const history = useHistory();
     return (
         <Container>
@@ -17,7 +16,7 @@ export default function EditTask() {
             >
                 Back
             </Button>
-            <EditTaskForm />
+            <CreateProjectForm />
         </Container>
-    );
+    )
 }

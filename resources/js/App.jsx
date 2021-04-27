@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
 import '../css/App.css';
-import Sidebar from './components/Sidebar';
 import RouteList from './components/RouteList';
+import Sidebar from './components/Sidebar';
 import { useSidebarContext } from './context/SidebarContext';
 
 export default function App() {
@@ -28,12 +28,12 @@ export default function App() {
         /**
          * Add event listener
          */
-        window.addEventListener("resize", updateWidth);
+        window.addEventListener('resize', updateWidth);
         /**
          * Remove event listener
          */
         return () => {
-            window.removeEventListener("resize", updateWidth);
+            window.removeEventListener('resize', updateWidth);
         };
     });
 

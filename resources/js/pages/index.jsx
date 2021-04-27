@@ -7,11 +7,15 @@ import ErrorPage from './ErrorPage';
 import IsLoggedIn from './IsLoggedIn';
 import Login from './Login';
 import Logout from './Logout';
+import ProjectTasks from './ProjectTasks';
 import Register from './Register';
-import Task from './Task';
 import Welcome from './Welcome';
+import ProjectList from './ProjectList';
+import CreateProject from './CreateProject';
+import UpdateProject from './UpdateProject'
 
 export {
+    ProjectList,
     AuthExample,
     CreateTask,
     Dashboard,
@@ -22,11 +26,14 @@ export {
     Login,
     Logout,
     Register,
-    Task,
+    ProjectTasks,
     Welcome,
+    CreateProject,
+    UpdateProject,
 };
 
 const Pages = {
+    ProjectList,
     AuthExample,
     CreateTask,
     Dashboard,
@@ -37,8 +44,10 @@ const Pages = {
     Login,
     Logout,
     Register,
-    Task,
+    ProjectTasks,
     Welcome,
+    CreateProject,
+    UpdateProject,
 };
 
 export default Pages;
