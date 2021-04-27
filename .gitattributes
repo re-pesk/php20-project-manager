@@ -2,5 +2,6 @@
 *.* text eol=lf
 *.jpg -text
 *.png -text
+*.ico -text
 *.pdf -text
 CHANGELOG.md export-ignore

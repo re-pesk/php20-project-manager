@@ -60,9 +60,9 @@ const Projects = () => {
                 >
                     Back
                     </Button>
-                    <Button
+                <Button
                     className="mb-3"
-                    style={{float: 'right'}}
+                    style={{ float: 'right' }}
                     variant="primary"
                     type="submit"
                     onClick={() => {
@@ -113,12 +113,12 @@ const Projects = () => {
                                             View tasks
                                         </Button>
                                         <Button className="mr-1">Show Board</Button>
-                                        <Button 
-                                            className="mr-1" 
+                                        <Button
+                                            className="mr-1"
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                            history.push(`/update-project/${project.id}`);
+                                                history.push(`/update-project/${project.id}`);
                                             }}
                                         >
                                             Edit
