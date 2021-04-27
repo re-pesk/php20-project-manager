@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
     AuthExample, CreateTask, Dashboard,
 
@@ -11,7 +12,7 @@ import {
     ProjectTasks, Register, Welcome, CreateProject, UpdateProject, ProjectList,
 } from '../../../pages';
 
-const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3});
+const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3 });
 
 const routeListData = [
     { exact: true, path: '/', content: Welcome, accessibility: accessType.both },
@@ -22,7 +23,7 @@ const routeListData = [
     { exact: true, path: '/empty', content: Empty, accessibility: accessType.requiresLogin },
     { exact: true, path: '/example', content: AuthExample, title: 'Authentication Example', accessibility: accessType.requiresLogin },
     { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?', accessibility: accessType.requiresLogin },
-    { exact: true, path: '/login', content: Login, accessibility: accessType.publicOnly},
+    { exact: true, path: '/login', content: Login, accessibility: accessType.publicOnly },
     { exact: true, path: '/register', content: Register, accessibility: accessType.publicOnly },
     { exact: true, path: '/logout', content: Logout, accessibility: accessType.requiresLogin },
     { exact: true, path: '/projects', content: ProjectList, title: 'Projects list', accessibility: accessType.requiresLogin },
