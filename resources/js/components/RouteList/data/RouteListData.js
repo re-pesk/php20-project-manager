@@ -8,8 +8,7 @@ import {
     Login,
 
     Logout,
-    Project,
-    ProjectTasks, Register, Welcome, CreateProject, UpdateProject,
+    ProjectTasks, Register, Welcome, CreateProject, UpdateProject, ProjectList,
 } from '../../../pages';
 
 const routeListData = [
@@ -24,7 +23,7 @@ const routeListData = [
     { exact: true, path: '/login', content: Login },
     { exact: true, path: '/register', content: Register },
     { exact: true, path: '/logout', content: Logout },
-    { exact: true, path: '/projects', content: Project, title: 'Projects list' },
+    { exact: true, path: '/projects', content: ProjectList, title: 'Projects list' },
     { exact: true, path: '/create-project', content: CreateProject, title: 'Create Project' },
     { exact: true, path: '/update-project/:project', content: UpdateProject, title: 'Update Project' },
     { exact: false, path: '', content: ErrorPage, title: 'Error' },

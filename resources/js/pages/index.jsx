@@ -10,12 +10,12 @@ import Logout from './Logout';
 import ProjectTasks from './ProjectTasks';
 import Register from './Register';
 import Welcome from './Welcome';
-import Project from './Project';
+import ProjectList from './ProjectList';
 import CreateProject from './CreateProject';
 import UpdateProject from './UpdateProject'
 
 export {
-    Project,
+    ProjectList,
     AuthExample,
     CreateTask,
     Dashboard,
@@ -33,7 +33,7 @@ export {
 };
 
 const Pages = {
-    Project,
+    ProjectList,
     AuthExample,
     CreateTask,
     Dashboard,
