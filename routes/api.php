@@ -33,6 +33,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
+Route::get('/project-data/{id}', [ProjectController::class, 'showData']);
 
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('users', UserController::class);
