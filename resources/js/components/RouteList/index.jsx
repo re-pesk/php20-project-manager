@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom';
-import routeListData from './data/RouteListData';
+import routeListData from './data/route-list-data';
 
 import Page from '../Page';
-import PrivateRoute from '../PrivateRoute';
-import PublicOnlyRoute from '../PublicOnlyRoute';
+import CheckedRoute from './CheckedRoute';
 
 const RouteList = () => (
     <Switch>
@@ -23,27 +22,11 @@ const RouteList = () => (
                     </Route>
                 );
             }
-            if (accessibility === 1) {
-                return (
-                    <PrivateRoute key={key} exact={exact} path={path}>
-                        <Page title={title}>{content()}</Page>
-                    </PrivateRoute>
-                );
-            }
-            if (accessibility === 2) {
-                return (
-                    <PublicOnlyRoute key={key} exact={exact} path={path}>
-                        <Page title={title}>{content()}</Page>
-                    </PublicOnlyRoute>
-                );
-            }
-            if (accessibility === 3) {
-                return (
-                    <Route key={key} exact={exact} path={path}>
-                        <Page title={title}>{content()}</Page>
-                    </Route>
-                );
-            }
+            return (
+                <CheckedRoute key={key} exact={exact} path={path} accessibility={accessibility}>
+                    <Page title={title}>{content()}</Page>
+                </CheckedRoute>
+            );
         })}
     </Switch>
 );
