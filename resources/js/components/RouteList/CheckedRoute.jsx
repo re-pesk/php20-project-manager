@@ -19,10 +19,11 @@ export default function CheckedRoute({ accessibility, children, ...rest }) {
             render={({ location }) => (canAccess ? (
                 children
             ) : (
-                <Redirect to={{
-                    pathname: '/',
-                    state: { from: location },
-                }}
+                <Redirect
+                    to={{
+                        pathname: '/',
+                        state: { from: location },
+                    }}
                 />
             ))}
         />
