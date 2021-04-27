@@ -9,7 +9,7 @@ import {
 
     Logout,
     Project,
-    ProjectTasks, Register, Welcome,
+    ProjectTasks, Register, Welcome, CreateProject, UpdateProject,
 } from '../../../pages';
 
 const routeListData = [
@@ -25,7 +25,9 @@ const routeListData = [
     { exact: true, path: '/register', content: Register },
     { exact: true, path: '/logout', content: Logout },
     { exact: true, path: '/projects', content: Project, title: 'Projects list' },
-    { exact: false, path: '', content: ErrorPage, title: 'Error' }, 
+    { exact: true, path: '/create-project', content: CreateProject, title: 'Create Project' },
+    { exact: true, path: '/update-project/:project', content: UpdateProject, title: 'Update Project' },
+    { exact: false, path: '', content: ErrorPage, title: 'Error' },
 ];
 
 export default routeListData;
