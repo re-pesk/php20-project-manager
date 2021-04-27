@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function CreateTaskForm() {
     // const { userContext, setUserContext } = useUserContext();
     // const { token } = userContext;
-
+    const history = useHistory();
     const { project } = useParams();
     // console.log(project);
 
@@ -65,6 +65,7 @@ export default function CreateTaskForm() {
                 // console.log(true);
             });
         setState(false);
+        history.push(`/task/${project}`);
     }, [state]);
 
     const handleSubmit = (event) => {
