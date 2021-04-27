@@ -8,7 +8,7 @@ import {
     faProjectDiagram,
 } from '@fortawesome/free-solid-svg-icons';
 
-const navItemListData = [
+export default [
     { href: '/', icon: faHome, text: 'Home' },
     { href: '/dashboard', icon: faChartLine, text: 'Dashboard' },
     { href: '/projects', icon: faProjectDiagram, text: 'Projects' },
@@ -18,5 +18,3 @@ const navItemListData = [
     { href: '/test', icon: faBug, text: 'Error' },
     { href: '/contact', icon: faPaperPlane, text: 'Contact' },
 ];
-
-export default navItemListData;
