@@ -11,6 +11,8 @@ import ProjectTasks from './ProjectTasks';
 import Register from './Register';
 import Welcome from './Welcome';
 import Project from './Project';
+import CreateProject from './CreateProject';
+import UpdateProject from './UpdateProject'
 
 export {
     Project,
@@ -26,6 +28,8 @@ export {
     Register,
     ProjectTasks,
     Welcome,
+    CreateProject,
+    UpdateProject,
 };
 
 const Pages = {
@@ -42,6 +46,8 @@ const Pages = {
     Register,
     ProjectTasks,
     Welcome,
+    CreateProject,
+    UpdateProject,
 };
 
 export default Pages;

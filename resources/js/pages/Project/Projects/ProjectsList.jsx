@@ -60,6 +60,17 @@ const Projects = () => {
                 >
                     Back
                     </Button>
+                    <Button
+                    className="mb-3"
+                    style={{float: 'right'}}
+                    variant="primary"
+                    type="submit"
+                    onClick={() => {
+                        history.push('/create-project/');
+                    }}
+                >
+                    Create New Project
+                    </Button>
             </div>
             <Accordion>
                 {projectsData.map(project => (
@@ -102,7 +113,16 @@ const Projects = () => {
                                             View tasks
                                         </Button>
                                         <Button className="mr-1">Show Board</Button>
-                                        <Button className="mr-1">Edit</Button>
+                                        <Button 
+                                            className="mr-1" 
+                                            type="submit"
+                                            value={project.id}
+                                            onClick={() => {
+                                            history.push(`/update-project/${project.id}`);
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
                                         <Button
                                             variant="danger"
                                             type="submit"
