@@ -1,11 +1,11 @@
-import React, { useContext, createContext, useState } from 'react';
-import Container from 'react-bootstrap';
+import React, { createContext, useContext, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
+
     Link,
-    Redirect,
+    Redirect, Route, Switch,
+
     useHistory,
     useLocation,
 } from 'react-router-dom';
