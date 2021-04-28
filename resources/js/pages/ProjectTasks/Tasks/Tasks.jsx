@@ -10,12 +10,14 @@ const Tasks = () => {
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const history = useHistory();
-    const { project } = useParams();
+    // console.log(history);
+    // const { project } = history.location.state;
+    // const { project } = useParams();
 
     const getProjectTasks = async () => {
         const config = {
             method: 'GET',
-            url: `/api/projectTasks/${project}`,
+            url: `/api/projectTasks/${history.location.state.project}`,
             headers: {
                 Accept: 'Application/json',
             },

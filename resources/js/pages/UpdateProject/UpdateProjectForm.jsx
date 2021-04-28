@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const UpdateProjectForm = () => {
     // get project id from params
-    const { project } = useParams();
+    // const { project } = useParams();
+    const history = useHistory();
     // current task data
     const [projectData, setProjectData] = useState({
         name: '',
@@ -25,9 +26,10 @@ const UpdateProjectForm = () => {
 
     // get editable project data from API
     useEffect(async () => {
+        console.log(history);
         const config = {
             method: 'get',
-            url: `/api/project-data/${project}`,
+            url: `/api/project-data/${history.location.state.project}`,
         };
 
         await axios(config)
@@ -51,7 +53,7 @@ const UpdateProjectForm = () => {
         }
         const config = {
             method: 'put',
-            url: `/api/projects/${project}`,
+            url: `/api/projects/${history.location.state.project}`,
             // headers: {
             //     Accept: 'application/json',
             // },
@@ -152,7 +154,7 @@ const UpdateProjectForm = () => {
                 </div>
             </Form>
         </>
-    )
-}
+    );
+};
 
-export default UpdateProjectForm
+export default UpdateProjectForm;

@@ -66,7 +66,7 @@ const Projects = () => {
                     variant="primary"
                     type="submit"
                     onClick={() => {
-                        history.push('/create-project/');
+                        history.push('/project/create/');
                     }}
                 >
                     Create New Project
@@ -74,12 +74,16 @@ const Projects = () => {
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
-                {projectsData.length < 1 ?
-                    <Card>
-                        <Card.Header as='h4' className='text-center'>
-                            There are no projects yet, <a href='/create-project/' className='text-primary'>create one!</a>
-                    </Card.Header>
-                    </Card>
+                {projectsData.length < 1
+                    ? (
+                        <Card>
+                            <Card.Header as="h4" className="text-center">
+                                There are no projects yet,
+                                {' '}
+                                <a href="/create-project/" className="text-primary">create one!</a>
+                            </Card.Header>
+                        </Card>
+                    )
                     :
                     // Jei yra sukurta projektu
                     projectsData.map((project) => (
@@ -99,18 +103,18 @@ const Projects = () => {
                                 <Card.Body className="bg-white">
                                     <Card.Title className="text-capitalize">
                                         State:
-                                    {' '}
+                                        {' '}
                                         {project.state.name}
                                     </Card.Title>
 
                                     <Card.Title className="text-capitalize">
                                         Tasks assigned:
-                                    {' '}
+                                        {' '}
                                         {project.tasks_count}
                                     </Card.Title>
                                     <Card.Title className="text-capitalize">
                                         Unfinished tasks:
-                                    {' '}
+                                        {' '}
                                         {project.unfinished_tasks_count}
                                     </Card.Title>
 
@@ -122,22 +126,30 @@ const Projects = () => {
                                                 type="submit"
                                                 value={project.id}
                                                 onClick={() => {
-                                                    history.push(`/task/${project.id}`);
+                                                    history.push(
+                                                        { pathname: '/project/tasks',
+                                                            state: { project: project.id,
+                                                                task: null } },
+                                                    );
                                                 }}
                                             >
                                                 View tasks
-                                        </Button>
+                                            </Button>
                                             <Button className="mr-1">Show Board</Button>
                                             <Button
                                                 className="mr-1"
                                                 type="submit"
                                                 value={project.id}
                                                 onClick={() => {
-                                                    history.push(`/update-project/${project.id}`);
+                                                    history.push(
+                                                        { pathname: '/project/edit',
+                                                            state: { project: project.id,
+                                                                task: null } },
+                                                    );
                                                 }}
                                             >
                                                 Edit
-                                        </Button>
+                                            </Button>
                                             <Button
                                                 variant="danger"
                                                 type="submit"
@@ -153,17 +165,17 @@ const Projects = () => {
                                                 }}
                                             >
                                                 Delete
-                                        </Button>
+                                            </Button>
                                         </div>
                                         <div>
                                             <Card.Text>
                                                 Created date:
-                                            {' '}
+                                                {' '}
                                                 {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </Card.Text>
                                             <Card.Text>
                                                 Updated date:
-                                            {' '}
+                                                {' '}
                                                 {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </Card.Text>
                                         </div>
