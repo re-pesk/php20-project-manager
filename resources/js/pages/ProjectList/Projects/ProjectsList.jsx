@@ -1,13 +1,14 @@
 import axios from 'axios';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Button, Card, Container } from 'react-bootstrap';
+import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const Projects = () => {
     const history = useHistory();
     const [projectsData, setProjectsData] = useState([]);
     const [idDelete, setIdDelete] = useState(0);
+    const [loading, setLoading] = useState(false);
     useEffect(async () => {
         const config = {
             method: 'GET',
@@ -20,6 +21,7 @@ const Projects = () => {
             .then((response) => {
                 // console.log(response.data);
                 setProjectsData(response.data);
+                setLoading(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -46,7 +48,6 @@ const Projects = () => {
         [],
     );
 
-    // console.log();
     return (
         <Container>
             <div>
@@ -74,14 +75,18 @@ const Projects = () => {
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
-                {projectsData.length < 1 ?
+                {projectsData < 1 ?
+                <>
                     <Card>
                         <Card.Header as='h4' className='text-center'>
-                            There are no projects yet, <a href='/create-project/' className='text-primary'>create one!</a>
+                            There are no projects yet.
                     </Card.Header>
                     </Card>
+                    { loading == false ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2'/></div> : <div></div>}            
+                </>
                     :
                     // Jei yra sukurta projektu
+                    
                     projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
@@ -171,7 +176,8 @@ const Projects = () => {
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
-                    ))}
+                    ))
+                    }
             </Accordion>
         </Container>
 
