@@ -13,8 +13,8 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->only(['logout', 'isLoggedIn']);
         $this->middleware(['cors']);
+        $this->middleware(['auth:sanctum'])->only(['logout', 'isLoggedIn']);
         $this->middleware(['log.routes']);
     }
 
