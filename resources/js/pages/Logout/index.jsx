@@ -7,8 +7,7 @@ import { useUserContext } from '../../context/UserContext';
 const { axios } = window;
 
 const Logout = () => {
-    const { userContext, setUserContext } = useUserContext({});
-    const { token } = userContext;
+    const { setUserContext } = useUserContext({});
     const history = useHistory();
 
     const clearData = async () => {
@@ -17,7 +16,6 @@ const Logout = () => {
             url: '/api/logout',
             headers: {
                 Accept: 'application/json',
-                Authorization: `Bearer ${token}`,
             },
         };
 
