@@ -32,13 +32,8 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $tokenName = env('APP_ID', 'api') . '-token';
-
-        $token = $user->createToken($tokenName)->plainTextToken;
-
         $response = [
             'user' => $user,
-            'token' => $token,
             'message' => 'The user is registered!'
         ];
 
@@ -53,13 +48,9 @@ class AuthController extends Controller
 
         $user = auth()->user();
 
-        $tokenName = env('APP_ID', 'api') . '-token';
-        $token = $user->createToken($tokenName)->plainTextToken;
-
         $response = [
             'user' => $user,
-            'token' => $token,
-            'message' => 'The user logged in!'
+            'message' => 'The user is logged in!'
         ];
 
         return response($response, 201);
@@ -67,17 +58,24 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        Auth::guard('web')->logout();
 
-        return response()->json(['message' => 'The user logged out']);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response(['message' => 'The user is logged out']);
     }
 
     public function isLoggedIn(Request $request)
     {
         $user = $request->user();
 
-        $token = $request->bearerToken();
+        $response = [
+            'user' => $user,
+            'message' => 'The user is logged in!',
+            'reloaded_at' => date('c'),
+        ];
 
-        return response(['user' => $user, 'token' => $token, 'message' => 'The user is logged in!']);
+        return response($response);
     }
 }

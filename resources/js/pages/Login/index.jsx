@@ -22,17 +22,18 @@ const Login = () => {
             },
             data: userData,
         };
-
-        await axios(config)
-            .then((response) => {
+        await axios.default.get('/sanctum/csrf-cookie').then(async () => {
+            await axios(config)
+                .then((response) => {
                 // eslint-disable-next-line no-console
-                console.log(response.data);
-                setUserContext(response.data);
-            })
-            .catch((error) => {
+                    console.log(response.data);
+                    setUserContext(response.data);
+                })
+                .catch((error) => {
                 // eslint-disable-next-line no-console
-                console.log(error);
-            });
+                    console.log(error);
+                });
+        });
     };
 
     const handleSubmit = async (event) => {

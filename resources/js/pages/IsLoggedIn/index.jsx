@@ -14,7 +14,6 @@ const IsLoggedIn = () => {
             url: '/api/logged-in',
             headers: {
                 Accept: 'application/json',
-                Authorization: `Bearer ${userContext.token}`,
             },
         };
         await axios(config)
