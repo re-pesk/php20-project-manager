@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Badge, Button, Card, Container } from 'react-bootstrap';
+import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
@@ -9,6 +9,7 @@ const Tasks = () => {
     const [projectData, setProjectData] = useState([]);
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
     const { project } = useParams();
 
@@ -23,14 +24,15 @@ const Tasks = () => {
         await axios(config)
             .then((response) => {
                 setTasksData(response.data.tasksData);
-
                 setProjectData(response.data.projectData);
             })
             .catch((error) => {
                 console.log(error);
             });
+        setLoading(false);
     };
     useEffect(() => {
+        setLoading(true);
         getProjectTasks();
     }, [idDelete]);
 
@@ -120,6 +122,12 @@ const Tasks = () => {
                             </Accordion.Toggle>
                         </Card>
                     )}
+                {loading === true ? (
+                    <div className="text-center">
+                        <Spinner animation="border" variant="info" style={{ width: '7rem', height: '7rem' }} />
+                    </div>
+
+                ) : (<div />)}
             </Accordion>
         </Container>
     );
