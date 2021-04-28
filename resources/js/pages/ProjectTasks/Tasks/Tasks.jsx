@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
+import Pagination from './Pagination';
 import TaskCard from './TaskCard';
 
 const Tasks = () => {
@@ -10,6 +11,8 @@ const Tasks = () => {
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [tasksPerPage] = useState(8);
     const history = useHistory();
     const { project } = useParams();
 
@@ -54,6 +57,14 @@ const Tasks = () => {
         [],
     );
 
+    // Get current posts
+    const indexOfLastTask = currentPage * tasksPerPage;
+    const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+    const currentTasks = tasksData.slice(indexOfFirstTask, indexOfLastTask);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <Container>
             {projectData.map((projectInfo) => (
@@ -94,7 +105,7 @@ const Tasks = () => {
             ))}
 
             <Accordion>
-                { tasksData.length > 0 ? tasksData.map((task) => (
+                { tasksData.length > 0 ? currentTasks.map((task) => (
                     <TaskCard
                         key={task.id}
                         name={task.name}
@@ -123,12 +134,19 @@ const Tasks = () => {
                         </Card>
                     )}
                 {loading === true ? (
-                    <div className="text-center">
-                        <Spinner animation="border" variant="info" style={{ width: '7rem', height: '7rem' }} />
+                    <div className="text-center font-weight-bold">
+                        Loading data...
+                        <Spinner animation="border" variant="primary" className="ml-2" />
                     </div>
 
                 ) : (<div />)}
             </Accordion>
+            <Pagination
+                tasksPerPage={tasksPerPage}
+                totalTasks={tasksData.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
         </Container>
     );
 };
