@@ -16,7 +16,6 @@ export default function Header(props) {
 
     return (
         <Container fluid>
-            {/* { token ? '' : <Redirect to="/" /> } */}
             <Navbar
                 bg="light"
                 // variant="info"
@@ -34,7 +33,7 @@ export default function Header(props) {
                 </Nav>
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
                 {
-                    userContext.token
+                    userContext.user
                         ? (
                             <Nav className="col-2 justify-content-end" navbar>
                                 <Nav.Link><p>{userContext.user.username}</p></Nav.Link>
