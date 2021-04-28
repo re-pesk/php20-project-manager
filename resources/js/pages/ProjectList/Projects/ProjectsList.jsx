@@ -73,96 +73,105 @@ const Projects = () => {
                 </Button>
             </div>
             <Accordion>
-                {projectsData.map((project) => (
-                    <Card key={project.id} id={project.id}>
-                        <Accordion.Toggle
-                            className="text-capitalize"
-                            as={Button}
-                            variant="link"
-                            eventKey={project.id}
-                        >
-                            <Card.Header as="h4">
-                                {project.name}
-                            </Card.Header>
-                        </Accordion.Toggle>
-
-                        <Accordion.Collapse eventKey={project.id}>
-                            <Card.Body className="bg-white">
-                                <Card.Title className="text-capitalize">
-                                    State:
-                                    {' '}
-                                    {project.state.name}
-                                </Card.Title>
-
-                                <Card.Title className="text-capitalize">
-                                    Tasks assigned:
-                                    {' '}
-                                    {project.tasks_count}
-                                </Card.Title>
-                                <Card.Title className="text-capitalize">
-                                    Unfinished tasks:
-                                    {' '}
-                                    {project.unfinished_tasks_count}
-                                </Card.Title>
-
-                                <Card.Text>{project.description}</Card.Text>
-                                <div className="d-flex justify-content-between">
-                                    <div>
-                                        <Button
-                                            className="mr-1"
-                                            type="submit"
-                                            value={project.id}
-                                            onClick={() => {
-                                                history.push(`/task/${project.id}`);
-                                            }}
-                                        >
-                                            View tasks
-                                        </Button>
-                                        <Button className="mr-1">Show Board</Button>
-                                        <Button
-                                            className="mr-1"
-                                            type="submit"
-                                            value={project.id}
-                                            onClick={() => {
-                                                history.push(`/update-project/${project.id}`);
-                                            }}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            variant="danger"
-                                            type="submit"
-                                            value={project.id}
-                                            onClick={() => {
-                                                if (confirm('Are you sure want to delete project?')) {
-                                                    deleteProject(project.id);
-                                                    setIdDelete(project.id);
-                                                } else {
-                                                    setIdDelete(project.id);
-                                                    return false;
-                                                }
-                                            }}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </div>
-                                    <div>
-                                        <Card.Text>
-                                            Created date:
-                                            {' '}
-                                            {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
-                                        </Card.Text>
-                                        <Card.Text>
-                                            Updated date:
-                                            {' '}
-                                            {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
-                                        </Card.Text>
-                                    </div>
-                                </div>
-                            </Card.Body>
-                        </Accordion.Collapse>
+                {/* Jei nera sukurta projektu */}
+                {projectsData.length < 1 ?
+                    <Card>
+                        <Card.Header as='h4' className='text-center'>
+                            There are no projects yet, <a href='/create-project/' className='text-primary'>create one!</a>
+                    </Card.Header>
                     </Card>
-                ))}
+                    :
+                    // Jei yra sukurta projektu
+                    projectsData.map((project) => (
+                        <Card key={project.id} id={project.id}>
+                            <Accordion.Toggle
+                                className="text-capitalize"
+                                as={Button}
+                                variant="link"
+                                eventKey={project.id}
+                            >
+                                <Card.Header as="h4">
+                                    {project.name}
+                                </Card.Header>
+                            </Accordion.Toggle>
+
+                            <Accordion.Collapse eventKey={project.id}>
+                                <Card.Body className="bg-white">
+                                    <Card.Title className="text-capitalize">
+                                        State:
+                                    {' '}
+                                        {project.state.name}
+                                    </Card.Title>
+
+                                    <Card.Title className="text-capitalize">
+                                        Tasks assigned:
+                                    {' '}
+                                        {project.tasks_count}
+                                    </Card.Title>
+                                    <Card.Title className="text-capitalize">
+                                        Unfinished tasks:
+                                    {' '}
+                                        {project.unfinished_tasks_count}
+                                    </Card.Title>
+
+                                    <Card.Text>{project.description}</Card.Text>
+                                    <div className="d-flex justify-content-between">
+                                        <div>
+                                            <Button
+                                                className="mr-1"
+                                                type="submit"
+                                                value={project.id}
+                                                onClick={() => {
+                                                    history.push(`/task/${project.id}`);
+                                                }}
+                                            >
+                                                View tasks
+                                        </Button>
+                                            <Button className="mr-1">Show Board</Button>
+                                            <Button
+                                                className="mr-1"
+                                                type="submit"
+                                                value={project.id}
+                                                onClick={() => {
+                                                    history.push(`/update-project/${project.id}`);
+                                                }}
+                                            >
+                                                Edit
+                                        </Button>
+                                            <Button
+                                                variant="danger"
+                                                type="submit"
+                                                value={project.id}
+                                                onClick={() => {
+                                                    if (confirm('Are you sure want to delete project?')) {
+                                                        deleteProject(project.id);
+                                                        setIdDelete(project.id);
+                                                    } else {
+                                                        setIdDelete(project.id);
+                                                        return false;
+                                                    }
+                                                }}
+                                            >
+                                                Delete
+                                        </Button>
+                                        </div>
+                                        <div>
+                                            <Card.Text>
+                                                Created date:
+                                            {' '}
+                                                {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                Updated date:
+                                            {' '}
+                                                {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </Card.Text>
+                                        </div>
+                                    </div>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    ))}
             </Accordion>
         </Container>
 
