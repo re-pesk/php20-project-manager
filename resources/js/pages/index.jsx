@@ -12,7 +12,7 @@ import Register from './Register';
 import Welcome from './Welcome';
 import ProjectList from './ProjectList';
 import CreateProject from './CreateProject';
-import UpdateProject from './UpdateProject'
+import UpdateProject from './UpdateProject';
 
 export {
     ProjectList,
@@ -32,7 +32,7 @@ export {
     UpdateProject,
 };
 
-const Pages = {
+export default {
     ProjectList,
     AuthExample,
     CreateTask,
@@ -49,5 +49,3 @@ const Pages = {
     CreateProject,
     UpdateProject,
 };
-
-export default Pages;

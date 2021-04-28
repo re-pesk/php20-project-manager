@@ -11,8 +11,8 @@ class ProjectController extends Controller
 
     public function __construct()
     {
-        // $this->middleware(['auth:sanctum']);
         $this->middleware(['cors']);
+        $this->middleware(['auth:sanctum']);
         $this->middleware(['log.routes']);
     }
 
@@ -22,7 +22,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {            
+    {
         return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->get();
     }
 
