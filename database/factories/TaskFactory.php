@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Priority;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,9 +25,9 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph,
-            'priority_id' => rand(1, 3),
+            'priority_id' => rand(1, Priority::count()),
             'task_state_id' => 1,
-            'project_id' => rand(1, 10),
+            // 'project_id' => rand(1, 1000),
         ];
     }
 }
