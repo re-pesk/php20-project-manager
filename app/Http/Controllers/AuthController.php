@@ -32,7 +32,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $tokenName = env('APP_ID', 'myapp') . '-token';
+        $tokenName = env('APP_ID', 'api') . '-token';
 
         $token = $user->createToken($tokenName)->plainTextToken;
 
@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         $user = auth()->user();
 
-        $tokenName = env('APP_ID', 'myapp') . '-token';
+        $tokenName = env('APP_ID', 'api') . '-token';
         $token = $user->createToken($tokenName)->plainTextToken;
 
         $response = [
