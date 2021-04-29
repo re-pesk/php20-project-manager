@@ -103,25 +103,23 @@ export default function Board() {
       }
   }
 
-  return (
-    <Container fluid className={classNames('content', { 'is-open': isOpen })}>
-      <Header title="Board" />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            margin: '24px auto',
-            width: '80%',
-            gap: '8px',
-          }}
-        >
-          {Object.values(columns).map((col) => (
-            <Column col={col} key={col.id} />
-          ))}
-        </div>
-      </DragDropContext>
-      <Footer />
-    </Container>
-  )
+    return (
+        <Container>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr 1fr',
+                        margin: '24px auto',
+                        width: '80%',
+                        gap: '8px',
+                    }}
+                >
+                    {Object.values(columns).map((col) => (
+                        <Column col={col} key={col.id} />
+                    ))}
+                </div>
+            </DragDropContext>
+        </Container>
+    );
 }
