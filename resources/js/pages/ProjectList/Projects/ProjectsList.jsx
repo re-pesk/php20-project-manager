@@ -3,12 +3,15 @@ import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Pagination from './Pagination';
 
 const Projects = () => {
     const history = useHistory();
     const [projectsData, setProjectsData] = useState([]);
     const [idDelete, setIdDelete] = useState(0);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [projectsPerPage] = useState(9);
     useEffect(async () => {
         const config = {
             method: 'GET',
@@ -21,7 +24,7 @@ const Projects = () => {
             .then((response) => {
                 // console.log(response.data);
                 setProjectsData(response.data);
-                setLoading(true);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -47,6 +50,14 @@ const Projects = () => {
         },
         [],
     );
+
+    // Get current projects
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    const currentProjects = projectsData.slice(indexOfFirstProject, indexOfLastProject);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <Container>
@@ -82,12 +93,12 @@ const Projects = () => {
                             There are no projects yet.
                     </Card.Header>
                     </Card>
-                    { loading == false ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2'/></div> : <div></div>}            
+                    { loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2'/></div> : <div></div>}            
                 </>
                     :
                     // Jei yra sukurta projektu
                     
-                    projectsData.map((project) => (
+                    currentProjects.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
                                 className="text-capitalize"
@@ -179,6 +190,12 @@ const Projects = () => {
                     ))
                     }
             </Accordion>
+            <Pagination
+                projectsPerPage={projectsPerPage}
+                totalProjects={projectsData.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
         </Container>
 
     );
