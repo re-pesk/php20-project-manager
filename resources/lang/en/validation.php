@@ -153,6 +153,7 @@ return [
     'attributes' => [
         "priority_id" => "priority",
         "task_state_id" => "state",
+        "project_state_id" => "state",
     ],
 
 ];
