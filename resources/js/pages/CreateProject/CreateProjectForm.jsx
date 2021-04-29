@@ -7,13 +7,11 @@ export default function CreateProjectForm() {
     const [projectData, setProjectData] = useState({
         name: '',
         description: '',
-        project_state_id: '',
     });
 
     const [validationErrors, setErrors] = useState({
         name: '',
         description: '',
-        project_state_id: '',
     });
 
     const [state, setState] = useState(false);
@@ -50,9 +48,6 @@ export default function CreateProjectForm() {
                         : '',
                     description: error.response.data.errors.description
                         ? error.response.data.errors.description[0]
-                        : '',
-                    project_state_id: error.response.data.errors.project_state_id
-                        ? error.response.data.errors.project_state_id[0]
                         : '',
                 });
                 // console.log(true);
@@ -101,15 +96,13 @@ export default function CreateProjectForm() {
                 <div style={{ fontSize: 12 }} className="text-danger">
                     {validationErrors.description}
                 </div>
-                <Form.Label className="mt-3">Priority</Form.Label>
+                {/* <Form.Label className="mt-3">Project State</Form.Label>
                 <Form.Control name="project_state_id" onChange={handleChange} as="select" custom>
-                    <option>--- SELECT PROJECT STATE ---</option>
-                    <option value="1">in progress</option>
-                    <option value="2">done</option>
+                    <option value="1">In Progress</option>
                 </Form.Control>
                 <div style={{ fontSize: 12 }} className="text-danger">
                     {validationErrors.project_state_id}
-                </div>
+                </div> */}
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Project
                 </Button>
