@@ -47,7 +47,6 @@ class ProjectController extends Controller
         $validation = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'project_state_id' => 'required|integer|min:1|max:2',
         ]);
 
         Project::create($request->all());
@@ -63,25 +62,6 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return
-            $projectData = array(
-                'project_state' => Project::leftJoin('project_states', 'projects.project_state_id', '=', 'project_states.id')
-                    ->select('project_states.name')
-                    ->where('projects.id', $id)
-                    ->get(),
-                'project_task_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-                    ->select('tasks.name as task_name')
-                    ->where('projects.id', $id)
-                    ->count(),
-                'project_unfinished_tasks_count' => Project::leftJoin('tasks', 'projects.id', '=', 'tasks.project_id')
-                    ->select('tasks.name as task_name')
-                    ->where('projects.id', $id)
-                    ->where('task_state_id', '!=', 3)
-                    ->count(),
-            );
-    }
-
-    public function showData($id){
         return Project::find($id);
     }
 
@@ -104,7 +84,14 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'project_state_id' => 'required|integer|min:1|max:2',
+        ]);
+
         $project = Project::find($id);
         $project->update($request->all());
         return $project;

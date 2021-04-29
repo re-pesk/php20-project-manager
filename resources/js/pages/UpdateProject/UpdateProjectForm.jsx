@@ -27,7 +27,7 @@ const UpdateProjectForm = () => {
     useEffect(async () => {
         const config = {
             method: 'get',
-            url: `/api/project-data/${project}`,
+            url: `/api/projects/${project}`,
         };
 
         await axios(config)
@@ -41,7 +41,7 @@ const UpdateProjectForm = () => {
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
-                console.log(error);
+                // console.log(error);
             });
     }, []);
 
@@ -98,8 +98,7 @@ const UpdateProjectForm = () => {
     const handleChange = (event) => setProjectData({
         ...projectData,
         [event.target.name]: event.target.value,
-    },
-    console.log(projectData));
+    },);
 
     return (
         <>
@@ -138,8 +137,8 @@ const UpdateProjectForm = () => {
                     value={projectData.project_state_id}
                 >
                     <option value="">--- SELECT STATE ---</option>
-                    <option value="1">in progress</option>
-                    <option value="2">done</option>
+                    <option value="1">In Progress</option>
+                    <option value="2">Done</option>
                 </Form.Control>
                 <div style={{ fontSize: 12 }} className="text-danger">
                     {validationErrors.project_state_id}
