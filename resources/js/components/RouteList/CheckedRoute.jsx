@@ -22,7 +22,7 @@ export default function CheckedRoute({ accessibility, children, exact, key, path
                 {children}
             </Route>
         ) : (
-            <Redirect to="/" />
+            <Redirect to="/login" />
         )
     );
 }

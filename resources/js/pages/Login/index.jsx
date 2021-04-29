@@ -16,7 +16,7 @@ const Login = () => {
     const getUserData = async () => {
         const config = {
             method: 'post',
-            url: '/api/login',
+            url: '/login',
             headers: {
                 Accept: 'application/json',
             },
