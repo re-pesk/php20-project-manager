@@ -18,7 +18,7 @@ const Register = () => {
     const getUserData = async () => {
         const config = {
             method: 'post',
-            url: '/api/register',
+            url: '/register',
             headers: {
                 Accept: 'application/json',
             },
