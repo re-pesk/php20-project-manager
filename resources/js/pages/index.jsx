@@ -13,6 +13,7 @@ import Welcome from './Welcome';
 import ProjectList from './ProjectList';
 import CreateProject from './CreateProject';
 import UpdateProject from './UpdateProject';
+import Board from './Board';
 
 export {
     ProjectList,
@@ -30,6 +31,7 @@ export {
     Welcome,
     CreateProject,
     UpdateProject,
+    Board,
 };
 
 export default {
@@ -48,4 +50,5 @@ export default {
     Welcome,
     CreateProject,
     UpdateProject,
+    Board,
 };

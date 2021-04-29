@@ -10,6 +10,7 @@ import {
 
     Logout,
     ProjectTasks, Register, Welcome, CreateProject, UpdateProject, ProjectList,
+    Board,
 } from '../../../pages';
 
 export const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3 });
@@ -29,5 +30,6 @@ export default [
     { exact: true, path: '/projects', content: ProjectList, title: 'Projects list', accessibility: accessType.requiresLogin },
     { exact: true, path: '/create-project', content: CreateProject, title: 'Create Project', accessibility: accessType.requiresLogin },
     { exact: true, path: '/update-project/:project', content: UpdateProject, title: 'Update Project', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/project/board', content: Board, title: 'Tasks Board', accessibility: accessType.requiresLogin },
     { exact: false, path: '', content: ErrorPage, title: 'Error', accessibility: accessType.both },
 ];
