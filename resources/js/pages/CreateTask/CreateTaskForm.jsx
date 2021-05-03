@@ -47,6 +47,9 @@ export default function CreateTaskForm() {
                 // console.log(response.data)
                 // setUserContext(response.data);
                 setSuccesMessage('Task created succesfully');
+                setTimeout(() => {
+                    history.push(`/task/${project}`);
+                }, 2000);
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -65,7 +68,6 @@ export default function CreateTaskForm() {
                 // console.log(true);
             });
         setState(false);
-        history.push(`/task/${project}`);
     }, [state]);
 
     const handleSubmit = (event) => {
