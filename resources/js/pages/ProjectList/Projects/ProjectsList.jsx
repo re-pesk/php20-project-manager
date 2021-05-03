@@ -6,31 +6,40 @@ import { useHistory } from 'react-router-dom';
 import Pagination from './Pagination';
 
 const Projects = () => {
+    // back button
     const history = useHistory();
+    // projects data
     const [projectsData, setProjectsData] = useState([]);
+    // project delete
     const [idDelete, setIdDelete] = useState(0);
+    // loading spinner
     const [loading, setLoading] = useState(true);
+    // paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const [projectsPerPage] = useState(9);
+    const [lastPage, setLastPage] = useState(0);
+
     useEffect(async () => {
         const config = {
             method: 'GET',
-            url: '/api/projects',
+            url: `/api/projects?page=${currentPage}`,
             headers: {
                 Accept: 'application/json',
             },
         };
         await axios(config)
             .then((response) => {
-                // console.log(response.data);
-                setProjectsData(response.data);
+                console.log(response.data);
+                setProjectsData(response.data.data);
+                setLastPage(response.data.last_page)
                 setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [idDelete]);
+    }, [idDelete, currentPage]);
     console.log(projectsData);
+
+    // delete project
 
     const deleteProject = useCallback(
         async (deleteId) => {
@@ -50,11 +59,6 @@ const Projects = () => {
         },
         [],
     );
-
-    // Get current projects
-    const indexOfLastProject = currentPage * projectsPerPage;
-    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-    const currentProjects = projectsData.slice(indexOfFirstProject, indexOfLastProject);
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -98,7 +102,7 @@ const Projects = () => {
                     :
                     // Jei yra sukurta projektu
                     
-                    currentProjects.map((project) => (
+                    projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
                                 className="text-capitalize"
@@ -191,8 +195,7 @@ const Projects = () => {
                     }
             </Accordion>
             <Pagination
-                projectsPerPage={projectsPerPage}
-                totalProjects={projectsData.length}
+                lastPage={lastPage}
                 paginate={paginate}
                 currentPage={currentPage}
             />
