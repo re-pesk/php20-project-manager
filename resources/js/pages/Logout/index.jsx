@@ -13,7 +13,7 @@ const Logout = () => {
     const clearData = async () => {
         const config = {
             method: 'post',
-            url: '/api/logout',
+            url: '/logout',
             headers: {
                 Accept: 'application/json',
             },
