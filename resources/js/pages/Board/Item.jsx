@@ -1,20 +1,18 @@
-import React from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 
-const Item = ({ text, index }) => {
-  return (
-    <Draggable draggableId={text} index={index}>
-      {provided => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {text}
-        </div>
-      )}
+const Item = ({ task, index }) => (
+    <Draggable draggableId={task.name} index={index}>
+        {(provided) => (
+            <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+            >
+                {task.name}
+            </div>
+        )}
     </Draggable>
-  )
-}
+);
 
-export default Item
+export default Item;
