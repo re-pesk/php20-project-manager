@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProjectTasksController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware(['auth:sanctum']);
+        $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
+    }
     /**
      * Display a listing of the resource.
      *
