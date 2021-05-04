@@ -14,7 +14,7 @@ export default function Board() {
     useEffect(async () => {
         const config = {
             method: 'GET',
-            url: `/api/projectTasks/${history.location.state.project}`,
+            url: `/api/project/${history.location.state.project}/tasks`,
             headers: {
                 Accept: 'Application/json',
             },
@@ -37,8 +37,8 @@ export default function Board() {
                         list: [],
                     },
                 };
-
-                response.data.tasksData.data.forEach((task) => {
+                console.log(response.data);
+                response.data.tasksData.forEach((task) => {
                     // console.log(task);
                     if (task.state === 'to do') {
                         initialColumns['to do'].list.push(task);
@@ -132,7 +132,7 @@ export default function Board() {
 
         const states = { 'to do': 1, 'in progress': 2, done: 3 };
         const priorities = { low: 1, medium: 2, high: 3 };
-        console.log(start.list[source.index]);
+        console.log(columns);
 
         const config = {
             method: 'PUT',

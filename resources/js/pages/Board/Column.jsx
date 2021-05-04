@@ -19,13 +19,14 @@ const Column = ({ col: { list, id } }) => (
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        minHeight: '120px',
+                        height: '50vh',
+                        overflowY: 'scroll',
                     }}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                 >
                     {list.map((task, index) => (
-                        <Item key={task.name} task={task} index={index} />
+                        <Item key={task.name + task.id} task={task} index={index} />
                     ))}
                     {provided.placeholder}
                 </div>
