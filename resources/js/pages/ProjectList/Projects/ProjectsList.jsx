@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { capitalize, indexOf } from 'lodash';
+import { capitalize } from 'lodash';
 
 const Projects = () => {
     // back button
