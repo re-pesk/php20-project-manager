@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { indexOf } from 'lodash';
+import { capitalize, indexOf } from 'lodash';
 
 const Projects = () => {
     // back button
@@ -116,8 +116,9 @@ const Projects = () => {
                                 <Card.Header>
                                     <div className='row'>
                                         <div className='col d-flex justify-content-start align-self-center'>
-                                            <button className='btn btn-lg btn-link disabled text-primary'>{project.id}</button>
-                                            <h4 className='align-self-center mt-2'>{project.name}</h4>
+                                            
+                                            {/* <Badge variant='secondary'>{project.id}</Badge> */}
+                                            <h3 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h3>
                                         </div>
                                         <div className='col align-self-center'>
                                             <div><b>State: </b>
