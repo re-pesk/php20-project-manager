@@ -118,7 +118,7 @@ const Projects = () => {
                                         <div className='col d-flex justify-content-start align-self-center'>
                                             
                                             {/* <Badge variant='secondary'>{project.id}</Badge> */}
-                                            <h3 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h3>
+                                            <h4 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h4>
                                         </div>
                                         <div className='col align-self-center'>
                                             <div><b>State: </b>
