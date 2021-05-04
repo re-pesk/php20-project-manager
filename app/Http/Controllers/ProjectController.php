@@ -23,7 +23,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->get();
+        return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->paginate(8);
     }
 
     /**
