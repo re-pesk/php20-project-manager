@@ -136,26 +136,11 @@ const Projects = () => {
 
                             <Accordion.Collapse eventKey={project.id}>
                                 <Card.Body className="bg-white">
-                                    <Card.Title className="text-capitalize">
-                                        State:
-                                    {' '}
-                                        {project.state.name}
-                                    </Card.Title>
-
-                                    <Card.Title className="text-capitalize">
-                                        Tasks assigned:
-                                    {' '}
-                                        {project.tasks_count}
-                                    </Card.Title>
-                                    <Card.Title className="text-capitalize">
-                                        Unfinished tasks:
-                                    {' '}
-                                        {project.unfinished_tasks_count}
-                                    </Card.Title>
-
-                                    <Card.Text>{project.description}</Card.Text>
-                                    <div className="d-flex justify-content-between">
-                                        <div>
+                                    <div className='row px-2'>
+                                        <Card.Text>{project.description}</Card.Text>
+                                    </div>
+                                    {/* <div className='row'> */}
+                                        <div className="row mt-4 pr-2 d-flex justify-content-end">
                                             <Button
                                                 className="mr-1"
                                                 type="submit"
@@ -194,19 +179,7 @@ const Projects = () => {
                                                 Delete
                                         </Button>
                                         </div>
-                                        <div>
-                                            <Card.Text>
-                                                Created date:
-                                            {' '}
-                                                {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
-                                            </Card.Text>
-                                            <Card.Text>
-                                                Updated date:
-                                            {' '}
-                                                {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
-                                            </Card.Text>
-                                        </div>
-                                    </div>
+                                    {/* </div> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
