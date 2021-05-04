@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { useHistory, useParams } from 'react-router-dom';
-import Pagination from './Pagination';
 import TaskCard from './TaskCard';
 
 const Tasks = () => {
@@ -15,7 +15,7 @@ const Tasks = () => {
     // loading
     const [loading, setLoading] = useState(false);
     // Paginate
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(0);
     // URL
     const history = useHistory();
@@ -64,7 +64,11 @@ const Tasks = () => {
     );
 
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (e) => {
+        console.log(e);
+        const pageNumber = e.selected + 1;
+        setCurrentPage(pageNumber);
+    };
 
     return (
         <Container>
@@ -134,19 +138,29 @@ const Tasks = () => {
                             </Accordion.Toggle>
                         </Card>
                     )}
-                {loading === true ? (
-                    <div className="text-center font-weight-bold">
-                        Loading data...
-                        <Spinner animation="border" variant="primary" className="ml-2" />
-                    </div>
 
-                ) : (<div />)}
             </Accordion>
-            <Pagination
-                lastPage={lastPage}
-                paginate={paginate}
-                currentPage={currentPage}
+            <ReactPaginate
+                pageCount={lastPage}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={2}
+                onPageChange={paginate}
+                initialPage={currentPage}
+                containerClassName="nav justify-content-center nav-pills mt-2"
+                pageClassName="nav-item mx-1"
+                pageLinkClassName="nav-link"
+                activeLinkClassName="active"
+                nextLinkClassName="btn btn-link ml-1"
+                previousLinkClassName="btn btn-link mr-1"
+                breakClassName="pt-2"
             />
+            {loading === true ? (
+                <div className="text-center font-weight-bold">
+                    Loading data...
+                    <Spinner animation="border" variant="primary" className="ml-2" />
+                </div>
+
+            ) : (<div />)}
         </Container>
     );
 };

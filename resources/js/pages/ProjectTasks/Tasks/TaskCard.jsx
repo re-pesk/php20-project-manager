@@ -1,6 +1,6 @@
 import Moment from 'moment';
 import React from 'react';
-import { Accordion, Button, Card } from 'react-bootstrap';
+import { Accordion, Badge, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const TaskCard = ({
@@ -22,12 +22,12 @@ const TaskCard = ({
     return (
         <Card key={id} id={id}>
             <Accordion.Toggle
-                as={Button}
+                as={Card.Header}
                 variant="link"
                 eventKey={id}
             >
                 <Card.Header as="h4">
-                    {id}
+                    <Badge variant="secondary">{id}</Badge>
                     {' '}
                     {capitalize(name)}
                 </Card.Header>
