@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { capitalize } from 'lodash';
 
 const Projects = () => {
     // back button
@@ -63,6 +64,7 @@ const Projects = () => {
     // Change page
     const paginate = (e) => {
         setCurrentPage(e.selected + 1);
+        setLoading(true);
         console.log(e);
     }
 
@@ -100,46 +102,46 @@ const Projects = () => {
                                 There are no projects yet.
                     </Card.Header>
                         </Card>
-                        {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
                     </>
                     :
                     // Jei yra sukurta projektu
-
                     projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
                                 className="text-capitalize"
                                 as={Button}
-                                variant="link"
+                                variant="light"
                                 eventKey={project.id}
                             >
-                                <Card.Header as="h4">
-                                    {project.name}
+                                <Card.Header>
+                                    <div className='row'>
+                                        <div className='col d-flex justify-content-start align-self-center'>
+                                            
+                                            {/* <Badge variant='secondary'>{project.id}</Badge> */}
+                                            <h4 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h4>
+                                        </div>
+                                        <div className='col align-self-center'>
+                                            <div><b>State: </b>
+                                                <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
+                                            </div>
+                                            <div><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                            <div><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                        </div>
+                                        <div className='col align-self-center'>
+                                            <div className='d-flex justify-content-end'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
+                                            <div className='d-flex justify-content-end'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
+                                        </div>
+                                    </div>
                                 </Card.Header>
                             </Accordion.Toggle>
 
                             <Accordion.Collapse eventKey={project.id}>
                                 <Card.Body className="bg-white">
-                                    <Card.Title className="text-capitalize">
-                                        State:
-                                    {' '}
-                                        {project.state.name}
-                                    </Card.Title>
-
-                                    <Card.Title className="text-capitalize">
-                                        Tasks assigned:
-                                    {' '}
-                                        {project.tasks_count}
-                                    </Card.Title>
-                                    <Card.Title className="text-capitalize">
-                                        Unfinished tasks:
-                                    {' '}
-                                        {project.unfinished_tasks_count}
-                                    </Card.Title>
-
-                                    <Card.Text>{project.description}</Card.Text>
-                                    <div className="d-flex justify-content-between">
-                                        <div>
+                                    <div className='row px-2'>
+                                        <Card.Text>{project.description}</Card.Text>
+                                    </div>
+                                    {/* <div className='row'> */}
+                                        <div className="row mt-4 pr-2 d-flex justify-content-end">
                                             <Button
                                                 className="mr-1"
                                                 type="submit"
@@ -178,31 +180,15 @@ const Projects = () => {
                                                 Delete
                                         </Button>
                                         </div>
-                                        <div>
-                                            <Card.Text>
-                                                Created date:
-                                            {' '}
-                                                {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
-                                            </Card.Text>
-                                            <Card.Text>
-                                                Updated date:
-                                            {' '}
-                                                {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
-                                            </Card.Text>
-                                        </div>
-                                    </div>
+                                    {/* </div> */}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
                     ))
                 }
+                {/* loading data spinneris */}
+                {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
             </Accordion>
-            {/* <Pagination
-                lastPage={lastPage}
-                paginate={paginate}
-                currentPage={currentPage}
-            /> */}
-
             <ReactPaginate
                 breakClassName={"pt-2"}
                 pageCount={lastPage}
