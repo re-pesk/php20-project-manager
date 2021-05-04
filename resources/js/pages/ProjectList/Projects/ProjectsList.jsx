@@ -64,6 +64,7 @@ const Projects = () => {
     // Change page
     const paginate = (e) => {
         setCurrentPage(e.selected + 1);
+        setLoading(true);
         console.log(e);
     }
 
@@ -101,11 +102,9 @@ const Projects = () => {
                                 There are no projects yet.
                     </Card.Header>
                         </Card>
-                        {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
                     </>
                     :
                     // Jei yra sukurta projektu
-
                     projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
@@ -213,13 +212,9 @@ const Projects = () => {
                         </Card>
                     ))
                 }
+                {/* loading data spinneris */}
+                {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
             </Accordion>
-            {/* <Pagination
-                lastPage={lastPage}
-                paginate={paginate}
-                currentPage={currentPage}
-            /> */}
-
             <ReactPaginate
                 breakClassName={"pt-2"}
                 pageCount={lastPage}
