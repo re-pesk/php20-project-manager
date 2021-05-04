@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { indexOf } from 'lodash';
 
 const Projects = () => {
     // back button
@@ -110,11 +111,27 @@ const Projects = () => {
                             <Accordion.Toggle
                                 className="text-capitalize"
                                 as={Button}
-                                variant="link"
+                                variant="light"
                                 eventKey={project.id}
                             >
-                                <Card.Header as="h4">
-                                    {project.name}
+                                <Card.Header>
+                                    <div className='row'>
+                                        <div className='col d-flex justify-content-start align-self-center'>
+                                            <button className='btn btn-lg btn-link disabled text-primary'>{project.id}</button>
+                                            <h4 className='align-self-center mt-2'>{project.name}</h4>
+                                        </div>
+                                        <div className='col align-self-center'>
+                                            <div><b>State: </b>
+                                                <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
+                                            </div>
+                                            <div><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                            <div><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                        </div>
+                                        <div className='col align-self-center'>
+                                            <div className='d-flex justify-content-end'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
+                                            <div className='d-flex justify-content-end'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
+                                        </div>
+                                    </div>
                                 </Card.Header>
                             </Accordion.Toggle>
 
