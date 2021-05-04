@@ -3,7 +3,7 @@ import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import Pagination from './Pagination';
+import ReactPaginate from 'react-paginate';
 
 const Projects = () => {
     // back button
@@ -15,7 +15,7 @@ const Projects = () => {
     // loading spinner
     const [loading, setLoading] = useState(true);
     // paginate
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(0);
 
     useEffect(async () => {
@@ -61,7 +61,10 @@ const Projects = () => {
     );
 
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (e) => {
+        setCurrentPage(e.selected + 1);
+        console.log(e);
+    }
 
     return (
         <Container>
@@ -91,17 +94,17 @@ const Projects = () => {
             <Accordion>
                 {/* Jei nera sukurta projektu */}
                 {projectsData < 1 ?
-                <>
-                    <Card>
-                        <Card.Header as='h4' className='text-center'>
-                            There are no projects yet.
+                    <>
+                        <Card>
+                            <Card.Header as='h4' className='text-center'>
+                                There are no projects yet.
                     </Card.Header>
-                    </Card>
-                    { loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2'/></div> : <div></div>}            
-                </>
+                        </Card>
+                        {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
+                    </>
                     :
                     // Jei yra sukurta projektu
-                    
+
                     projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
@@ -192,12 +195,27 @@ const Projects = () => {
                             </Accordion.Collapse>
                         </Card>
                     ))
-                    }
+                }
             </Accordion>
-            <Pagination
+            {/* <Pagination
                 lastPage={lastPage}
                 paginate={paginate}
                 currentPage={currentPage}
+            /> */}
+
+            <ReactPaginate
+                breakClassName={"pt-2"}
+                pageCount={lastPage}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={2}
+                onPageChange={paginate}
+                initialPage={currentPage}
+                containerClassName="nav justify-content-center nav-pills mt-2"
+                pageClassName="nav-item mx-1"
+                pageLinkClassName="nav-link"
+                activeLinkClassName="active"
+                nextLinkClassName="btn btn-link ml-1"
+                previousLinkClassName="btn btn-link mr-1"
             />
         </Container>
 
