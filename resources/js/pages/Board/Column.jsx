@@ -10,17 +10,21 @@ const Column = ({ col: { list, id } }) => (
                     display: 'flex',
                     flexDirection: 'column',
                     backgroundColor: 'rgba(23, 162, 184, 0.7)',
-                    padding: '20px',
+                    padding: '0 20px 20px 20px',
                     color: 'white',
                 }}
             >
-                <h2>{id}</h2>
+                <h2
+                    className="pt-2 pl-2"
+                >
+                    {id}
+                </h2>
                 <div
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
                         height: '50vh',
-                        overflowY: 'scroll',
+                        overflowY: 'auto',
                     }}
                     {...provided.droppableProps}
                     ref={provided.innerRef}

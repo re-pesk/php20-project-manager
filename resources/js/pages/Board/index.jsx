@@ -21,7 +21,7 @@ export default function Board() {
         };
         await axios(config)
             .then((response) => {
-                // console.log(response.data.tasksData.data);
+                console.log(response.data.tasksData);
 
                 const initialColumns = {
                     'to do': {
@@ -175,8 +175,8 @@ export default function Board() {
                         display: 'grid',
                         gridTemplateColumns: '1fr 1fr 1fr',
                         margin: '24px auto',
-                        width: '80%',
-                        gap: '8px',
+                        width: '90%',
+                        gap: '0',
                     }}
                 >
                     {Object.values(columns).map((col) => (
