@@ -47,6 +47,14 @@ export default function CreateTaskForm() {
                 // console.log(response.data)
                 // setUserContext(response.data);
                 setSuccesMessage('Task created succesfully');
+
+                // history.push(`/task/${project}`);
+                setTaskData({
+                    name: '',
+                    description: '',
+                    priority_id: '',
+                    project_id: project,
+                });
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -65,7 +73,6 @@ export default function CreateTaskForm() {
                 // console.log(true);
             });
         setState(false);
-        history.push(`/task/${project}`);
     }, [state]);
 
     const handleSubmit = (event) => {
@@ -122,9 +129,14 @@ export default function CreateTaskForm() {
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Task
                 </Button>
-                <div style={{ fontSize: 15 }} className="text-success my-3">
-                    {succesMessage}
-                </div>
+                {succesMessage !== '' ? (
+                    <div style={{ fontSize: 15 }} className="text-success my-3">
+                        {succesMessage}
+                    </div>
+                ) : (
+                    <div style={{ fontSize: 15 }} className="text-success my-3" />
+                )}
+
             </Form>
         </>
     );

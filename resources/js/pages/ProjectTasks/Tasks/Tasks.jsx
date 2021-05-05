@@ -1,32 +1,38 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { useHistory, useParams } from 'react-router-dom';
-import Pagination from './Pagination';
 import TaskCard from './TaskCard';
 
 const Tasks = () => {
+    // Tasks data
     const [tasksData, setTasksData] = useState([]);
     const [projectData, setProjectData] = useState([]);
+    // Delete
     const [idDelete, setIdDelete] = useState(0);
     const [deleting, setDeleting] = useState(false);
+    // loading
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [tasksPerPage] = useState(8);
+    // Paginate
+    const [currentPage, setCurrentPage] = useState(0);
+    const [lastPage, setLastPage] = useState(0);
+    // URL
     const history = useHistory();
     const { project } = useParams();
 
     const getProjectTasks = async () => {
         const config = {
             method: 'GET',
-            url: `/api/projectTasks/${project}`,
+            url: `/api/projectTasks/${project}?page=${currentPage}`,
             headers: {
                 Accept: 'Application/json',
             },
         };
         await axios(config)
             .then((response) => {
-                setTasksData(response.data.tasksData);
+                setTasksData(response.data.tasksData.data);
+                setLastPage(response.data.tasksData.last_page);
                 setProjectData(response.data.projectData);
             })
             .catch((error) => {
@@ -37,7 +43,7 @@ const Tasks = () => {
     useEffect(() => {
         setLoading(true);
         getProjectTasks();
-    }, [idDelete]);
+    }, [idDelete, currentPage]);
 
     const deleteTask = useCallback(
         async (deleteId) => {
@@ -57,13 +63,12 @@ const Tasks = () => {
         [],
     );
 
-    // Get current posts
-    const indexOfLastTask = currentPage * tasksPerPage;
-    const indexOfFirstTask = indexOfLastTask - tasksPerPage;
-    const currentTasks = tasksData.slice(indexOfFirstTask, indexOfLastTask);
-
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (e) => {
+        console.log(e);
+        const pageNumber = e.selected + 1;
+        setCurrentPage(pageNumber);
+    };
 
     return (
         <Container>
@@ -105,7 +110,7 @@ const Tasks = () => {
             ))}
 
             <Accordion>
-                { tasksData.length > 0 ? currentTasks.map((task) => (
+                { tasksData.length > 0 ? tasksData.map((task) => (
                     <TaskCard
                         key={task.id}
                         name={task.name}
@@ -133,20 +138,29 @@ const Tasks = () => {
                             </Accordion.Toggle>
                         </Card>
                     )}
-                {loading === true ? (
-                    <div className="text-center font-weight-bold">
-                        Loading data...
-                        <Spinner animation="border" variant="primary" className="ml-2" />
-                    </div>
 
-                ) : (<div />)}
             </Accordion>
-            <Pagination
-                tasksPerPage={tasksPerPage}
-                totalTasks={tasksData.length}
-                paginate={paginate}
-                currentPage={currentPage}
+            <ReactPaginate
+                pageCount={lastPage}
+                pageRangeDisplayed={5}
+                marginPagesDisplayed={2}
+                onPageChange={paginate}
+                initialPage={currentPage}
+                containerClassName="nav justify-content-center nav-pills mt-2"
+                pageClassName="nav-item mx-1"
+                pageLinkClassName="nav-link"
+                activeLinkClassName="active"
+                nextLinkClassName="btn btn-link ml-1"
+                previousLinkClassName="btn btn-link mr-1"
+                breakClassName="pt-2"
             />
+            {loading === true ? (
+                <div className="text-center font-weight-bold">
+                    Loading data...
+                    <Spinner animation="border" variant="primary" className="ml-2" />
+                </div>
+
+            ) : (<div />)}
         </Container>
     );
 };

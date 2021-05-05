@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProjectTasksController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware(['auth:sanctum']);
+        $this->middleware(['cors']);
+        $this->middleware(['log.routes']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +60,7 @@ class ProjectTasksController extends Controller
                 ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
                 ->select('tasks.id', 'tasks.name', 'tasks.description', 'priorities.name as priority', 'task_states.name as state', 'tasks.created_at', 'tasks.updated_at')
                 ->where('project_id', $id)
-                ->get(),
+                ->paginate(8),
             'projectData' => Project::where('id', $id)->select('projects.id', 'projects.name')->get(),
         );
         return $dataForTasks;
