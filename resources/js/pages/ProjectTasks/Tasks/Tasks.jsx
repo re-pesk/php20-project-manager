@@ -160,7 +160,7 @@ const Tasks = () => {
                     <Spinner animation="border" variant="primary" className="ml-2" />
                 </div>
 
-            ) : (<div />)}
+            ) : null}
         </Container>
     );
 };
