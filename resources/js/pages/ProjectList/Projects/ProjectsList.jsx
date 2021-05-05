@@ -121,15 +121,19 @@ const Projects = () => {
                                             <h4 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h4>
                                         </div>
                                         <div className='col align-self-center'>
-                                            <div><b>State: </b>
+                                            <div className='d-flex justify-content-start'><b>State: </b>
                                                 <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
                                             </div>
-                                            <div><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
-                                            <div><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                            {/* <div><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                            <div><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div> */}
+                                            <div className='d-flex justify-content-start'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
+                                            <div className='d-flex justify-content-start'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
                                         </div>
-                                        <div className='col align-self-center'>
-                                            <div className='d-flex justify-content-end'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
-                                            <div className='d-flex justify-content-end'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
+                                        <div className='col align-self-center '>
+                                            {/* <div className='d-flex justify-content-end'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
+                                            <div className='d-flex justify-content-end'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div> */}
+                                            <div className='d-flex justify-content-end'><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                            <div className='d-flex justify-content-end'><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
                                         </div>
                                     </div>
                                 </Card.Header>
