@@ -32,6 +32,12 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Bad credencials'], 401);
+        }
+
+        $user = auth()->user();
+
         $response = [
             'user' => $user,
             'message' => 'The user is registered!'
