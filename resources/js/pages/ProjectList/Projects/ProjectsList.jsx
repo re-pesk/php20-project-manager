@@ -116,22 +116,16 @@ const Projects = () => {
                                 <Card.Header>
                                     <div className='row'>
                                         <div className='col d-flex justify-content-start align-self-center'>
-                                            
-                                            {/* <Badge variant='secondary'>{project.id}</Badge> */}
                                             <h4 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h4>
                                         </div>
                                         <div className='col align-self-center'>
                                             <div className='d-flex justify-content-start'><b>State: </b>
                                                 <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
                                             </div>
-                                            {/* <div><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
-                                            <div><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div> */}
                                             <div className='d-flex justify-content-start'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
                                             <div className='d-flex justify-content-start'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
                                         </div>
                                         <div className='col align-self-center '>
-                                            {/* <div className='d-flex justify-content-end'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
-                                            <div className='d-flex justify-content-end'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div> */}
                                             <div className='d-flex justify-content-end'><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
                                             <div className='d-flex justify-content-end'><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
                                         </div>
@@ -144,47 +138,45 @@ const Projects = () => {
                                     <div className='row px-2'>
                                         <Card.Text>{project.description}</Card.Text>
                                     </div>
-                                    {/* <div className='row'> */}
-                                        <div className="row mt-4 pr-2 d-flex justify-content-end">
-                                            <Button
-                                                className="mr-1"
-                                                type="submit"
-                                                value={project.id}
-                                                onClick={() => {
-                                                    history.push(`/task/${project.id}`);
-                                                }}
-                                            >
-                                                View tasks
+                                    <div className="row mt-4 pr-2 d-flex justify-content-end">
+                                        <Button
+                                            className="mr-1"
+                                            type="submit"
+                                            value={project.id}
+                                            onClick={() => {
+                                                history.push(`/task/${project.id}`);
+                                            }}
+                                        >
+                                            View tasks
                                         </Button>
-                                            <Button className="mr-1">Show Board</Button>
-                                            <Button
-                                                className="mr-1"
-                                                type="submit"
-                                                value={project.id}
-                                                onClick={() => {
-                                                    history.push(`/update-project/${project.id}`);
-                                                }}
-                                            >
-                                                Edit
+                                        <Button className="mr-1">Show Board</Button>
+                                        <Button
+                                            className="mr-1"
+                                            type="submit"
+                                            value={project.id}
+                                            onClick={() => {
+                                                history.push(`/update-project/${project.id}`);
+                                            }}
+                                        >
+                                            Edit
                                         </Button>
-                                            <Button
-                                                variant="danger"
-                                                type="submit"
-                                                value={project.id}
-                                                onClick={() => {
-                                                    if (confirm('Are you sure want to delete project?')) {
-                                                        deleteProject(project.id);
-                                                        setIdDelete(project.id);
-                                                    } else {
-                                                        setIdDelete(project.id);
-                                                        return false;
-                                                    }
-                                                }}
-                                            >
-                                                Delete
+                                        <Button
+                                            variant="danger"
+                                            type="submit"
+                                            value={project.id}
+                                            onClick={() => {
+                                                if (confirm('Are you sure want to delete project?')) {
+                                                    deleteProject(project.id);
+                                                    setIdDelete(project.id);
+                                                } else {
+                                                    setIdDelete(project.id);
+                                                    return false;
+                                                }
+                                            }}
+                                        >
+                                            Delete
                                         </Button>
-                                        </div>
-                                    {/* </div> */}
+                                    </div>
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
