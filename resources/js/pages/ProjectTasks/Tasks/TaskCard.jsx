@@ -44,7 +44,7 @@ const TaskCard = ({
                                 <span className={
                                     priority === 'low' ? 'text-secondary'
                                         : priority === 'medium' ? 'text-warning'
-                                            : priority === 'high' ? 'text-success' : null
+                                            : priority === 'high' ? 'text-danger' : null
                                 }
                                 >
                                     {priority}
