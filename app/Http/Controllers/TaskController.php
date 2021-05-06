@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Task;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class TaskController extends Controller
 
     public function __construct()
     {
-        // $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum']);
         $this->middleware(['cors']);
         $this->middleware(['log.routes']);
     }
@@ -46,7 +47,7 @@ class TaskController extends Controller
     {
         // KAROLIS
         $validation = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'priority_id' => 'required|integer|min:1|max:3',
             'project_id' => 'required',
@@ -67,6 +68,17 @@ class TaskController extends Controller
     {
         //KAROLIS
         return $task;
+    }
+
+    public function showAll($projectId) {
+        $projectTasks = array(
+            'tasksData' => Task::leftJoin('priorities', 'tasks.priority_id', '=', 'priorities.id')
+                ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
+                ->select('tasks.id', 'tasks.name', 'tasks.description', 'priorities.name as priority', 'task_states.name as state', 'tasks.created_at', 'tasks.updated_at')
+                ->where('project_id', $projectId)->get(),
+            'projectData' => Project::where('id', $projectId)->select('projects.id', 'projects.name')->get(),
+        );
+        return $projectTasks;
     }
 
     /**

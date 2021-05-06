@@ -54,7 +54,9 @@ const Tasks = () => {
                 },
             };
             await axios
-                .post(`/api/projectTasks/${deleteId}`, config)
+                .post(`/api/projectTasks/${deleteId}`, config).then((response) => {
+                    console.log('Deleted success!', response);
+                })
                 .catch((error) => {
                     console.log(error);
                 });
@@ -65,7 +67,6 @@ const Tasks = () => {
 
     // Change page
     const paginate = (e) => {
-        console.log(e);
         const pageNumber = e.selected + 1;
         setCurrentPage(pageNumber);
     };

@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { capitalize } from 'lodash';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { capitalize } from 'lodash';
+import { useHistory } from 'react-router-dom';
 
 const Projects = () => {
     // back button
@@ -31,7 +31,7 @@ const Projects = () => {
             .then((response) => {
                 console.log(response.data);
                 setProjectsData(response.data.data);
-                setLastPage(response.data.last_page)
+                setLastPage(response.data.last_page);
                 setLoading(false);
             })
             .catch((error) => {
@@ -66,7 +66,7 @@ const Projects = () => {
         setCurrentPage(e.selected + 1);
         setLoading(true);
         console.log(e);
-    }
+    };
 
     return (
         <Container>
@@ -95,14 +95,16 @@ const Projects = () => {
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
-                {projectsData < 1 ?
-                    <>
-                        <Card>
-                            <Card.Header as='h4' className='text-center'>
-                                There are no projects yet.
-                    </Card.Header>
-                        </Card>
-                    </>
+                {projectsData < 1
+                    ? (
+                        <>
+                            <Card>
+                                <Card.Header as="h4" className="text-center">
+                                    There are no projects yet.
+                                </Card.Header>
+                            </Card>
+                        </>
+                    )
                     :
                     // Jei yra sukurta projektu
                     projectsData.map((project) => (
@@ -114,20 +116,42 @@ const Projects = () => {
                                 eventKey={project.id}
                             >
                                 <Card.Header>
-                                    <div className='row'>
-                                        <div className='col d-flex justify-content-start align-self-center'>
-                                            <h4 className='align-self-center mt-2'><span className='badge bg-secondary text-light mr-2'>{project.id}</span>{capitalize(project.name)}</h4>
+                                    <div className="row">
+                                        <div className="col d-flex justify-content-start align-self-center">
+                                            <h4 className="align-self-center mt-2">
+                                                <span className="badge bg-secondary text-light mr-2">{project.id}</span>
+                                                {capitalize(project.name)}
+                                            </h4>
                                         </div>
-                                        <div className='col align-self-center'>
-                                            <div className='d-flex justify-content-start'><b>State: </b>
-                                                <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
+                                        <div className="col align-self-center">
+                                            <div className="d-flex justify-content-start">
+                                                <b>State: </b>
+                                                <span className={
+                                                    project.state.name === 'in progress'
+                                                        ? 'text-primary' : 'text-success'
+                                                }
+                                                >
+                                                    {project.state.name}
+                                                </span>
                                             </div>
-                                            <div className='d-flex justify-content-start'><b>Tasks Assigned:&nbsp;</b><span className='text-primary'>{project.tasks_count}</span></div>
-                                            <div className='d-flex justify-content-start'><b>Unfinished Tasks:&nbsp;</b><span className='text-danger'>{project.unfinished_tasks_count}</span></div>
+                                            <div className="d-flex justify-content-start">
+                                                <b>Tasks Assigned:&nbsp;</b>
+                                                <span className="text-primary">{project.tasks_count}</span>
+                                            </div>
+                                            <div className="d-flex justify-content-start">
+                                                <b>Unfinished Tasks:&nbsp;</b>
+                                                <span className="text-danger">{project.unfinished_tasks_count}</span>
+                                            </div>
                                         </div>
-                                        <div className='col align-self-center '>
-                                            <div className='d-flex justify-content-end'><b>Created at: </b>{Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}</div>
-                                            <div className='d-flex justify-content-end'><b>Updated at: </b>{Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}</div>
+                                        <div className="col align-self-center ">
+                                            <div className="d-flex justify-content-end">
+                                                <b>Created at: </b>
+                                                {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </div>
+                                            <div className="d-flex justify-content-end">
+                                                <b>Updated at: </b>
+                                                {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </div>
                                         </div>
                                     </div>
                                 </Card.Header>
@@ -135,7 +159,7 @@ const Projects = () => {
 
                             <Accordion.Collapse eventKey={project.id}>
                                 <Card.Body className="bg-white">
-                                    <div className='row px-2'>
+                                    <div className="row px-2">
                                         <Card.Text>{project.description}</Card.Text>
                                     </div>
                                     <div className="row mt-4 pr-2 d-flex justify-content-end">
@@ -149,7 +173,18 @@ const Projects = () => {
                                         >
                                             View tasks
                                         </Button>
-                                        <Button className="mr-1">Show Board</Button>
+                                        <Button
+                                            className="mr-1"
+                                            onClick={() => {
+                                                history.push({ pathname: '/project/board',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
+                                            }}
+                                        >
+                                            Show Board
+                                        </Button>
                                         <Button
                                             className="mr-1"
                                             type="submit"
@@ -180,13 +215,18 @@ const Projects = () => {
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
-                    ))
-                }
+                    ))}
                 {/* loading data spinneris */}
-                {loading == true ? <div className='text-center font-weight-bold'>Loading data... <Spinner animation='border' variant='primary' className='ml-2' /></div> : <div></div>}
+                {loading == true ? (
+                    <div className="text-center font-weight-bold">
+                        Loading data...
+                        {' '}
+                        <Spinner animation="border" variant="primary" className="ml-2" />
+                    </div>
+                ) : <div />}
             </Accordion>
             <ReactPaginate
-                breakClassName={"pt-2"}
+                breakClassName="pt-2"
                 pageCount={lastPage}
                 pageRangeDisplayed={5}
                 marginPagesDisplayed={2}
