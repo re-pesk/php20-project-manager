@@ -47,7 +47,7 @@ export default function Item({ task, index, cols, setCols }) {
                 >
                     <Card style={{ color: 'black' }} className="mx-2 mb-2 background-light">
                         <Card.Body>
-                            <Card.Title>
+                            <Card.Title style={{ maxWidth: '218.2px' }}>
                                 <Badge variant="secondary">{task.id}</Badge>
                                 {' '}
                                 {task.name}
