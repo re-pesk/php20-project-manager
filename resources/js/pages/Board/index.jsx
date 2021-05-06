@@ -152,16 +152,26 @@ export default function Board() {
 
     return (
         <Container>
-            <Button
-                className="text-center"
-                variant="primary"
-                type="submit"
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                Back
-            </Button>
+            <div className="mx-auto d-flex justify-content-between" style={{ width: '90%' }}>
+                <Button
+                    className="text-center"
+                    variant="primary"
+                    type="submit"
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                >
+                    Back
+                </Button>
+                <Button
+                    onClick={() => {
+                        history.push(`/create-task/${history.location.state.project}`);
+                    }}
+                    variant="primary"
+                >
+                    Create Task
+                </Button>
+            </div>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div
                     style={{
