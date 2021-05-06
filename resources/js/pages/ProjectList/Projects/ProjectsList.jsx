@@ -53,9 +53,9 @@ const Projects = () => {
             };
             await axios
                 .post(`/api/projects/${deleteId}`, config)
-                // .then((response) => {
-                //     console.log('deleted succesfuly');
-                // })
+                .then((response) => {
+                    console.log('Project deleted succesfuly', response);
+                })
                 .catch((error) => {
                     console.log(error);
                 });
