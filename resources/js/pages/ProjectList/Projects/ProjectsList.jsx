@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+import { capitalize } from 'lodash';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { capitalize } from 'lodash';
+import { useHistory } from 'react-router-dom';
 
 const Projects = () => {
     // back button
@@ -127,8 +127,15 @@ const Projects = () => {
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
                                                 <b>State: </b>
+<<<<<<< HEAD
                                                 <span className={project.state.name === 'in progress'
                                                     ? 'text-primary' : 'text-success'}
+=======
+                                                <span className={
+                                                    project.state.name === 'in progress'
+                                                        ? 'text-primary' : 'text-success'
+                                                }
+>>>>>>> develop
                                                 >
                                                     {project.state.name}
                                                 </span>
