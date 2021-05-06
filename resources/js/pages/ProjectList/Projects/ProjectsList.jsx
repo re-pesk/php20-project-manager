@@ -127,15 +127,8 @@ const Projects = () => {
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
                                                 <b>State: </b>
-<<<<<<< HEAD
                                                 <span className={project.state.name === 'in progress'
                                                     ? 'text-primary' : 'text-success'}
-=======
-                                                <span className={
-                                                    project.state.name === 'in progress'
-                                                        ? 'text-primary' : 'text-success'
-                                                }
->>>>>>> develop
                                                 >
                                                     {project.state.name}
                                                 </span>
