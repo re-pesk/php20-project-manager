@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ export default function CreateTaskForm() {
     // const { token } = userContext;
     const history = useHistory();
     const { project } = useParams();
+
     // console.log(project);
 
     const [taskData, setTaskData] = useState({
@@ -48,13 +49,13 @@ export default function CreateTaskForm() {
                 // setUserContext(response.data);
                 setSuccesMessage('Task created succesfully');
 
-                // history.push(`/task/${project}`);
                 setTaskData({
                     name: '',
                     description: '',
                     priority_id: '',
                     project_id: project,
                 });
+                document.querySelector('#priority_id').value = '';
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -81,12 +82,14 @@ export default function CreateTaskForm() {
         setErrors({});
         // console.log(event);
         setState(true);
-        document.querySelector('#priority_id').value = '';
     };
 
     const handleChange = (event) => setTaskData({
         ...taskData,
         [event.target.name]: event.target.value,
+    });
+    const goBackToTasks = useCallback(() => {
+        history.push(`/task/${project}`);
     });
 
     return (
@@ -131,9 +134,15 @@ export default function CreateTaskForm() {
                     Create Task
                 </Button>
                 {succesMessage !== '' ? (
-                    <div style={{ fontSize: 15 }} className="text-success my-3">
-                        {succesMessage}
+                    <div>
+                        <div style={{ fontSize: 15 }} className="text-success my-3">
+                            {succesMessage}
+                        </div>
+                        <Button className="mt-3" variant="primary" onClick={goBackToTasks}>
+                            Go Back To Tasks
+                        </Button>
                     </div>
+
                 ) : (
                     <div style={{ fontSize: 15 }} className="text-success my-3" />
                 )}

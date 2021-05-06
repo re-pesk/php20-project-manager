@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import {
-    AuthExample, CreateTask, Dashboard,
+    AuthExample,
+
+    Board, CreateProject, CreateTask, Dashboard,
 
     EditTask,
     Empty,
@@ -9,8 +11,7 @@ import {
     Login,
 
     Logout,
-    ProjectTasks, Register, Welcome, CreateProject, UpdateProject, ProjectList,
-    Board,
+    ProjectList, ProjectTasks, Register, UpdateProject, Welcome,
 } from '../../../pages';
 
 export const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3 });
