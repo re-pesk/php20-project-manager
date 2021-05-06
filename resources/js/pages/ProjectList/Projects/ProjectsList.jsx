@@ -167,7 +167,18 @@ const Projects = () => {
                                         >
                                             View tasks
                                         </Button>
-                                        <Button className="mr-1">Show Board</Button>
+                                        <Button
+                                            className="mr-1"
+                                            onClick={() => {
+                                                history.push({ pathname: '/project/board',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
+                                            }}
+                                        >
+                                            Show Board
+                                        </Button>
                                         <Button
                                             className="mr-1"
                                             type="submit"
