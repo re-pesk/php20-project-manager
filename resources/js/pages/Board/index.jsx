@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { useSidebarContext } from '../../context/SidebarContext';
 import Column from './Column';
 
 export default function Board() {
-    const { isOpen } = useSidebarContext;
     const history = useHistory();
     const [columns, setColumns] = useState([]);
 
@@ -21,8 +19,6 @@ export default function Board() {
         };
         await axios(config)
             .then((response) => {
-                console.log(response.data.tasksData);
-
                 const initialColumns = {
                     'to do': {
                         id: 'to do',
@@ -37,9 +33,7 @@ export default function Board() {
                         list: [],
                     },
                 };
-                console.log(response.data);
                 response.data.tasksData.forEach((task) => {
-                    // console.log(task);
                     if (task.state === 'to do') {
                         initialColumns['to do'].list.push(task);
                     }
@@ -50,10 +44,10 @@ export default function Board() {
                         initialColumns.done.list.push(task);
                     }
                 });
-                console.log(initialColumns);
                 setColumns(initialColumns);
             })
             .catch((error) => {
+                // eslint-disable-next-line no-console
                 console.log(error);
             });
     }, []);
@@ -132,7 +126,6 @@ export default function Board() {
 
         const states = { 'to do': 1, 'in progress': 2, done: 3 };
         const priorities = { low: 1, medium: 2, high: 3 };
-        console.log(columns);
 
         const config = {
             method: 'PUT',
@@ -180,7 +173,7 @@ export default function Board() {
                     }}
                 >
                     {Object.values(columns).map((col) => (
-                        <Column col={col} key={col.id} />
+                        <Column col={col} cols={columns} setCols={setColumns} key={col.id} />
                     ))}
                 </div>
             </DragDropContext>
