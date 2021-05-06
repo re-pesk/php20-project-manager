@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { capitalize } from 'lodash';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { capitalize } from 'lodash';
+import { useHistory } from 'react-router-dom';
 
 const Projects = () => {
     // back button
@@ -126,7 +126,13 @@ const Projects = () => {
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
                                                 <b>State: </b>
-                                                <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
+                                                <span className={
+                                                    project.state.name === 'in progress'
+                                                        ? 'text-primary' : 'text-success'
+                                                }
+                                                >
+                                                    {project.state.name}
+                                                </span>
                                             </div>
                                             <div className="d-flex justify-content-start">
                                                 <b>Tasks Assigned:&nbsp;</b>
