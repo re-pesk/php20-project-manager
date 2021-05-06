@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateProjectForm() {
     const [projectData, setProjectData] = useState({
         name: '',
         description: '',
     });
+    // back mygtukas atsirandantis po projekto sukurimo
+    const [backToProjectsButton, setBackToProjectsButton] = useState(false);
+    const history = useHistory();
 
     const [validationErrors, setErrors] = useState({
         name: '',
@@ -38,6 +42,12 @@ export default function CreateProjectForm() {
                 // console.log(response.data)
                 // setUserContext(response.data);
                 setSuccesMessage('Project created succesfully');
+                // nuresetinam forma po projekto sukurimo
+                setProjectData({
+                    name: '',
+                    description: '',
+                });
+                setBackToProjectsButton(true);
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -103,9 +113,19 @@ export default function CreateProjectForm() {
                 <div style={{ fontSize: 12 }} className="text-danger">
                     {validationErrors.project_state_id}
                 </div> */}
-                <Button className="mt-3" variant="primary" type="submit">
-                    Create Project
-                </Button>
+                <div className="d-flex justify-content-between">
+                    <Button className="mt-3" variant="primary" type="submit">
+                        Create Project
+                    </Button>
+                    {/* back mygtukas atsirandantis po projekto sukurimo */}
+                    { backToProjectsButton === true
+                        ? (
+                            <Button className="mt-3" variant="primary" onClick={() => { history.goBack(); }}>
+                                Back
+                            </Button>
+                        )
+                        : <div />}
+                </div>
                 <div style={{ fontSize: 15 }} className="text-success my-3">
                     {succesMessage}
                 </div>

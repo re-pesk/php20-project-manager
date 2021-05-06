@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -52,8 +53,9 @@ const Projects = () => {
             };
             await axios
                 .post(`/api/projects/${deleteId}`, config)
-                .then((response) => {
-                })
+                // .then((response) => {
+                //     console.log('deleted succesfuly');
+                // })
                 .catch((error) => {
                     console.log(error);
                 });
@@ -97,14 +99,13 @@ const Projects = () => {
                 {/* Jei nera sukurta projektu */}
                 {projectsData < 1
                     ? (
-                        <>
-                            <Card>
-                                <Card.Header as="h4" className="text-center">
-                                    There are no projects yet.
-                                </Card.Header>
-                            </Card>
-                        </>
+                        <Card>
+                            <Card.Header as="h4" className="text-center">
+                                There are no projects yet.
+                            </Card.Header>
+                        </Card>
                     )
+                    // eslint-disable-next-line operator-linebreak
                     :
                     // Jei yra sukurta projektu
                     projectsData.map((project) => (
@@ -126,7 +127,11 @@ const Projects = () => {
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
                                                 <b>State: </b>
-                                                <span className={project.state.name == 'in progress' ? 'text-primary' : 'text-success'}>{project.state.name}</span>
+                                                <span className={project.state.name === 'in progress'
+                                                    ? 'text-primary' : 'text-success'}
+                                                >
+                                                    {project.state.name}
+                                                </span>
                                             </div>
                                             <div className="d-flex justify-content-start">
                                                 <b>Tasks Assigned:&nbsp;</b>
@@ -211,10 +216,9 @@ const Projects = () => {
                         </Card>
                     ))}
                 {/* loading data spinneris */}
-                {loading == true ? (
+                {loading === true ? (
                     <div className="text-center font-weight-bold">
                         Loading data...
-                        {' '}
                         <Spinner animation="border" variant="primary" className="ml-2" />
                     </div>
                 ) : <div />}
