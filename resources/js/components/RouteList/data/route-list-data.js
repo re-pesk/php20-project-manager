@@ -18,7 +18,7 @@ export const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both:
 export default [
     { exact: true, path: '/', content: Welcome, accessibility: accessType.both },
     { exact: true, path: '/dashboard', content: Dashboard, accessibility: accessType.requiresLogin },
-    { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Edit task', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/create-task/:project', content: CreateTask, title: 'Create task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/edit-task/:task', content: EditTask, title: 'Edit task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/task/:project', content: ProjectTasks, title: 'Project Tasks', accessibility: accessType.requiresLogin },
     { exact: true, path: '/empty', content: Empty, accessibility: accessType.requiresLogin },
