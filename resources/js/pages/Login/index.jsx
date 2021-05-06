@@ -12,8 +12,11 @@ const Login = () => {
         email: '',
         password: '',
     });
+    const [validated, setValidated] = useState(false);
+    const [errorData, setErrorData] = useState({});
 
     const getUserData = async () => {
+        setErrorData({});
         const config = {
             method: 'post',
             url: '/login',
@@ -28,23 +31,25 @@ const Login = () => {
                 // eslint-disable-next-line no-console
                     console.log(response.data);
                     setUserContext(response.data);
+                    history.push('/dashboard');
                 })
                 .catch((error) => {
-                // eslint-disable-next-line no-console
-                    console.log(error);
+                    setErrorData({ status: error.response.status, message: error.response.data.message });
+                    // eslint-disable-next-line no-console
+                    console.log(error.response);
                 });
         });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        try {
-            await getUserData();
-            history.push('/dashboard');
-        } catch (e) {
-            // eslint-disable-next-line no-alert
-            alert(e.message);
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+            return;
         }
+        getUserData();
     };
 
     const handleChange = (event) => setUserData({
@@ -54,24 +59,36 @@ const Login = () => {
 
     return (
         <Form
+            noValidate
+            validated={validated}
             className="w-25 mx-auto mt-5"
             onSubmit={handleSubmit}
         >
-            <Form.Label className="mt-3">Email</Form.Label>
-            <Form.Control
-                name="email"
-                type="email"
-                value={userData.email}
-                onChange={handleChange}
-            />
-            <Form.Label className="mt-3">Password</Form.Label>
-            <Form.Control
-                name="password"
-                type="password"
-                placeholder="Type in new password"
-                value={userData.password}
-                onChange={handleChange}
-            />
+            <Form.Text type="invalid" className="text-danger">{errorData.message}</Form.Text>
+            <Form.Group controlId="email">
+                <Form.Label className="mt-3">Email</Form.Label>
+                <Form.Control
+                    name="email"
+                    type="email"
+                    value={userData.email}
+                    placeholder="Type in e-mail address"
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Control.Feedback type="invalid">Please provide a valid e-mail address!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="password">
+                <Form.Label className="mt-3">Password</Form.Label>
+                <Form.Control
+                    name="password"
+                    type="password"
+                    placeholder="Type in the password"
+                    value={userData.password}
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Control.Feedback type="invalid">Please provide a valid password!</Form.Control.Feedback>
+            </Form.Group>
             <Button
                 className="mt-3"
                 variant="primary"
