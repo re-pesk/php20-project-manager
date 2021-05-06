@@ -53,7 +53,7 @@ export default function EditTaskForm() {
             return;
         }
         const config = {
-            method: 'put',
+            method: 'PUT',
             url: `/api/tasks/${task}`,
             // headers: {
             //     Accept: 'application/json',

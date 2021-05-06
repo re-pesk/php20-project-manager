@@ -34,4 +34,5 @@ Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('tasks', TaskController::class);
+Route::get('project/{id}/tasks', [TaskController::class, 'showAll']);
 Route::apiResource('projectTasks', ProjectTasksController::class);
