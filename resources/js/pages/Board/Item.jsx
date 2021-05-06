@@ -8,6 +8,20 @@ import { useHistory } from 'react-router-dom';
 export default function Item({ task, index, cols, setCols }) {
     const history = useHistory();
 
+    let priorityColor = 'text-primary';
+
+    if (task.priority === 'low') {
+        priorityColor = 'text-success';
+    }
+
+    if (task.priority === 'medium') {
+        priorityColor = 'text-warning';
+    }
+
+    if (task.priority === 'high') {
+        priorityColor = 'text-danger';
+    }
+
     const deleteTask = async (deleteId) => {
         const config = {
             _method: 'DELETE',
@@ -38,6 +52,11 @@ export default function Item({ task, index, cols, setCols }) {
                                 {' '}
                                 {task.name}
                             </Card.Title>
+                            {/* eslint-disable-next-line max-len */}
+                            <Card.Subtitle className="mb-2 text-muted text-capitalize">
+                                {'Priority: '}
+                                <span className={priorityColor}>{task.priority}</span>
+                            </Card.Subtitle>
                             <Card.Text style={{ fontSize: '12px' }}>
                                 {task.description}
                             </Card.Text>
