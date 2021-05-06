@@ -47,7 +47,7 @@ class TaskController extends Controller
     {
         // KAROLIS
         $validation = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'priority_id' => 'required|integer|min:1|max:3',
             'project_id' => 'required',
