@@ -81,6 +81,7 @@ export default function CreateTaskForm() {
         setErrors({});
         // console.log(event);
         setState(true);
+        document.querySelector('#priority_id').value = '';
     };
 
     const handleChange = (event) => setTaskData({
@@ -117,8 +118,8 @@ export default function CreateTaskForm() {
                     {validationErrors.description}
                 </div>
                 <Form.Label className="mt-3">Priority</Form.Label>
-                <Form.Control name="priority_id" onChange={handleChange} as="select" custom>
-                    <option>--- SELECT PRIORITY ---</option>
+                <Form.Control id="priority_id" name="priority_id" onChange={handleChange} as="select" custom>
+                    <option value="">--- SELECT PRIORITY ---</option>
                     <option value="1">low</option>
                     <option value="2">medium</option>
                     <option value="3">high</option>
