@@ -87,7 +87,7 @@ class ProjectController extends Controller
     {   
 
         $request->validate([
-            'name' => 'required|max:255|unique:projects',
+            'name' => 'required|max:255|unique:projects,name,'.$id,
             'description' => 'required',
             'project_state_id' => 'required|integer|min:1|max:2',
         ]);
