@@ -1,18 +1,40 @@
 import React from 'react';
-import { Card, Container } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+
+const images = [
+    {
+        id: 1,
+        src: '../../img/padejeja.jpg',
+        title: 'Developerio padėjėja',
+        text: 'Prilaikysiu letenyte, kad patyliukais nepabėgtų :)',
+    },
+    {
+        id: 2,
+        src: '../../img/padejejas-2.jpg',
+        title: 'Ramybės sargas',
+        text: 'Aš irgi nagiuką prikišau!',
+    },
+];
 
 const Cards = () => (
     <Container>
-        <Card style={{ width: '50rem' }}>
-            <Card.Img variant="top" src="../../img/padejeja.jpg" />
-            <Card.Body>
-                <Card.Title>Developerio padėjėja</Card.Title>
-                <Card.Text>
-                    Prilaikysiu letenyte, kad patyliukais nepabėgtų
-                    {' :)'}
-                </Card.Text>
-            </Card.Body>
-        </Card>
+        <Row>
+            {images.map(
+                (data) => (
+                    <Col key={data.id}>
+                        <Card className="mx-auto" style={{ width: '30rem' }}>
+                            <Card.Img variant="top" src={data.src} />
+                            <Card.Body>
+                                <Card.Title>{data.title}</Card.Title>
+                                <Card.Text>
+                                    {data.text}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ),
+            )}
+        </Row>
     </Container>
 );
 
