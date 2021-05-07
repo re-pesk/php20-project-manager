@@ -57,7 +57,7 @@ export default function Item({ task, index, cols, setCols }) {
                                 {'Priority: '}
                                 <span className={priorityColor}>{task.priority}</span>
                             </Card.Subtitle>
-                            <Card.Text style={{ fontSize: '12px' }}>
+                            <Card.Text style={{ fontSize: '12px', maxWidth: '218.2px' }}>
                                 {task.description}
                             </Card.Text>
                             <Button
