@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Task;
+use App\Rules\UniqueToProject;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,11 @@ class TaskController extends Controller
     {
         // KAROLIS
         $validation = $request->validate([
-            'name' => 'required|max:255|unique:tasks',
+            'name' => [
+                'required',
+                'max:255',
+                new UniqueToProject($request->project_id),
+            ],
             'description' => 'required',
             'priority_id' => 'required|integer|min:1|max:3',
             'project_id' => 'required|integer',
@@ -70,7 +75,8 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function showAll($projectId) {
+    public function showAll($projectId)
+    {
         $projectTasks = array(
             'tasksData' => Task::leftJoin('priorities', 'tasks.priority_id', '=', 'priorities.id')
                 ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
@@ -102,15 +108,19 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //KAROLIS
-        $request->validate([
-            'name' => 'required|max:255|unique:tasks',
+       $validation = $request->validate([
+            'name' => [
+                'required',
+                'max:255',
+                new UniqueToProject($task->project_id, $task->id),
+            ],
             'description' => 'required',
             'priority_id' => 'required|integer|min:1|max:3',
             'task_state_id' => 'required|integer|min:1|max:3',
         ]);
 
         $task->update($request->all());
-        return $task;
+        return $validation;
     }
 
     /**
