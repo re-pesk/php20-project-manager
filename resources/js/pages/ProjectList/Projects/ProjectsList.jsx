@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { capitalize } from 'lodash';
 import Moment from 'moment';
@@ -52,7 +53,7 @@ const Projects = () => {
             };
             await axios
                 .post(`/api/projects/${deleteId}`, config)
-                .then((response) => {
+                .then(() => {
                 })
                 .catch((error) => {
                     console.log(error);
@@ -105,9 +106,8 @@ const Projects = () => {
                             </Card>
                         </>
                     )
-                    :
                     // Jei yra sukurta projektu
-                    projectsData.map((project) => (
+                    : projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
                                 className="text-capitalize"
@@ -125,7 +125,7 @@ const Projects = () => {
                                         </div>
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
-                                                <b>State: </b>
+                                                <b>State:&nbsp; </b>
                                                 <span className={
                                                     project.state.name === 'in progress'
                                                         ? 'text-primary' : 'text-success'
@@ -145,11 +145,11 @@ const Projects = () => {
                                         </div>
                                         <div className="col align-self-center ">
                                             <div className="d-flex justify-content-end">
-                                                <b>Created at: </b>
+                                                <b>Created at:&nbsp; </b>
                                                 {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </div>
                                             <div className="d-flex justify-content-end">
-                                                <b>Updated at: </b>
+                                                <b>Updated at:&nbsp; </b>
                                                 {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </div>
                                         </div>
@@ -200,6 +200,7 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
+                                                // eslint-disable-next-line no-restricted-globals, no-alert
                                                 if (confirm('Are you sure want to delete project?')) {
                                                     deleteProject(project.id);
                                                     setIdDelete(project.id);
@@ -207,6 +208,7 @@ const Projects = () => {
                                                     setIdDelete(project.id);
                                                     return false;
                                                 }
+                                                return false;
                                             }}
                                         >
                                             Delete
@@ -217,7 +219,7 @@ const Projects = () => {
                         </Card>
                     ))}
                 {/* loading data spinneris */}
-                {loading == true ? (
+                {loading === true ? (
                     <div className="text-center font-weight-bold">
                         Loading data...
                         {' '}
