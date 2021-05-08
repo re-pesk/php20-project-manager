@@ -15,9 +15,9 @@ const UpdateProjectForm = () => {
 
     // validation errors from API
     const [validationErrors, setErrors] = useState({
-        name: '',
-        description: '',
-        project_state_id: '',
+        name: '-',
+        description: '-',
+        project_state_id: '-',
     });
 
     const [state, setState] = useState(false);
@@ -32,7 +32,6 @@ const UpdateProjectForm = () => {
 
         await axios(config)
             .then((response) => {
-                // eslint-disable-next-line no-console
                 setProjectData({
                     name: response.data.name,
                     description: response.data.description,
@@ -41,7 +40,7 @@ const UpdateProjectForm = () => {
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
-                // console.log(error);
+                console.log(error);
             });
     }, []);
 
@@ -52,25 +51,19 @@ const UpdateProjectForm = () => {
         const config = {
             method: 'put',
             url: `/api/projects/${project}`,
-            // headers: {
-            //     Accept: 'application/json',
-            // },
             data: projectData,
         };
 
-        // console.log(taskData)
-
         await axios(config)
-            .then((response) => {
-                // eslint-disable-next-line no-console
-                // console.log(response.data)
-                // setUserContext(response.data);
+            .then(() => {
+                setErrors({
+                    name: '',
+                    description: '',
+                    project_state_id: '',
+                });
                 setSuccesMessage('Project updated succesfully');
             })
             .catch((error) => {
-                // eslint-disable-next-line no-console
-                // console.log(error.response.data.errors);
-                // console.log(error.response.data.errors);
                 setErrors({
                     name: error.response.data.errors.name
                         ? error.response.data.errors.name[0]
@@ -82,7 +75,6 @@ const UpdateProjectForm = () => {
                         ? error.response.data.errors.project_state_id[0]
                         : '',
                 });
-                // console.log(true);
             });
         setState(false);
     }, [state]);
@@ -90,59 +82,61 @@ const UpdateProjectForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSuccesMessage('');
-        setErrors({});
-        // console.log(event);
         setState(true);
     };
 
     const handleChange = (event) => setProjectData({
         ...projectData,
         [event.target.name]: event.target.value,
-    },);
+    });
 
     return (
         <>
-            {/* {
-                token && <Redirect to="/dashboard" />
-            } */}
-            <Form className="w-25 mx-auto mt-5" onSubmit={handleSubmit}>
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                    name="name"
-                    type="text"
-                    value={projectData.name}
-                    onChange={handleChange}
-                />
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.name}
-                </div>
-                <Form.Label className="mt-3">Description</Form.Label>
-                <Form.Control
-                    name="description"
-                    as="textarea"
-                    rows={5}
-                    style={{ resize: 'none' }}
-                    value={projectData.description}
-                    onChange={handleChange}
-                />
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.description}
-                </div>
-                <Form.Label className="mt-3">State</Form.Label>
-                <Form.Control
-                    name="project_state_id"
-                    onChange={handleChange}
-                    as="select"
-                    custom
-                    value={projectData.project_state_id}
-                >
-                    <option value="">--- SELECT STATE ---</option>
-                    <option value="1">In Progress</option>
-                    <option value="2">Done</option>
-                </Form.Control>
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.project_state_id}
-                </div>
+            <Form noValidate className="w-25 mx-auto mt-5" onSubmit={handleSubmit}>
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        name="name"
+                        type="text"
+                        value={projectData.name}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.name === '')}
+                        isInvalid={Boolean(validationErrors.name !== '' && validationErrors.name !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.name}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label className="mt-3">Description</Form.Label>
+                    <Form.Control
+                        name="description"
+                        as="textarea"
+                        rows={5}
+                        style={{ resize: 'none' }}
+                        value={projectData.description}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.description === '')}
+                        isInvalid={Boolean(validationErrors.description !== '' && validationErrors.description !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.description}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="project_state_id">
+                    <Form.Label className="mt-3">State</Form.Label>
+                    <Form.Control
+                        name="project_state_id"
+                        onChange={handleChange}
+                        as="select"
+                        custom
+                        value={projectData.project_state_id}
+                        isValid={Boolean(validationErrors.project_state_id === '')}
+                        isInvalid={Boolean(validationErrors.project_state_id !== ''
+                        && validationErrors.project_state_id !== '-')}
+                    >
+                        <option value="">--- SELECT STATE ---</option>
+                        <option value="1">In Progress</option>
+                        <option value="2">Done</option>
+                    </Form.Control>
+                    <Form.Control.Feedback type="invalid">{validationErrors.project_state_id}</Form.Control.Feedback>
+                </Form.Group>
                 <Button className="mt-3" variant="primary" type="submit">
                     Update Project
                 </Button>
@@ -151,7 +145,7 @@ const UpdateProjectForm = () => {
                 </div>
             </Form>
         </>
-    )
-}
+    );
+};
 
-export default UpdateProjectForm
+export default UpdateProjectForm;
