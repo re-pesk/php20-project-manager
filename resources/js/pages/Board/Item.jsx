@@ -30,7 +30,7 @@ export default function Item({ task, index, cols, setCols }) {
             },
         };
         await axios
-            .post(`/api/projectTasks/${deleteId}`, config)
+            .post(`/api/tasks/${deleteId}`, config)
             .catch((error) => {
                 // eslint-disable-next-line no-console
                 console.log(error);

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
@@ -54,7 +55,7 @@ const Tasks = () => {
                 },
             };
             await axios
-                .post(`/api/projectTasks/${deleteId}`, config).then((response) => {
+                .post(`/api/tasks/${deleteId}`, config).then((response) => {
                     console.log('Deleted success!', response);
                 })
                 .catch((error) => {
