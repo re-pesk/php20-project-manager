@@ -59,6 +59,10 @@ class TaskController extends Controller
         ]);
 
         Task::create($request->all());
+        Project::find($request->project_id)->update([
+            'project_state_id' => 1
+        ]);
+
 
         return $validation;
     }
@@ -80,7 +84,15 @@ class TaskController extends Controller
         $projectTasks = array(
             'tasksData' => Task::leftJoin('priorities', 'tasks.priority_id', '=', 'priorities.id')
                 ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
-                ->select('tasks.id', 'tasks.name', 'tasks.description', 'priorities.name as priority', 'task_states.name as state', 'tasks.created_at', 'tasks.updated_at')
+                ->select(
+                    'tasks.id',
+                    'tasks.name',
+                    'tasks.description',
+                    'priorities.name as priority',
+                    'task_states.name as state',
+                    'tasks.created_at',
+                    'tasks.updated_at'
+                )
                 ->where('project_id', $projectId)->get(),
             'projectData' => Project::where('id', $projectId)->select('projects.id', 'projects.name')->get(),
         );
@@ -108,7 +120,7 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //KAROLIS
-       $validation = $request->validate([
+        $validation = $request->validate([
             'name' => [
                 'required',
                 'max:255',
@@ -120,6 +132,17 @@ class TaskController extends Controller
         ]);
 
         $task->update($request->all());
+        $project = Project::find($task->project_id);
+
+        if ($project->unfinishedTasks()->exists()) {
+            $project->update([
+                'project_state_id' => 1
+            ]);
+        } else {
+            $project->update([
+                'project_state_id' => 2
+            ]);
+        }
         return $validation;
     }
 
@@ -129,8 +152,22 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function destroy(Task $task)
     {
-        //
+        $project = Project::find($task->project_id);
+        $task->delete();
+
+        if ($project->unfinishedTasks()->exists()) {
+            $project->update([
+                'project_state_id' => 1
+            ]);
+        } else {
+            $project->update([
+                'project_state_id' => 2
+            ]);
+        }
+
+        return "Task deleted";
     }
 }
