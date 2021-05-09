@@ -1,12 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Draggable } from 'react-beautiful-dnd';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
 
 export default function Item({ task, index, cols, setCols }) {
     const history = useHistory();
+    // use context to communicate with modal window, these are globals
+    const { handleShow, confirmedDeletion, confirmDeletion, canceledDeletion } = useUserContext();
+    // used to set this particular task for deletion, this is local variable
+    const [wantToDelete, setToDelete] = useState(false);
 
     let priorityColor = 'text-primary';
 
@@ -36,6 +41,36 @@ export default function Item({ task, index, cols, setCols }) {
                 console.log(error);
             });
     };
+
+    // used when task confirmed for deletion
+    useEffect(() => {
+        if (wantToDelete && confirmedDeletion) {
+            setToDelete(false);
+            confirmDeletion(false);
+            const newCols = {};
+            newCols['to do'] = {};
+            newCols['to do'].id = 'to do';
+            newCols['to do'].list = cols['to do'].list.filter((t) => t.id !== task.id);
+
+            newCols['in progress'] = {};
+            newCols['in progress'].id = 'in progress';
+            // eslint-disable-next-line max-len
+            newCols['in progress'].list = cols['in progress'].list.filter((t) => t.id !== task.id);
+
+            newCols.done = {};
+            newCols.done.id = 'done';
+            newCols.done.list = cols.done.list.filter((t) => t.id !== task.id);
+            setCols(
+                newCols,
+            );
+            deleteTask(task.id);
+        }
+    }, [confirmedDeletion]);
+
+    // used when task refused for deletion
+    useEffect(() => {
+        setToDelete(false);
+    }, [canceledDeletion]);
 
     return (
         <Draggable draggableId={task.name + task.id} index={index}>
@@ -70,23 +105,10 @@ export default function Item({ task, index, cols, setCols }) {
                             </Button>
                             <Button
                                 onClick={() => {
-                                    const newCols = {};
-                                    newCols['to do'] = {};
-                                    newCols['to do'].id = 'to do';
-                                    newCols['to do'].list = cols['to do'].list.filter((t) => t.id !== task.id);
-
-                                    newCols['in progress'] = {};
-                                    newCols['in progress'].id = 'in progress';
-                                    // eslint-disable-next-line max-len
-                                    newCols['in progress'].list = cols['in progress'].list.filter((t) => t.id !== task.id);
-
-                                    newCols.done = {};
-                                    newCols.done.id = 'done';
-                                    newCols.done.list = cols.done.list.filter((t) => t.id !== task.id);
-                                    setCols(
-                                        newCols,
-                                    );
-                                    deleteTask(task.id);
+                                    // show modal
+                                    handleShow(true);
+                                    // set this particular task as wanted for deletion
+                                    setToDelete(true);
                                 }}
                                 variant="light"
                             >
