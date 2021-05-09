@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Modal } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Column from './Column';
-import { useUserContext } from '../../context/UserContext';
+import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
 
 export default function Board() {
     const history = useHistory();
     const [columns, setColumns] = useState([]);
-    const { show, handleClose, confirmDeletion, cancelDeletion, canceledDeletion } = useUserContext();
 
     useEffect(async () => {
         const config = {
@@ -152,35 +151,12 @@ export default function Board() {
         return null;
     };
 
-    // if modal dialog confirms deletion
-    const confirmToDelete = () => {
-        handleClose();
-        confirmDeletion(true);
-    };
-
-    // if modal dialog canceled deletion
-    const cancelToDelete = () => {
-        handleClose();
-        cancelDeletion(!canceledDeletion);
-    };
-
     return (
         <Container>
             {/* This is modal window */}
-            <Modal show={show} onHide={cancelToDelete} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>You are about to delete task</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={cancelToDelete}>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={confirmToDelete}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ConfirmDeleteModal
+                itemNameToDelete="task"
+            />
             {/* Modal end */}
             <div className="mx-auto d-flex justify-content-between" style={{ width: '90%' }}>
                 <Button
