@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import Moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useUserContext } from '../../../context/UserContext';
 
 const TaskCard = ({
     name,
@@ -19,6 +21,29 @@ const TaskCard = ({
     const history = useHistory();
     Moment.locale('en');
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+    const { handleShow, confirmedDeletion, confirmDeletion, canceledDeletion } = useUserContext();
+
+    // used to set this particular task for deletion, this is local variable
+    const [wantToDelete, setToDelete] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(0);
+
+    // used when task confirmed for deletion
+    useEffect(() => {
+        if (wantToDelete && confirmedDeletion) {
+            setDeleting(true);
+            setToDelete(false);
+            confirmDeletion(false);
+            deleteTask(idToDelete);
+            setIdDelete(idToDelete);
+        }
+    }, [confirmedDeletion]);
+
+    // used when task refused for deletion
+    useEffect(() => {
+        setToDelete(false);
+    }, [canceledDeletion]);
+
     return (
         <Card key={id} id={id}>
             <Accordion.Toggle
@@ -104,14 +129,11 @@ const TaskCard = ({
                                 type="submit"
                                 value={id}
                                 onClick={() => {
-                                    if (confirm(`Are you sure want to delete ${capitalize(name)} task?`)) {
-                                        setDeleting(true);
-                                        deleteTask(id);
-                                        setIdDelete(id);
-                                    } else {
-                                        setIdDelete(id);
-                                        return false;
-                                    }
+                                    // show modal
+                                    handleShow(true);
+                                    // set this particular task as wanted for deletion
+                                    setToDelete(true);
+                                    setIdToDelete(id);
                                 }}
                             >
                                 {deleting ? 'Loading...' : 'Delete'}

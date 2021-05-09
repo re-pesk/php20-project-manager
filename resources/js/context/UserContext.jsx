@@ -21,6 +21,14 @@ const getValue = () => {
 
 const UserContextProvider = ({ children }) => {
     const [userContext, setContextValue] = useState(getValue);
+    // for modal delete window
+    // sets modal window visibility
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    // confirm or cancel deletion
+    const [confirmedDeletion, confirmDeletion] = useState(false);
+    const [canceledDeletion, cancelDeletion] = useState(false);
 
     const setUserContext = (value) => {
         try {
@@ -38,7 +46,18 @@ const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <Provider value={{ userContext, setUserContext }} displayName="UserContextProvider">
+        <Provider
+            value={{ userContext,
+                setUserContext,
+                show,
+                handleClose,
+                handleShow,
+                confirmedDeletion,
+                confirmDeletion,
+                canceledDeletion,
+                cancelDeletion }}
+            displayName="UserContextProvider"
+        >
             {children}
         </Provider>
     );

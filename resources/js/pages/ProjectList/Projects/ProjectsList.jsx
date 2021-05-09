@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
+import { useUserContext } from '../../../context/UserContext';
 
 const Projects = () => {
     // back button
@@ -19,6 +20,10 @@ const Projects = () => {
     // paginate
     const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(0);
+    const { handleShow, confirmedDeletion, confirmDeletion, canceledDeletion } = useUserContext();
+    // used to set this particular project for deletion, this is local variable
+    const [wantToDelete, setToDelete] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(0);
 
     useEffect(async () => {
         const config = {
@@ -42,7 +47,6 @@ const Projects = () => {
     console.log(projectsData);
 
     // delete project
-
     const deleteProject = useCallback(
         async (deleteId) => {
             const config = {
@@ -68,6 +72,21 @@ const Projects = () => {
         setLoading(true);
         console.log(e);
     };
+
+    // used when project confirmed for deletion
+    useEffect(() => {
+        if (wantToDelete && confirmedDeletion) {
+            setToDelete(false);
+            confirmDeletion(false);
+            deleteProject(idToDelete);
+            setIdDelete(idToDelete);
+        }
+    }, [confirmedDeletion]);
+
+    // used when project refused for deletion
+    useEffect(() => {
+        setToDelete(false);
+    }, [canceledDeletion]);
 
     return (
         <Container>
@@ -200,15 +219,11 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                // eslint-disable-next-line no-restricted-globals, no-alert
-                                                if (confirm('Are you sure want to delete project?')) {
-                                                    deleteProject(project.id);
-                                                    setIdDelete(project.id);
-                                                } else {
-                                                    setIdDelete(project.id);
-                                                    return false;
-                                                }
-                                                return false;
+                                                // show modal
+                                                handleShow(true);
+                                                // set this particular project as wanted for deletion
+                                                setToDelete(true);
+                                                setIdToDelete(project.id);
                                             }}
                                         >
                                             Delete

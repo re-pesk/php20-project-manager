@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Column from './Column';
+import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
 
 export default function Board() {
     const history = useHistory();
@@ -152,6 +153,11 @@ export default function Board() {
 
     return (
         <Container>
+            {/* This is modal window */}
+            <ConfirmDeleteModal
+                itemNameToDelete="task"
+            />
+            {/* Modal end */}
             <div className="mx-auto d-flex justify-content-between" style={{ width: '90%' }}>
                 <Button
                     className="text-center"
