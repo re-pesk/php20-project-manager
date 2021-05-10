@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { DragDropContext } from 'react-beautiful-dnd';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { Button, Container } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
 import Column from './Column';
 
 export default function Board() {
@@ -152,6 +153,11 @@ export default function Board() {
 
     return (
         <Container>
+            {/* This is modal window */}
+            <ConfirmDeleteModal
+                itemNameToDelete="task"
+            />
+            {/* Modal end */}
             <div className="mx-auto d-flex justify-content-between" style={{ width: '90%' }}>
                 <Button
                     className="text-center"
@@ -165,7 +171,11 @@ export default function Board() {
                 </Button>
                 <Button
                     onClick={() => {
-                        history.push(`/create-task/${history.location.state.project}`);
+                        history.push({ pathname: '/project/create-task',
+                            state: {
+                                project: history.location.state.project,
+                                task: null,
+                            } });
                     }}
                     variant="primary"
                 >

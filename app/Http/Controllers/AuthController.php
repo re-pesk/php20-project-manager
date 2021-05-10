@@ -49,7 +49,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Bad credencials'], 401);
+            return response()->json(['message' => 'The username and password you entered does not match any account! Please try again'], 401);
         }
 
         $user = auth()->user();

@@ -1,13 +1,11 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateTaskForm() {
-    // const { userContext, setUserContext } = useUserContext();
-    // const { token } = userContext;
     const history = useHistory();
-    const { project } = useParams();
+    const { project } = history.location.state;
 
     // console.log(project);
 
@@ -19,9 +17,9 @@ export default function CreateTaskForm() {
     });
 
     const [validationErrors, setErrors] = useState({
-        name: '',
-        description: '',
-        priority_id: '',
+        name: '-',
+        description: '-',
+        priority_id: '-',
     });
 
     const [state, setState] = useState(false);
@@ -34,19 +32,11 @@ export default function CreateTaskForm() {
         const config = {
             method: 'post',
             url: '/api/tasks',
-            // headers: {
-            //     Accept: 'application/json',
-            // },
             data: taskData,
         };
 
-        // console.log(taskData)
-
         await axios(config)
             .then(() => {
-                // eslint-disable-next-line no-console
-                // console.log(response.data)
-                // setUserContext(response.data);
                 setSuccesMessage('Task created succesfully');
 
                 setTaskData({
@@ -56,10 +46,14 @@ export default function CreateTaskForm() {
                     project_id: project,
                 });
                 document.querySelector('#priority_id').value = '';
+
+                setErrors({
+                    name: '-',
+                    description: '-',
+                    priority_id: '-',
+                });
             })
             .catch((error) => {
-                // eslint-disable-next-line no-console
-                // console.log(error.response.data.errors);
                 setErrors({
                     name: error.response.data.errors.name
                         ? error.response.data.errors.name[0]
@@ -71,7 +65,6 @@ export default function CreateTaskForm() {
                         ? error.response.data.errors.priority_id[0]
                         : '',
                 });
-                // console.log(true);
             });
         setState(false);
     }, [state]);
@@ -79,8 +72,6 @@ export default function CreateTaskForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSuccesMessage('');
-        setErrors({});
-        // console.log(event);
         setState(true);
     };
 
@@ -88,48 +79,57 @@ export default function CreateTaskForm() {
         ...taskData,
         [event.target.name]: event.target.value,
     });
-    const goBackToTasks = useCallback(() => {
-        history.push(`/task/${project}`);
-    });
 
     return (
         <>
-            {/* {
-                token && <Redirect to="/dashboard" />
-            } */}
-            <Form className="w-25 mx-auto mt-5 mb-5" onSubmit={handleSubmit}>
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                    name="name"
-                    type="text"
-                    value={taskData.name}
-                    onChange={handleChange}
-                />
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.name}
-                </div>
-                <Form.Label className="mt-3">Description</Form.Label>
-                <Form.Control
-                    name="description"
-                    as="textarea"
-                    rows={5}
-                    style={{ resize: 'none' }}
-                    value={taskData.description}
-                    onChange={handleChange}
-                />
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.description}
-                </div>
-                <Form.Label className="mt-3">Priority</Form.Label>
-                <Form.Control id="priority_id" name="priority_id" onChange={handleChange} as="select" custom>
-                    <option value="">--- SELECT PRIORITY ---</option>
-                    <option value="1">low</option>
-                    <option value="2">medium</option>
-                    <option value="3">high</option>
-                </Form.Control>
-                <div style={{ fontSize: 12 }} className="text-danger">
-                    {validationErrors.priority_id}
-                </div>
+            <Form
+                noValidate
+                className="w-25 mx-auto mt-5 mb-5"
+                onSubmit={handleSubmit}
+            >
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        name="name"
+                        type="text"
+                        value={taskData.name}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.name === '')}
+                        isInvalid={Boolean(validationErrors.name !== '' && validationErrors.name !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.name}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label className="mt-3">Description</Form.Label>
+                    <Form.Control
+                        name="description"
+                        as="textarea"
+                        rows={5}
+                        style={{ resize: 'none' }}
+                        value={taskData.description}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.description === '')}
+                        isInvalid={Boolean(validationErrors.description !== '' && validationErrors.description !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.description}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="priority_id">
+                    <Form.Label className="mt-3">Priority</Form.Label>
+                    <Form.Control
+                        name="priority_id"
+                        onChange={handleChange}
+                        as="select"
+                        isValid={Boolean(validationErrors.priority_id === '')}
+                        isInvalid={Boolean(validationErrors.priority_id !== '' && validationErrors.priority_id !== '-')}
+                        custom
+                    >
+                        <option value="">--- SELECT PRIORITY ---</option>
+                        <option value="1">low</option>
+                        <option value="2">medium</option>
+                        <option value="3">high</option>
+                    </Form.Control>
+                    <Form.Control.Feedback type="invalid">{validationErrors.priority_id}</Form.Control.Feedback>
+                </Form.Group>
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Task
                 </Button>
@@ -138,15 +138,45 @@ export default function CreateTaskForm() {
                         <div style={{ fontSize: 15 }} className="text-success my-3">
                             {succesMessage}
                         </div>
-                        <Button className="mt-3" variant="primary" onClick={goBackToTasks}>
-                            Go Back To Tasks
-                        </Button>
-                    </div>
 
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-end">
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        // history.push(`/task/${project.id}`);
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go Back To Tasks
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Board
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
                 ) : (
                     <div style={{ fontSize: 15 }} className="text-success my-3" />
-                )}
 
+                )}
             </Form>
         </>
     );

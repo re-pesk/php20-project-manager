@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import TaskCard from './TaskCard';
 
 const Tasks = () => {
@@ -19,7 +20,8 @@ const Tasks = () => {
     const [lastPage, setLastPage] = useState(0);
     // URL
     const history = useHistory();
-    const { project } = useParams();
+    // const { project } = useParams();
+    const { project } = history.location.state;
 
     const getProjectTasks = async () => {
         const config = {
@@ -54,7 +56,7 @@ const Tasks = () => {
                 },
             };
             await axios
-                .post(`/api/projectTasks/${deleteId}`, config).then((response) => {
+                .post(`/api/tasks/${deleteId}`, config).then((response) => {
                     console.log('Deleted success!', response);
                 })
                 .catch((error) => {
@@ -99,7 +101,12 @@ const Tasks = () => {
                             type="submit"
                             value={projectInfo.id}
                             onClick={() => {
-                                history.push(`/create-task/${projectInfo.id}`);
+                                // history.push(`/create-task/${projectInfo.id}`);
+                                history.push({ pathname: '/project/create-task',
+                                    state: {
+                                        project: projectInfo.id,
+                                        task: null,
+                                    } });
                             }}
                         >
                             Create Task

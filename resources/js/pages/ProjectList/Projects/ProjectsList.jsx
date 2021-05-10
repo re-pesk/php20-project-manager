@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
+import { useUserContext } from '../../../context/UserContext';
 
 const Projects = () => {
     // back button
@@ -19,6 +20,10 @@ const Projects = () => {
     // paginate
     const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(0);
+    const { handleShow, confirmedDeletion, confirmDeletion, canceledDeletion } = useUserContext();
+    // used to set this particular project for deletion, this is local variable
+    const [wantToDelete, setToDelete] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(0);
 
     useEffect(async () => {
         const config = {
@@ -42,7 +47,6 @@ const Projects = () => {
     console.log(projectsData);
 
     // delete project
-
     const deleteProject = useCallback(
         async (deleteId) => {
             const config = {
@@ -69,6 +73,21 @@ const Projects = () => {
         setLoading(true);
         console.log(e);
     };
+
+    // used when project confirmed for deletion
+    useEffect(() => {
+        if (wantToDelete && confirmedDeletion) {
+            setToDelete(false);
+            confirmDeletion(false);
+            deleteProject(idToDelete);
+            setIdDelete(idToDelete);
+        }
+    }, [confirmedDeletion]);
+
+    // used when project refused for deletion
+    useEffect(() => {
+        setToDelete(false);
+    }, [canceledDeletion]);
 
     return (
         <Container>
@@ -105,10 +124,8 @@ const Projects = () => {
                             </Card.Header>
                         </Card>
                     )
-                    // eslint-disable-next-line operator-linebreak
-                    :
                     // Jei yra sukurta projektu
-                    projectsData.map((project) => (
+                    : projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
                                 className="text-capitalize"
@@ -126,9 +143,11 @@ const Projects = () => {
                                         </div>
                                         <div className="col align-self-center">
                                             <div className="d-flex justify-content-start">
-                                                <b>State: </b>
-                                                <span className={project.state.name === 'in progress'
-                                                    ? 'text-primary' : 'text-success'}
+                                                <b>State:&nbsp; </b>
+                                                <span className={
+                                                    project.state.name === 'in progress'
+                                                        ? 'text-primary' : 'text-success'
+                                                }
                                                 >
                                                     {project.state.name}
                                                 </span>
@@ -144,11 +163,11 @@ const Projects = () => {
                                         </div>
                                         <div className="col align-self-center ">
                                             <div className="d-flex justify-content-end">
-                                                <b>Created at: </b>
+                                                <b>Created at:&nbsp; </b>
                                                 {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </div>
                                             <div className="d-flex justify-content-end">
-                                                <b>Updated at: </b>
+                                                <b>Updated at:&nbsp; </b>
                                                 {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
                                             </div>
                                         </div>
@@ -167,7 +186,12 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                history.push(`/task/${project.id}`);
+                                                // history.push(`/task/${project.id}`);
+                                                history.push({ pathname: '/project/tasks',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
                                             }}
                                         >
                                             View tasks
@@ -189,7 +213,11 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                history.push(`/update-project/${project.id}`);
+                                                history.push({ pathname: '/update-project',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
                                             }}
                                         >
                                             Edit
@@ -199,13 +227,11 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                if (confirm('Are you sure want to delete project?')) {
-                                                    deleteProject(project.id);
-                                                    setIdDelete(project.id);
-                                                } else {
-                                                    setIdDelete(project.id);
-                                                    return false;
-                                                }
+                                                // show modal
+                                                handleShow(true);
+                                                // set this particular project as wanted for deletion
+                                                setToDelete(true);
+                                                setIdToDelete(project.id);
                                             }}
                                         >
                                             Delete
