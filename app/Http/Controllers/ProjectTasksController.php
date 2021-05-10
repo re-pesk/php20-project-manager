@@ -22,7 +22,7 @@ class ProjectTasksController extends Controller
      */
     public function index()
     {
-        //
+        return Project::select('id')->latest()->first();
     }
 
     /**

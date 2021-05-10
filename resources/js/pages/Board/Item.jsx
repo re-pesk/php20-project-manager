@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { Card, Button, Badge } from 'react-bootstrap';
+import { Badge, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 
@@ -97,7 +97,12 @@ export default function Item({ task, index, cols, setCols }) {
                             </Card.Text>
                             <Button
                                 onClick={() => {
-                                    history.push(`/edit-task/${task.id}`);
+                                    // history.push(`/edit-task/${task.id}`);
+                                    history.push({ pathname: '/project/edit-task',
+                                        state: {
+                                            task: task.id,
+                                            project: null,
+                                        } });
                                 }}
                                 variant="light"
                             >

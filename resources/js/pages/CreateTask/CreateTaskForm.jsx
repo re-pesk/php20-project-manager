@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateTaskForm() {
     const history = useHistory();
-    const { project } = useParams();
+    const { project } = history.location.state;
 
     // console.log(project);
 
@@ -79,9 +79,6 @@ export default function CreateTaskForm() {
         ...taskData,
         [event.target.name]: event.target.value,
     });
-    const goBackToTasks = useCallback(() => {
-        history.push(`/task/${project}`);
-    });
 
     return (
         <>
@@ -141,12 +138,44 @@ export default function CreateTaskForm() {
                         <div style={{ fontSize: 15 }} className="text-success my-3">
                             {succesMessage}
                         </div>
-                        <Button className="mt-3" variant="primary" onClick={goBackToTasks}>
-                            Go Back To Tasks
-                        </Button>
+
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-end">
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        // history.push(`/task/${project.id}`);
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go Back To Tasks
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Board
+                                </Button>
+                            </div>
+                        </Alert>
                     </div>
                 ) : (
                     <div style={{ fontSize: 15 }} className="text-success my-3" />
+
                 )}
             </Form>
         </>
