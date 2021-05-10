@@ -119,7 +119,12 @@ const TaskCard = ({
                                 type="submit"
                                 value={id}
                                 onClick={() => {
-                                    history.push(`/edit-task/${id}`);
+                                    // history.push(`/edit-task/${id}`);
+                                    history.push({ pathname: '/project/edit-task',
+                                        state: {
+                                            task: id,
+                                            project: null,
+                                        } });
                                 }}
                             >
                                 Edit

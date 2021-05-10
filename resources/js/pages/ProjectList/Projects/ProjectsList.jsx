@@ -187,7 +187,12 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                history.push(`/task/${project.id}`);
+                                                // history.push(`/task/${project.id}`);
+                                                history.push({ pathname: '/project/tasks',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
                                             }}
                                         >
                                             View tasks
@@ -209,7 +214,11 @@ const Projects = () => {
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
-                                                history.push(`/update-project/${project.id}`);
+                                                history.push({ pathname: '/update-project',
+                                                    state: {
+                                                        project: project.id,
+                                                        task: null,
+                                                    } });
                                             }}
                                         >
                                             Edit

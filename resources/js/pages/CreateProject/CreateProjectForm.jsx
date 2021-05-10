@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateProjectForm() {
+    const history = useHistory();
     const [projectData, setProjectData] = useState({
         name: '',
         description: '',
@@ -15,6 +17,20 @@ export default function CreateProjectForm() {
 
     const [state, setState] = useState(false);
     const [succesMessage, setSuccesMessage] = useState('');
+    const [projectId, setProjectId] = useState('');
+
+    const getLastProject = async () => {
+        const config = {
+            method: 'GET',
+            url: '/api/projectTasks',
+        };
+        await axios(config)
+            .then((response) => {
+                setProjectId(response.data.id);
+            }).catch((error) => {
+                console.log(error);
+            });
+    };
 
     useEffect(async () => {
         if (!state) {
@@ -33,6 +49,7 @@ export default function CreateProjectForm() {
                     description: '-',
                 });
                 setSuccesMessage('Project created succesfully');
+                getLastProject();
             })
             .catch((error) => {
                 setErrors({
@@ -90,9 +107,59 @@ export default function CreateProjectForm() {
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Project
                 </Button>
-                <div style={{ fontSize: 15 }} className="text-success my-3">
-                    {succesMessage}
-                </div>
+                {succesMessage !== '' ? (
+                    <div>
+                        <div style={{ fontSize: 15 }} className="text-success my-3">
+                            {succesMessage}
+                        </div>
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-end">
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        // history.push(`/task/${project.id}`);
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project: projectId,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go To Project Task List
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project: projectId,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Project Board
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push('/projects');
+                                    }}
+                                >
+                                    Go To Project List
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
+
+                ) : (
+                    <div style={{ fontSize: 15 }} className="text-success my-3" />
+                )}
+
             </Form>
         </>
     );

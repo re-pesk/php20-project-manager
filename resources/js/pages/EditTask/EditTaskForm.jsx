@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function EditTaskForm() {
 // get task id from params
-    const { task } = useParams();
+    const history = useHistory();
+    const { task } = history.location.state;
     // current task data
     const [taskData, setTaskData] = useState({
         name: '',
