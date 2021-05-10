@@ -84,7 +84,8 @@ export default function CreateTaskForm() {
         <>
             <Form
                 noValidate
-                className="w-25 mx-auto mt-5 mb-5"
+                style={{ width: '370px' }}
+                className="mx-auto mt-5 mb-5"
                 onSubmit={handleSubmit}
             >
                 <Form.Group controlId="name">
@@ -134,11 +135,7 @@ export default function CreateTaskForm() {
                     Create Task
                 </Button>
                 {succesMessage !== '' ? (
-                    <div>
-                        <div style={{ fontSize: 15 }} className="text-success my-3">
-                            {succesMessage}
-                        </div>
-
+                    <div className="mt-4">
                         <Alert variant="success">
                             <Alert.Heading>{succesMessage}</Alert.Heading>
                             <hr />
@@ -147,7 +144,6 @@ export default function CreateTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
-                                        // history.push(`/task/${project.id}`);
                                         history.push({ pathname: '/project/tasks',
                                             state: {
                                                 project,

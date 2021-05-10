@@ -180,9 +180,9 @@ const Projects = () => {
                                     <div className="row px-2">
                                         <Card.Text>{project.description}</Card.Text>
                                     </div>
-                                    <div className="row mt-4 pr-2 d-flex justify-content-end">
+                                    <div className="row mt-3 px-2 d-flex justify-content-start">
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
@@ -197,7 +197,7 @@ const Projects = () => {
                                             View tasks
                                         </Button>
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             onClick={() => {
                                                 history.push({ pathname: '/project/board',
                                                     state: {
@@ -209,7 +209,7 @@ const Projects = () => {
                                             Show Board
                                         </Button>
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {

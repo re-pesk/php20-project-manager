@@ -46,7 +46,7 @@ const Logout = () => {
         <Container className="text-center">
             <h1>Do you really want to logout?</h1>
             <Nav className="row justify-content-center" navbar>
-                <Nav.Item>
+                <Nav.Item className="mr-2">
                     <LinkContainer to="" onClick={() => history.goBack()}>
                         <Button>
                             Cancel

@@ -94,7 +94,12 @@ const UpdateProjectForm = () => {
 
     return (
         <>
-            <Form noValidate className="w-25 mx-auto mt-5" onSubmit={handleSubmit}>
+            <Form
+                noValidate
+                style={{ width: '370px' }}
+                className="mx-auto mt-5"
+                onSubmit={handleSubmit}
+            >
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control

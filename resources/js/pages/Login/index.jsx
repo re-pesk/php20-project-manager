@@ -61,7 +61,8 @@ const Login = () => {
         <Form
             noValidate
             validated={validated}
-            className="w-25 mx-auto mt-5"
+            style={{ width: '370px' }}
+            className="mx-auto mt-5"
             onSubmit={handleSubmit}
         >
             <Form.Text type="invalid" className="text-danger">{errorData.message}</Form.Text>

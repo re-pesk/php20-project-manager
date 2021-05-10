@@ -80,7 +80,12 @@ export default function CreateProjectForm() {
 
     return (
         <>
-            <Form noValidate className="w-25 mx-auto mt-5 mb-5" onSubmit={handleSubmit}>
+            <Form
+                noValidate
+                style={{ width: '370px' }}
+                className="mx-auto mt-5 mb-5"
+                onSubmit={handleSubmit}
+            >
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -111,16 +116,12 @@ export default function CreateProjectForm() {
                     Create Project
                 </Button>
                 {succesMessage !== '' ? (
-                    <div>
-                        <div style={{ fontSize: 15 }} className="text-success my-3">
-                            {succesMessage}
-                        </div>
+                    <div className="mt-4">
                         <Alert variant="success">
                             <Alert.Heading>{succesMessage}</Alert.Heading>
                             <hr />
-                            <div className="d-flex justify-content-end">
+                            <div className="d-flex justify-content-between">
                                 <Button
-                                    className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
                                         // history.push(`/task/${project.id}`);
@@ -134,7 +135,7 @@ export default function CreateProjectForm() {
                                     Go To Project Task List
                                 </Button>
                                 <Button
-                                    className="m-1"
+                                    className="mx-2"
                                     variant="outline-success"
                                     onClick={() => {
                                         history.push({ pathname: '/project/board',
@@ -147,7 +148,6 @@ export default function CreateProjectForm() {
                                     Show Project Board
                                 </Button>
                                 <Button
-                                    className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
                                         history.push('/projects');
