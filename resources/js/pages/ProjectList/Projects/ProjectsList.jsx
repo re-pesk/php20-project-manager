@@ -69,9 +69,9 @@ const Projects = () => {
 
     // Change page
     const paginate = (e) => {
-        setCurrentPage(e.selected + 1);
+        const pageNumber = e.selected + 1;
+        setCurrentPage(pageNumber);
         setLoading(true);
-        console.log(e);
     };
 
     // used when project confirmed for deletion
@@ -246,16 +246,9 @@ const Projects = () => {
                             </Accordion.Collapse>
                         </Card>
                     ))}
-                {/* loading data spinneris */}
-                {loading === true ? (
-                    <div className="text-center font-weight-bold">
-                        Loading data...
-                        <Spinner animation="border" variant="primary" className="ml-2" />
-                    </div>
-                ) : <div />}
+
             </Accordion>
             <ReactPaginate
-                breakClassName="pt-2"
                 pageCount={lastPage}
                 pageRangeDisplayed={5}
                 marginPagesDisplayed={2}
@@ -267,7 +260,15 @@ const Projects = () => {
                 activeLinkClassName="active"
                 nextLinkClassName="btn btn-link ml-1"
                 previousLinkClassName="btn btn-link mr-1"
+                breakClassName="pt-2"
             />
+            {/* loading data spinneris */}
+            {loading === true ? (
+                <div className="text-center font-weight-bold">
+                    Loading data...
+                    <Spinner animation="border" variant="primary" className="ml-2" />
+                </div>
+            ) : null}
         </Container>
 
     );

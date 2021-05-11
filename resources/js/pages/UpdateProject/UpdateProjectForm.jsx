@@ -100,6 +100,51 @@ const UpdateProjectForm = () => {
                 className="mx-auto mt-5"
                 onSubmit={handleSubmit}
             >
+                {succesMessage !== '' ? (
+                    <div className="mt-4">
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-between">
+                                <Button
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        // history.push(`/task/${project.id}`);
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go To Project Task List
+                                </Button>
+                                <Button
+                                    className="mx-2"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Project Board
+                                </Button>
+                                <Button
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push('/projects');
+                                    }}
+                                >
+                                    Go To Project List
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
+
+                ) : null}
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -147,53 +192,6 @@ const UpdateProjectForm = () => {
                 <Button className="mt-3" variant="primary" type="submit">
                     Update Project
                 </Button>
-                {succesMessage !== '' ? (
-                    <div className="mt-4">
-                        <Alert variant="success">
-                            <Alert.Heading>{succesMessage}</Alert.Heading>
-                            <hr />
-                            <div className="d-flex justify-content-between">
-                                <Button
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        // history.push(`/task/${project.id}`);
-                                        history.push({ pathname: '/project/tasks',
-                                            state: {
-                                                project,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Go To Project Task List
-                                </Button>
-                                <Button
-                                    className="mx-2"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        history.push({ pathname: '/project/board',
-                                            state: {
-                                                project,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Show Project Board
-                                </Button>
-                                <Button
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        history.push('/projects');
-                                    }}
-                                >
-                                    Go To Project List
-                                </Button>
-                            </div>
-                        </Alert>
-                    </div>
-
-                ) : (
-                    <div style={{ fontSize: 15 }} className="text-success my-3" />
-                )}
             </Form>
         </>
     );
