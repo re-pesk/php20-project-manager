@@ -116,7 +116,7 @@ const Projects = () => {
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
-                {projectsData < 1
+                {projectsData < 1 && currentPage === 1
                     ? (
                         <Card>
                             <Card.Header as="h4" className="text-center">
@@ -125,6 +125,11 @@ const Projects = () => {
                         </Card>
                     )
                     // Jei yra sukurta projektu
+                    : null}
+                {projectsData < 1 && currentPage > 1
+                    ? (
+                        setCurrentPage(currentPage - 1)
+                    )
                     : projectsData.map((project) => (
                         <Card key={project.id} id={project.id}>
                             <Accordion.Toggle
