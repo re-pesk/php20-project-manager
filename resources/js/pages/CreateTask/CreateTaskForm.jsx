@@ -88,6 +88,42 @@ export default function CreateTaskForm() {
                 className="mx-auto mt-5 mb-5"
                 onSubmit={handleSubmit}
             >
+                {succesMessage !== '' ? (
+                    <div className="mt-4">
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-between">
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go Back To Tasks
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Board
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
+                ) : null}
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -134,45 +170,7 @@ export default function CreateTaskForm() {
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Task
                 </Button>
-                {succesMessage !== '' ? (
-                    <div className="mt-4">
-                        <Alert variant="success">
-                            <Alert.Heading>{succesMessage}</Alert.Heading>
-                            <hr />
-                            <div className="d-flex justify-content-end">
-                                <Button
-                                    className="m-1"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        history.push({ pathname: '/project/tasks',
-                                            state: {
-                                                project,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Go Back To Tasks
-                                </Button>
-                                <Button
-                                    className="m-1"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        history.push({ pathname: '/project/board',
-                                            state: {
-                                                project,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Show Board
-                                </Button>
-                            </div>
-                        </Alert>
-                    </div>
-                ) : (
-                    <div style={{ fontSize: 15 }} className="text-success my-3" />
 
-                )}
             </Form>
         </>
     );
