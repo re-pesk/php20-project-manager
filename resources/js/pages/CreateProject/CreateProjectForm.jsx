@@ -10,6 +10,8 @@ export default function CreateProjectForm() {
         name: '',
         description: '',
     });
+    // back mygtukas atsirandantis po projekto sukurimo
+    // const [backToProjectsButton, setBackToProjectsButton] = useState(false);
 
     const [validationErrors, setErrors] = useState({
         name: '-',
@@ -88,7 +90,60 @@ export default function CreateProjectForm() {
 
     return (
         <>
-            <Form noValidate className="w-25 mx-auto mt-5 mb-5" onSubmit={handleSubmit}>
+            <Form
+                noValidate
+                style={{ width: '370px' }}
+                className="mx-auto mt-5 mb-5"
+                onSubmit={handleSubmit}
+            >
+                {succesMessage !== '' ? (
+                    <div className="mt-4">
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-between">
+                                <Button
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        Log('send');
+                                        // history.push(`/task/${project.id}`);
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project: projectId,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go To Project Task List
+                                </Button>
+                                <Button
+                                    className="mx-2"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        Log('send');
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project: projectId,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Project Board
+                                </Button>
+                                <Button
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        Log('send');
+                                        history.push('/projects');
+                                    }}
+                                >
+                                    Go To Project List
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
+
+                ) : null}
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -118,62 +173,6 @@ export default function CreateProjectForm() {
                 <Button className="mt-3" variant="primary" type="submit">
                     Create Project
                 </Button>
-                {succesMessage !== '' ? (
-                    <div>
-                        <div style={{ fontSize: 15 }} className="text-success my-3">
-                            {succesMessage}
-                        </div>
-                        <Alert variant="success">
-                            <Alert.Heading>{succesMessage}</Alert.Heading>
-                            <hr />
-                            <div className="d-flex justify-content-end">
-                                <Button
-                                    className="m-1"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        Log('send');
-                                        // history.push(`/task/${project.id}`);
-                                        history.push({ pathname: '/project/tasks',
-                                            state: {
-                                                project: projectId,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Go To Project Task List
-                                </Button>
-                                <Button
-                                    className="m-1"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        Log('send');
-                                        history.push({ pathname: '/project/board',
-                                            state: {
-                                                project: projectId,
-                                                task: null,
-                                            } });
-                                    }}
-                                >
-                                    Show Project Board
-                                </Button>
-                                <Button
-                                    className="m-1"
-                                    variant="outline-success"
-                                    onClick={() => {
-                                        Log('send');
-                                        history.push('/projects');
-                                    }}
-                                >
-                                    Go To Project List
-                                </Button>
-                            </div>
-                        </Alert>
-                    </div>
-
-                ) : (
-                    <> </>
-                )}
-
             </Form>
         </>
     );
