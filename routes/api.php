@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTasksController;
 use App\Http\Controllers\TaskController;
@@ -30,6 +31,8 @@ return $request->user();
  */
 
 Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
+Route::post('/log', [LogController::class, 'addToLog']);
+
 
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('users', UserController::class);

@@ -29,8 +29,7 @@ class LogRoutes
                 'response' => $response->getContent(),
             ];
 
-            Log::debug('Route logging', $log);
-
+            Log::channel('single')->debug('Route logging', $log);
         }
 
 

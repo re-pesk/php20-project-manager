@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
 
 export default function CreateProjectForm() {
     const history = useHistory();
@@ -28,6 +29,7 @@ export default function CreateProjectForm() {
             .then((response) => {
                 setProjectId(response.data.id);
             }).catch((error) => {
+                // eslint-disable-next-line no-console
                 console.log(error);
             });
     };
@@ -49,6 +51,7 @@ export default function CreateProjectForm() {
                     description: '-',
                 });
                 setSuccesMessage('Project created succesfully');
+                Log('add', 'Project created succesfully');
                 getLastProject();
             })
             .catch((error) => {
@@ -59,6 +62,14 @@ export default function CreateProjectForm() {
                     description: error.response.data.errors.description
                         ? error.response.data.errors.description[0]
                         : '',
+                });
+                Log('add', {
+                    name: error.response.data.errors.name
+                        ? error.response.data.errors.name[0]
+                        : 'validated',
+                    description: error.response.data.errors.description
+                        ? error.response.data.errors.description[0]
+                        : 'validated',
                 });
             });
         setState(false);
@@ -120,6 +131,7 @@ export default function CreateProjectForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('send');
                                         // history.push(`/task/${project.id}`);
                                         history.push({ pathname: '/project/tasks',
                                             state: {
@@ -134,6 +146,7 @@ export default function CreateProjectForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
                                                 project: projectId,
@@ -147,6 +160,7 @@ export default function CreateProjectForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('send');
                                         history.push('/projects');
                                     }}
                                 >
@@ -157,7 +171,7 @@ export default function CreateProjectForm() {
                     </div>
 
                 ) : (
-                    <div style={{ fontSize: 15 }} className="text-success my-3" />
+                    <> </>
                 )}
 
             </Form>
