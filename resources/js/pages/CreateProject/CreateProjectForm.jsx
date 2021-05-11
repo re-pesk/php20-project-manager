@@ -52,6 +52,10 @@ export default function CreateProjectForm() {
                     description: '-',
                 });
                 setSuccesMessage('Project created succesfully');
+                setProjectData({
+                    name: '',
+                    description: '',
+                });
                 getLastProject();
             })
             .catch((error) => {
@@ -86,35 +90,6 @@ export default function CreateProjectForm() {
                 className="mx-auto mt-5 mb-5"
                 onSubmit={handleSubmit}
             >
-                <Form.Group controlId="name">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        name="name"
-                        type="text"
-                        value={projectData.name}
-                        onChange={handleChange}
-                        isValid={Boolean(validationErrors.name === '')}
-                        isInvalid={Boolean(validationErrors.name !== '' && validationErrors.name !== '-')}
-                    />
-                    <Form.Control.Feedback type="invalid">{validationErrors.name}</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="description">
-                    <Form.Label className="mt-3">Description</Form.Label>
-                    <Form.Control
-                        name="description"
-                        as="textarea"
-                        rows={5}
-                        style={{ resize: 'none' }}
-                        value={projectData.description}
-                        onChange={handleChange}
-                        isValid={Boolean(validationErrors.description === '')}
-                        isInvalid={Boolean(validationErrors.description !== '' && validationErrors.description !== '-')}
-                    />
-                    <Form.Control.Feedback type="invalid">{validationErrors.description}</Form.Control.Feedback>
-                </Form.Group>
-                <Button className="mt-3" variant="primary" type="submit">
-                    Create Project
-                </Button>
                 {succesMessage !== '' ? (
                     <div className="mt-4">
                         <Alert variant="success">
@@ -159,10 +134,36 @@ export default function CreateProjectForm() {
                         </Alert>
                     </div>
 
-                ) : (
-                    <div style={{ fontSize: 15 }} className="text-success my-3" />
-                )}
-
+                ) : null}
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        name="name"
+                        type="text"
+                        value={projectData.name}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.name === '')}
+                        isInvalid={Boolean(validationErrors.name !== '' && validationErrors.name !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.name}</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label className="mt-3">Description</Form.Label>
+                    <Form.Control
+                        name="description"
+                        as="textarea"
+                        rows={5}
+                        style={{ resize: 'none' }}
+                        value={projectData.description}
+                        onChange={handleChange}
+                        isValid={Boolean(validationErrors.description === '')}
+                        isInvalid={Boolean(validationErrors.description !== '' && validationErrors.description !== '-')}
+                    />
+                    <Form.Control.Feedback type="invalid">{validationErrors.description}</Form.Control.Feedback>
+                </Form.Group>
+                <Button className="mt-3" variant="primary" type="submit">
+                    Create Project
+                </Button>
             </Form>
         </>
     );
