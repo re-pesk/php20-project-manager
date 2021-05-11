@@ -118,7 +118,7 @@ const Tasks = () => {
             ))}
 
             <Accordion>
-                { tasksData.length > 0 ? tasksData.map((task) => (
+                {/* { tasksData.length > 0 ? tasksData.map((task) => (
                     <TaskCard
                         key={task.id}
                         name={task.name}
@@ -135,7 +135,7 @@ const Tasks = () => {
                         deleting={deleting}
                     />
                 ))
-                    : (
+                    :  (
                         <Card>
                             <Accordion.Toggle
                                 as={Card.Header}
@@ -145,7 +145,39 @@ const Tasks = () => {
                                 There are no tasks in this project.
                             </Accordion.Toggle>
                         </Card>
-                    )}
+                    )} */}
+                {tasksData.length < 1 && currentPage === 1
+                    ? (
+                        <Card>
+                            <Accordion.Toggle
+                                as={Card.Header}
+                                variant="link"
+                                className="text-center"
+                            >
+                                There are no tasks in this project.
+                            </Accordion.Toggle>
+                        </Card>
+                    ) : null}
+                {tasksData.length < 1 && currentPage > 1
+                    ? (
+                        setCurrentPage(currentPage - 2)
+                    ) : tasksData.map((task) => (
+                        <TaskCard
+                            key={task.id}
+                            name={task.name}
+                            description={task.description}
+                            id={task.id}
+                            priority={task.priority}
+                            state={task.state}
+                            created={task.created_at}
+                            updated={task.updated_at}
+                            deleteTask={deleteTask}
+                            setIdDelete={setIdDelete}
+                            idDelete={idDelete}
+                            setDeleting={setDeleting}
+                            deleting={deleting}
+                        />
+                    ))}
 
             </Accordion>
             <ReactPaginate

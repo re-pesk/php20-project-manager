@@ -57,7 +57,8 @@ const Projects = () => {
             };
             await axios
                 .post(`/api/projects/${deleteId}`, config)
-                .then(() => {
+                .then((response) => {
+                    console.log('Project deleted succesfuly', response);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -117,13 +118,11 @@ const Projects = () => {
                 {/* Jei nera sukurta projektu */}
                 {projectsData < 1
                     ? (
-                        <>
-                            <Card>
-                                <Card.Header as="h4" className="text-center">
-                                    There are no projects yet.
-                                </Card.Header>
-                            </Card>
-                        </>
+                        <Card>
+                            <Card.Header as="h4" className="text-center">
+                                There are no projects yet.
+                            </Card.Header>
+                        </Card>
                     )
                     // Jei yra sukurta projektu
                     : projectsData.map((project) => (
@@ -181,9 +180,9 @@ const Projects = () => {
                                     <div className="row px-2">
                                         <Card.Text>{project.description}</Card.Text>
                                     </div>
-                                    <div className="row mt-4 pr-2 d-flex justify-content-end">
+                                    <div className="row mt-3 px-2 d-flex justify-content-start">
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
@@ -198,7 +197,7 @@ const Projects = () => {
                                             View tasks
                                         </Button>
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             onClick={() => {
                                                 history.push({ pathname: '/project/board',
                                                     state: {
@@ -210,7 +209,7 @@ const Projects = () => {
                                             Show Board
                                         </Button>
                                         <Button
-                                            className="mr-1"
+                                            className="mr-2"
                                             type="submit"
                                             value={project.id}
                                             onClick={() => {
@@ -246,7 +245,6 @@ const Projects = () => {
                 {loading === true ? (
                     <div className="text-center font-weight-bold">
                         Loading data...
-                        {' '}
                         <Spinner animation="border" variant="primary" className="ml-2" />
                     </div>
                 ) : <div />}
