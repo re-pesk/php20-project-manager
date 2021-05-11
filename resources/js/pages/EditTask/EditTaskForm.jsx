@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export default function EditTaskForm() {
@@ -25,6 +25,7 @@ export default function EditTaskForm() {
 
     const [state, setState] = useState(false);
     const [succesMessage, setSuccesMessage] = useState('');
+    const [project, setProject] = useState(0);
 
     // get editable task data from API
     useEffect(async () => {
@@ -42,6 +43,7 @@ export default function EditTaskForm() {
                     priority_id: response.data.priority_id,
                     task_state_id: response.data.task_state_id,
                 });
+                setProject(response.data.project_id);
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
@@ -107,6 +109,42 @@ export default function EditTaskForm() {
                 className="mx-auto mt-5"
                 onSubmit={handleSubmit}
             >
+                {succesMessage !== '' ? (
+                    <div className="mt-4">
+                        <Alert variant="success">
+                            <Alert.Heading>{succesMessage}</Alert.Heading>
+                            <hr />
+                            <div className="d-flex justify-content-between">
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/tasks',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Go Back To Tasks
+                                </Button>
+                                <Button
+                                    className="m-1"
+                                    variant="outline-success"
+                                    onClick={() => {
+                                        history.push({ pathname: '/project/board',
+                                            state: {
+                                                project,
+                                                task: null,
+                                            } });
+                                    }}
+                                >
+                                    Show Board
+                                </Button>
+                            </div>
+                        </Alert>
+                    </div>
+                ) : null}
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
