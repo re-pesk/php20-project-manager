@@ -30,6 +30,7 @@
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
         "classnames": "^2.3.1",
+        "dotenv": "^8.6.0",
         "lodash": "^4.17.19",
         "moment": "^2.29.1",
         "prop-types": "^15.7.2",
