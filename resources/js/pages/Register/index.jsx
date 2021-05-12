@@ -4,7 +4,7 @@ import { Button, Form, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
 
 const { axios } = window;
-const minPassLength = 6;
+const minPassLength = 8;
 
 const Register = () => {
     const history = useHistory();
@@ -102,7 +102,7 @@ const Register = () => {
                             <Popover.Content className="bg-primary text-white">
                                 Password must be have minimum 8 characters length
                                 and must contain at least one uppercase letter,
-                                one lowercase letter, one number and one of ~!@#$%^&*- characters!
+                                one lowercase letter, one number and one of ~!@#$%^&*?- characters!
                             </Popover.Content>
                         </Popover>
                     )}
@@ -113,14 +113,14 @@ const Register = () => {
                         placeholder="Type in your password"
                         value={userData.password}
                         minLength={minPassLength}
-                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*-])[A-Za-z\d~!@#$%^&*-]+$"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#\$%\^&\*\?-])[A-Za-z\d~!@#\$%\^&\*\?-]+$"
                         onChange={handleChange}
                         required
                     />
                 </OverlayTrigger>
                 <Form.Control.Feedback type="invalid">
                     Password must be have minimum 8 characters length and contain at least one uppercase letter,
-                    one lowercase letter, one number and one of ~!@#$%^&*- characters!
+                    one lowercase letter, one number and one of ~!@#$%^&*?- characters!
                 </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="confirm_password">
@@ -141,7 +141,7 @@ const Register = () => {
                         placeholder="Confirm your password"
                         value={userData.password_confirmation}
                         minLength={minPassLength}
-                        pattern={userData.password}
+                        pattern={`^${userData.password.replace(/([$^*?])/g, '\\$1')}$`}
                         onChange={handleChange}
                         required
                     />
