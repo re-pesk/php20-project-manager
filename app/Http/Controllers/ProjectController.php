@@ -107,4 +107,8 @@ class ProjectController extends Controller
     {
        return Project::destroy($id);
     }
+
+    public function search($key){
+        return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->where('name', 'like', "%$key%")->paginate(8);
+    }
 }
