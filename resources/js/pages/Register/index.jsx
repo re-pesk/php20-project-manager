@@ -102,7 +102,7 @@ const Register = () => {
                             <Popover.Content className="bg-primary text-white">
                                 Password must be have minimum 8 characters length
                                 and must contain at least one uppercase letter,
-                                one lowercase letter, one number and one special character!
+                                one lowercase letter, one number and one of ~!@#$%^&*- characters!
                             </Popover.Content>
                         </Popover>
                     )}
@@ -120,7 +120,7 @@ const Register = () => {
                 </OverlayTrigger>
                 <Form.Control.Feedback type="invalid">
                     Password must be have minimum 8 characters length and contain at least one uppercase letter,
-                    one lowercase letter, one number and one special character!
+                    one lowercase letter, one number and one of ~!@#$%^&*- characters!
                 </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="confirm_password">
