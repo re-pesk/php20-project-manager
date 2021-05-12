@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
+import Log from '../../components/Log';
 
 const { axios } = window;
 
@@ -31,6 +32,8 @@ const Login = () => {
                 // eslint-disable-next-line no-console
                     console.log(response.data);
                     setUserContext(response.data);
+                    Log('add', `User ${response.data.user.email} logged in`);
+                    Log('send');
                     history.push('/dashboard');
                 })
                 .catch((error) => {

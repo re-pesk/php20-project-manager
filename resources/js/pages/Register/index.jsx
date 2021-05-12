@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useUserContext } from '../../context/UserContext';
+import Log from '../../components/Log';
 
 const { axios } = window;
 const minPassLength = 6;
@@ -34,6 +35,8 @@ const Register = () => {
                 // eslint-disable-next-line no-console
                     console.log(response.data);
                     setUserContext(response.data);
+                    Log('add', `New user ${response.data.user.email} registered and logged in`);
+                    Log('send');
                     history.push('/dashboard');
                 })
                 .catch((error) => {
