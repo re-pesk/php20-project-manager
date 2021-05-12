@@ -17,6 +17,8 @@ const TaskCard = ({
     updated,
     setDeleting,
     deleting,
+    tasksData,
+    currentPage,
 }) => {
     const history = useHistory();
     Moment.locale('en');
@@ -28,6 +30,16 @@ const TaskCard = ({
     const [wantToDelete, setToDelete] = useState(false);
     const [idToDelete, setIdToDelete] = useState(0);
 
+    const eventFire = (el, etype) => {
+        if (el.fireEvent) {
+            el.fireEvent(`on${etype}`);
+        } else {
+            const evObj = document.createEvent('Events');
+            evObj.initEvent(etype, true, false);
+            el.dispatchEvent(evObj);
+        }
+    };
+
     // used when task confirmed for deletion
     useEffect(() => {
         if (wantToDelete && confirmedDeletion) {
@@ -36,6 +48,9 @@ const TaskCard = ({
             confirmDeletion(false);
             deleteTask(idToDelete);
             setIdDelete(idToDelete);
+            if (tasksData.length === 1) {
+                eventFire(document.querySelector(`a[aria-label='Page ${currentPage - 1}']`), 'click');
+            }
         }
     }, [confirmedDeletion]);
 

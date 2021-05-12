@@ -176,6 +176,8 @@ const Tasks = () => {
                             idDelete={idDelete}
                             setDeleting={setDeleting}
                             deleting={deleting}
+                            tasksData={tasksData}
+                            currentPage={currentPage}
                         />
                     ))}
 
