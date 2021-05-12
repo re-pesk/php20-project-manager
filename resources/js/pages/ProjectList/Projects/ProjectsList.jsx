@@ -101,7 +101,7 @@ const Projects = () => {
                     variant="primary"
                     type="submit"
                     onClick={() => {
-                        history.goBack();
+                        history.push({ pathname: '/dashboard' });
                     }}
                 >
                     Back
@@ -264,7 +264,7 @@ const Projects = () => {
             />
             {/* loading data spinneris */}
             {loading === true ? (
-                <div className="text-center font-weight-bold">
+                <div className="mt-2 text-center font-weight-bold">
                     Loading data...
                     <Spinner animation="border" variant="primary" className="ml-2" />
                 </div>
