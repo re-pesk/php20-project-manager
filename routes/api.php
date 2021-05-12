@@ -39,3 +39,5 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('tasks', TaskController::class);
 Route::get('project/{id}/tasks', [TaskController::class, 'showAll']);
 Route::apiResource('projectTasks', ProjectTasksController::class);
+Route::get('search-projects/{key}', [ProjectController::class, 'search']);
+Route::get('search-tasks/{id}/{key}', [ProjectTasksController::class, 'search']);
