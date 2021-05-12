@@ -1,12 +1,12 @@
 import React from 'react';
 import Cards from '../../components/Cards';
-import DownloadData from '../../components/DownloadData';
+import Buttons from '../../components/Buttons';
 
 export default function Dashboard() {
     return (
         <>
             <Cards />
-            <DownloadData />
+            <Buttons />
         </>
     );
 }
