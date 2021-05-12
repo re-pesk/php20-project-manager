@@ -1,10 +1,7 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
 
-const DownloadButton = ({ href, title }) => (
-    <Col>
-        <a className="btn btn-primary" href={href}>{title}</a>
-    </Col>
+const DownloadButton = ({ endpoint, title }) => (
+    <a className="btn btn-primary" href={endpoint}>{title}</a>
 );
 
 export default DownloadButton;
