@@ -164,7 +164,7 @@ export default function Board() {
                     variant="primary"
                     type="submit"
                     onClick={() => {
-                        history.goBack();
+                        history.push({ pathname: '/projects' });
                     }}
                 >
                     Back

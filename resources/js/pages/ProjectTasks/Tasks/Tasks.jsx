@@ -82,7 +82,7 @@ const Tasks = () => {
                         variant="primary"
                         type="submit"
                         onClick={() => {
-                            history.goBack();
+                            history.push({ pathname: '/projects' });
                         }}
                     >
                         Back
@@ -194,7 +194,7 @@ const Tasks = () => {
                 breakClassName="pt-2"
             />
             {loading === true ? (
-                <div className="text-center font-weight-bold">
+                <div className="mt-2 text-center font-weight-bold">
                     Loading data...
                     <Spinner animation="border" variant="primary" className="ml-2" />
                 </div>
