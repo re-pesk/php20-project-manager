@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
+import eventFire from '../../../components/EventFire';
 import { useUserContext } from '../../../context/UserContext';
 
 const Projects = () => {
@@ -72,16 +73,6 @@ const Projects = () => {
         const pageNumber = e.selected + 1;
         setCurrentPage(pageNumber);
         setLoading(true);
-    };
-
-    const eventFire = (el, etype) => {
-        if (el.fireEvent) {
-            el.fireEvent(`on${etype}`);
-        } else {
-            const evObj = document.createEvent('Events');
-            evObj.initEvent(etype, true, false);
-            el.dispatchEvent(evObj);
-        }
     };
 
     // used when project confirmed for deletion

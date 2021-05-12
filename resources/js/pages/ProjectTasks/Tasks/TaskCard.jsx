@@ -3,6 +3,7 @@ import Moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import eventFire from '../../../components/EventFire';
 import { useUserContext } from '../../../context/UserContext';
 
 const TaskCard = ({
@@ -29,16 +30,6 @@ const TaskCard = ({
     // used to set this particular task for deletion, this is local variable
     const [wantToDelete, setToDelete] = useState(false);
     const [idToDelete, setIdToDelete] = useState(0);
-
-    const eventFire = (el, etype) => {
-        if (el.fireEvent) {
-            el.fireEvent(`on${etype}`);
-        } else {
-            const evObj = document.createEvent('Events');
-            evObj.initEvent(etype, true, false);
-            el.dispatchEvent(evObj);
-        }
-    };
 
     // used when task confirmed for deletion
     useEffect(() => {
