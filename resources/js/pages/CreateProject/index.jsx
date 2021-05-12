@@ -18,6 +18,7 @@ export default function CreateProject() {
                 variant="primary"
                 type="submit"
                 onClick={() => {
+                    Log('add', 'User navigated to "somewhere"');
                     Log('send');
                     history.goBack();
                 }}
