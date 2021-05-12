@@ -82,7 +82,7 @@ const Projects = () => {
             confirmDeletion(false);
             deleteProject(idToDelete);
             setIdDelete(idToDelete);
-            if (projectsData.length === 1) {
+            if (projectsData.length === 1 && currentPage !== 1) {
                 eventFire(document.querySelector(`a[aria-label='Page ${currentPage - 1}']`), 'click');
             }
         }

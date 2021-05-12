@@ -39,7 +39,7 @@ const TaskCard = ({
             confirmDeletion(false);
             deleteTask(idToDelete);
             setIdDelete(idToDelete);
-            if (tasksData.length === 1) {
+            if (tasksData.length === 1 && currentPage !== 1) {
                 eventFire(document.querySelector(`a[aria-label='Page ${currentPage - 1}']`), 'click');
             }
         }
