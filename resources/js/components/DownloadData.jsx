@@ -10,6 +10,9 @@ const DownloadData = () => {
             method: 'get',
             url: 'api/data/export',
             responseType: 'blob',
+            headers: {
+                Accept: 'application/vnd.ms-excel',
+            },
         };
         await axios(config)
             .then((response) => {
