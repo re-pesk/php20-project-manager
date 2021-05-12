@@ -52,6 +52,10 @@ export default function CreateProjectForm() {
                     name: '-',
                     description: '-',
                 });
+                setProjectData({
+                    name: '',
+                    description: '',
+                });
                 setSuccesMessage('Project created succesfully');
                 Log('add', 'Project created succesfully');
                 getLastProject();
