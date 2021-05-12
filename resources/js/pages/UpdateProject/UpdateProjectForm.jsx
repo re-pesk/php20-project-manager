@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Log from '../../components/Log';
+import { useUserContext } from '../../context/UserContext';
 
 const UpdateProjectForm = () => {
+    const { userContext } = useUserContext({});
     // get project id from params
     const history = useHistory();
     const { project } = history.location.state;
@@ -122,7 +124,7 @@ const UpdateProjectForm = () => {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to /project/tasks');
+                                        Log('add', `User ${userContext.user.email} navigated to /project/tasks`);
                                         Log('send');
                                         history.push({ pathname: '/project/tasks',
                                             state: {
@@ -137,7 +139,7 @@ const UpdateProjectForm = () => {
                                     className="mx-2"
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to /project/board');
+                                        Log('add', `User ${userContext.user.email} navigated to /project/board`);
                                         Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
@@ -151,7 +153,7 @@ const UpdateProjectForm = () => {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to /projects');
+                                        Log('add', `User ${userContext.user.email} navigated to /projects`);
                                         Log('send');
                                         history.push('/projects');
                                     }}

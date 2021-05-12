@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Log from '../../components/Log';
+import { useUserContext } from '../../context/UserContext';
 
 export default function CreateTaskForm() {
+    const { userContext } = useUserContext({});
     const history = useHistory();
     const { project } = history.location.state;
 
@@ -110,7 +112,7 @@ export default function CreateTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to /project/tasks');
+                                        Log('add', `User ${userContext.user.email} navigated to /project/tasks`);
                                         Log('send');
                                         history.push({ pathname: '/project/tasks',
                                             state: {
@@ -125,7 +127,7 @@ export default function CreateTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to /project/board');
+                                        Log('add', `User ${userContext.user.email} navigated to /project/board`);
                                         Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {

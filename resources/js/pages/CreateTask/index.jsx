@@ -3,11 +3,13 @@ import { Container, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Log from '../../components/Log';
 import CreateTaskForm from './CreateTaskForm';
+import { useUserContext } from '../../context/UserContext';
 
 export default function CreateTask() {
     const history = useHistory();
+    const { userContext } = useUserContext({});
     useEffect(() => {
-        Log('add', 'Entered task create page');
+        Log('add', `User ${userContext.user.email} navigated to task create page`);
     }, []);
     return (
         <Container>
@@ -16,7 +18,7 @@ export default function CreateTask() {
                 variant="primary"
                 type="submit"
                 onClick={() => {
-                    Log('add', 'User navigated to previous page');
+                    Log('add', `User ${userContext.user.email} navigated to previous page`);
                     Log('send');
                     history.goBack();
                 }}
