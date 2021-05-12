@@ -109,7 +109,7 @@ export default function CreateProjectForm() {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to "/project/tasks"');
+                                        Log('add', 'User navigated to /project/tasks');
                                         Log('send');
                                         // history.push(`/task/${project.id}`);
                                         history.push({ pathname: '/project/tasks',
@@ -125,7 +125,7 @@ export default function CreateProjectForm() {
                                     className="mx-2"
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to "/project/board"');
+                                        Log('add', 'User navigated to /project/board');
                                         Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
@@ -139,7 +139,7 @@ export default function CreateProjectForm() {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
-                                        Log('add', 'User navigated to "/projects"');
+                                        Log('add', 'User navigated to /projects');
                                         Log('send');
                                         history.push('/projects');
                                     }}

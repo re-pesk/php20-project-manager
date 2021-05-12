@@ -9,7 +9,7 @@ export default function CreateProject() {
 
     useEffect(() => {
         Log('add', 'Entered project create page');
-    });
+    }, []);
 
     return (
         <Container>
@@ -18,7 +18,7 @@ export default function CreateProject() {
                 variant="primary"
                 type="submit"
                 onClick={() => {
-                    Log('add', 'User navigated to "somewhere"');
+                    Log('add', 'User navigated to previous page');
                     Log('send');
                     history.goBack();
                 }}
