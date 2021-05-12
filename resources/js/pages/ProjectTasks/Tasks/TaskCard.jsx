@@ -3,6 +3,7 @@ import Moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Accordion, Badge, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import eventFire from '../../../components/EventFire';
 import { useUserContext } from '../../../context/UserContext';
 
 const TaskCard = ({
@@ -17,6 +18,8 @@ const TaskCard = ({
     updated,
     setDeleting,
     deleting,
+    tasksData,
+    currentPage,
 }) => {
     const history = useHistory();
     Moment.locale('en');
@@ -36,6 +39,9 @@ const TaskCard = ({
             confirmDeletion(false);
             deleteTask(idToDelete);
             setIdDelete(idToDelete);
+            if (tasksData.length === 1 && currentPage !== 1) {
+                eventFire(document.querySelector(`a[aria-label='Page ${currentPage - 1}']`), 'click');
+            }
         }
     }, [confirmedDeletion]);
 

@@ -23,7 +23,7 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->asciify('********************'),
             'description' => $this->faker->paragraph,
             'priority_id' => rand(1, Priority::count()),
             'task_state_id' => 1,

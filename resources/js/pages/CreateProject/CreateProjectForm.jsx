@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
 
 export default function CreateProjectForm() {
     const history = useHistory();
@@ -52,10 +53,7 @@ export default function CreateProjectForm() {
                     description: '-',
                 });
                 setSuccesMessage('Project created succesfully');
-                setProjectData({
-                    name: '',
-                    description: '',
-                });
+                Log('add', 'Project created succesfully');
                 getLastProject();
             })
             .catch((error) => {
@@ -66,6 +64,14 @@ export default function CreateProjectForm() {
                     description: error.response.data.errors.description
                         ? error.response.data.errors.description[0]
                         : '',
+                });
+                Log('add', {
+                    name: error.response.data.errors.name
+                        ? error.response.data.errors.name[0]
+                        : 'validated',
+                    description: error.response.data.errors.description
+                        ? error.response.data.errors.description[0]
+                        : 'validated',
                 });
             });
         setState(false);
@@ -99,6 +105,8 @@ export default function CreateProjectForm() {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', 'User navigated to "/project/tasks"');
+                                        Log('send');
                                         // history.push(`/task/${project.id}`);
                                         history.push({ pathname: '/project/tasks',
                                             state: {
@@ -113,6 +121,8 @@ export default function CreateProjectForm() {
                                     className="mx-2"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', 'User navigated to "/project/board"');
+                                        Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
                                                 project: projectId,
@@ -125,6 +135,8 @@ export default function CreateProjectForm() {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', 'User navigated to "/projects"');
+                                        Log('send');
                                         history.push('/projects');
                                     }}
                                 >
