@@ -68,28 +68,32 @@ const Projects = () => {
     );
 
     // Change page
-    const paginate = (e = null, ifItemDeleted) => {
-        if (e) {
-            const pageNumber = e.selected + 1;
-            setCurrentPage(pageNumber);
-            setLoading(true);
+    const paginate = (e) => {
+        const pageNumber = e.selected + 1;
+        setCurrentPage(pageNumber);
+        setLoading(true);
+    };
+
+    const eventFire = (el, etype) => {
+        if (el.fireEvent) {
+            el.fireEvent(`on${etype}`);
         } else {
-            setCurrentPage(ifItemDeleted);
-            setLoading(true);
+            const evObj = document.createEvent('Events');
+            evObj.initEvent(etype, true, false);
+            el.dispatchEvent(evObj);
         }
     };
 
     // used when project confirmed for deletion
     useEffect(() => {
         if (wantToDelete && confirmedDeletion) {
-            if (projectsData.length === 1) {
-                console.log(currentPage - 1);
-                paginate(null, currentPage - 1);
-            }
             setToDelete(false);
             confirmDeletion(false);
             deleteProject(idToDelete);
             setIdDelete(idToDelete);
+            if (projectsData.length === 1) {
+                eventFire(document.querySelector(`a[aria-label='Page ${currentPage - 1}']`), 'click');
+            }
         }
     }, [confirmedDeletion]);
 
