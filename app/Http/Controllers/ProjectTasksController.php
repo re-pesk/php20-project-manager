@@ -107,4 +107,26 @@ class ProjectTasksController extends Controller
     {
         //
     }
+
+    public function search($id, $key){
+        $dataForTasks = array(
+            'tasksData' => Task::leftJoin('priorities', 'tasks.priority_id', '=', 'priorities.id')
+                ->leftJoin('task_states', 'tasks.task_state_id', '=', 'task_states.id')
+                ->select(
+                    'tasks.id',
+                    'tasks.name',
+                    'tasks.description',
+                    'priorities.name as priority',
+                    'task_states.name as state',
+                    'tasks.created_at',
+                    'tasks.updated_at'
+                )
+                ->where('project_id', $id)
+                ->where('tasks.name', 'like', "%$key%")
+                ->paginate(8),
+            'projectData' => Project::where('id', $id)->select('projects.id', 'projects.name')->get(),
+        );
+        return $dataForTasks;
+    }
+
 }

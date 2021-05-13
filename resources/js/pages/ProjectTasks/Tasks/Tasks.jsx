@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Badge, Button, Card, Container, Spinner } from 'react-bootstrap';
+import { Accordion, Badge, Button, Card, Container, Form, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
 import TaskCard from './TaskCard';
@@ -22,6 +24,10 @@ const Tasks = () => {
     const history = useHistory();
     // const { project } = useParams();
     const { project } = history.location.state;
+    // search
+    const [searchVar, setSearchVar] = useState('');
+    const [show, setShow] = useState(false);
+    const [searchInit, setSearchInit] = useState(0);
 
     const getProjectTasks = async () => {
         const config = {
@@ -42,6 +48,48 @@ const Tasks = () => {
             });
         setLoading(false);
     };
+
+    // search
+
+    const handleInputChange = (event) => {
+        setSearchVar(event.target.value);
+    };
+
+    useEffect(async () => {
+        let config = {};
+        if (searchVar !== '') {
+            config = {
+                method: 'GET',
+                url: `/api/search-tasks/${project}/${searchVar}?page=${currentPage}`,
+                headers: {
+                    Accept: 'application/json',
+                },
+            };
+        } else {
+            config = {
+                method: 'GET',
+                url: `/api/projectTasks/${project}?page=${currentPage}`,
+                headers: {
+                    Accept: 'Application/json',
+                },
+            };
+        }
+
+        await axios(config)
+            .then((response) => {
+                console.log(response.data);
+                setTasksData(response.data.tasksData.data);
+                setLastPage(response.data.tasksData.last_page);
+                setProjectData(response.data.projectData);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        console.log(searchVar);
+    }, [searchInit, idDelete, currentPage]);
+
+    // delete
+
     useEffect(() => {
         setLoading(true);
         getProjectTasks();
@@ -82,7 +130,7 @@ const Tasks = () => {
                         variant="primary"
                         type="submit"
                         onClick={() => {
-                            history.goBack();
+                            history.push({ pathname: '/projects' });
                         }}
                     >
                         Back
@@ -116,7 +164,44 @@ const Tasks = () => {
                 </div>
 
             ))}
-
+            <div>
+                <Form>
+                    <div className="mb-1" style={{ display: 'flex' }}>
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            className="mt-1 mb-1 mr-2"
+                            style={{ cursor: 'pointer', marginLeft: 'auto', order: '2' }}
+                            onClick={() => { setShow(!show); }}
+                        />
+                    </div>
+                    <div className="mb-3" style={{ display: 'flex' }}>
+                        {show ? (
+                            <Form.Group className="w-100" style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                                <Form.Control
+                                    type="text"
+                                    style={{ marginLeft: 'auto', order: '2' }}
+                                    placeholder="Search..."
+                                    onChange={handleInputChange}
+                                    className="w-25"
+                                />
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    className="ml-1 mr-2"
+                                    style={{ order: '1' }}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setSearchInit(searchInit + 1);
+                                    }}
+                                >
+                                    Submit
+                                </Button>
+                            </Form.Group>
+                        )
+                            : null}
+                    </div>
+                </Form>
+            </div>
             <Accordion>
                 {/* { tasksData.length > 0 ? tasksData.map((task) => (
                     <TaskCard
@@ -194,7 +279,7 @@ const Tasks = () => {
                 breakClassName="pt-2"
             />
             {loading === true ? (
-                <div className="text-center font-weight-bold">
+                <div className="mt-2 text-center font-weight-bold">
                     Loading data...
                     <Spinner animation="border" variant="primary" className="ml-2" />
                 </div>

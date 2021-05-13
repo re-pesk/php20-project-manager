@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { capitalize } from 'lodash';
 import Moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Accordion, Button, Card, Container, Spinner } from 'react-bootstrap';
+import { Accordion, Button, Card, Container, Form, Spinner } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
 import eventFire from '../../../components/EventFire';
@@ -25,6 +27,10 @@ const Projects = () => {
     // used to set this particular project for deletion, this is local variable
     const [wantToDelete, setToDelete] = useState(false);
     const [idToDelete, setIdToDelete] = useState(0);
+    // search
+    const [searchVar, setSearchVar] = useState('');
+    const [show, setShow] = useState(false);
+    const [searchInit, setSearchInit] = useState(0);
 
     useEffect(async () => {
         const config = {
@@ -46,6 +52,46 @@ const Projects = () => {
             });
     }, [idDelete, currentPage]);
     console.log(projectsData);
+
+    // search projects
+
+    const handleInputChange = (event) => {
+        setSearchVar(event.target.value);
+    };
+
+    useEffect(async () => {
+        let config = {};
+        if (searchVar !== '') {
+            config = {
+                method: 'GET',
+                url: `/api/search-projects/${searchVar}?page=${currentPage}`,
+                headers: {
+                    Accept: 'application/json',
+                },
+            };
+        } else {
+            config = {
+                method: 'GET',
+                url: `/api/projects?page=${currentPage}`,
+                headers: {
+                    Accept: 'application/json',
+                },
+            };
+        }
+
+        await axios(config)
+            .then((response) => {
+                console.log(response.data);
+                // setProjectsData(response.data);
+                setProjectsData(response.data.data);
+                setLastPage(response.data.last_page);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        console.log(searchVar);
+    }, [searchInit, idDelete, currentPage]);
 
     // delete project
     const deleteProject = useCallback(
@@ -101,7 +147,7 @@ const Projects = () => {
                     variant="primary"
                     type="submit"
                     onClick={() => {
-                        history.goBack();
+                        history.push({ pathname: '/dashboard' });
                     }}
                 >
                     Back
@@ -117,6 +163,44 @@ const Projects = () => {
                 >
                     Create New Project
                 </Button>
+                <Form>
+                    <div className="mb-1" style={{ display: 'flex' }}>
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            className="mt-1 mb-1"
+                            style={{ cursor: 'pointer',
+                                marginLeft: 'auto',
+                                order: '2' }}
+                            onClick={() => { setShow(!show); }}
+                        />
+                    </div>
+                    {show ? (
+                        <Form.Group className="w-100" style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                            <Form.Control
+                                type="text"
+                                style={{
+                                    order: '2',
+                                }}
+                                placeholder="Search..."
+                                onChange={handleInputChange}
+                                className="w-25"
+                            />
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                className="ml-1"
+                                style={{ order: '1' }}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setSearchInit(searchInit + 1);
+                                }}
+                            >
+                                Submit
+                            </Button>
+                        </Form.Group>
+                    )
+                        : null}
+                </Form>
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
@@ -264,7 +348,7 @@ const Projects = () => {
             />
             {/* loading data spinneris */}
             {loading === true ? (
-                <div className="text-center font-weight-bold">
+                <div className="mt-2 text-center font-weight-bold">
                     Loading data...
                     <Spinner animation="border" variant="primary" className="ml-2" />
                 </div>
