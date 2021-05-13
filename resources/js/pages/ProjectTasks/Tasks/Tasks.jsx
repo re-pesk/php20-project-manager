@@ -26,7 +26,7 @@ const Tasks = () => {
     const { project } = history.location.state;
     // search
     const [searchVar, setSearchVar] = useState('');
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [searchInit, setSearchInit] = useState(0);
 
     // const getProjectTasks = async () => {
@@ -147,6 +147,14 @@ const Tasks = () => {
 
                         <Button
                             className="m-2"
+                            variant="warning"
+                            type="submit"
+                            href={`/api/export/projects/${projectInfo.id}/tasks`}
+                        >
+                            Export Tasks
+                        </Button>
+                        <Button
+                            className="m-2"
                             variant="primary"
                             type="submit"
                             value={projectInfo.id}
@@ -205,34 +213,6 @@ const Tasks = () => {
                 </Form>
             </div>
             <Accordion>
-                {/* { tasksData.length > 0 ? tasksData.map((task) => (
-                    <TaskCard
-                        key={task.id}
-                        name={task.name}
-                        description={task.description}
-                        id={task.id}
-                        priority={task.priority}
-                        state={task.state}
-                        created={task.created_at}
-                        updated={task.updated_at}
-                        deleteTask={deleteTask}
-                        setIdDelete={setIdDelete}
-                        idDelete={idDelete}
-                        setDeleting={setDeleting}
-                        deleting={deleting}
-                    />
-                ))
-                    :  (
-                        <Card>
-                            <Accordion.Toggle
-                                as={Card.Header}
-                                variant="link"
-                                className="text-center"
-                            >
-                                There are no tasks in this project.
-                            </Accordion.Toggle>
-                        </Card>
-                    )} */}
                 {tasksData.length < 1 && currentPage === 1
                     ? (
                         <Card>

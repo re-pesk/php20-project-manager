@@ -29,7 +29,7 @@ const Projects = () => {
     const [idToDelete, setIdToDelete] = useState(0);
     // search
     const [searchVar, setSearchVar] = useState('');
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [searchInit, setSearchInit] = useState(0);
 
     // useEffect(async () => {
@@ -162,6 +162,15 @@ const Projects = () => {
                     }}
                 >
                     Create New Project
+                </Button>
+                <Button
+                    className="mb-3 mr-2"
+                    style={{ float: 'right' }}
+                    variant="warning"
+                    type="submit"
+                    href="api/export/projects"
+                >
+                    Export Projects
                 </Button>
                 <Form>
                     <div className="mb-1" style={{ display: 'flex' }}>
