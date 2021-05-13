@@ -30,10 +30,6 @@ class ProjectsExport implements FromQuery
             $query = $query->where('id', $this->id);
         }
 
-        if ($this->taskList) {
-            $query = $query->tasks()->get();
-        }
-
         return $query;
     }
 }
