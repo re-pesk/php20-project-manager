@@ -1,4 +1,6 @@
 {
+    "name": "phprojectman",
+    "lockfileVersion": 2,
     "private": true,
     "scripts": {
         "dev": "npm run development",
