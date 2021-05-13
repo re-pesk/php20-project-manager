@@ -1,6 +1,4 @@
 window._ = require('lodash');
-// window._ = require('lodash');
-// require('dotenv').config();
 
 // eslint-disable-next-line no-console
 console.log(process.env);
