@@ -44,7 +44,13 @@ nvm install --lts -latest-npm
 Reopen terminal
 
 ```bash
-nvm -v
+nvm -v // must be > 7+
+```
+
+If npm version is not 7+:
+
+```bash
+npm install -g npm@latest
 ```
 
 ## Install git
