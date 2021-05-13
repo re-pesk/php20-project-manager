@@ -117,6 +117,17 @@ const Projects = () => {
                 >
                     Create New Project
                 </Button>
+                <Button
+                    className="mb-3 mr-2"
+                    style={{ float: 'right' }}
+                    variant="outline-warning"
+                    type="submit"
+                    onClick={() => {
+                        // history.push('/create-project/');
+                    }}
+                >
+                    Download CSV
+                </Button>
             </div>
             <Accordion>
                 {/* Jei nera sukurta projektu */}
