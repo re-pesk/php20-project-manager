@@ -109,6 +109,10 @@ class ProjectController extends Controller
     }
 
     public function search($key){
-        return Project::withCount(['tasks', 'unfinishedTasks'])->with('state:name,id')->where('name', 'like', "%$key%")->paginate(8);
+        return Project::withCount(['tasks', 'unfinishedTasks'])
+            ->with('state:name,id')
+            ->where('name', 'like', "%$key%")
+            ->orWhere('id', 'like', "%$key%")
+            ->paginate(8);
     }
 }

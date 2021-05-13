@@ -32,26 +32,26 @@ const Projects = () => {
     const [show, setShow] = useState(false);
     const [searchInit, setSearchInit] = useState(0);
 
-    useEffect(async () => {
-        const config = {
-            method: 'GET',
-            url: `/api/projects?page=${currentPage}`,
-            headers: {
-                Accept: 'application/json',
-            },
-        };
-        await axios(config)
-            .then((response) => {
-                console.log(response.data);
-                setProjectsData(response.data.data);
-                setLastPage(response.data.last_page);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [idDelete, currentPage]);
-    console.log(projectsData);
+    // useEffect(async () => {
+    //     const config = {
+    //         method: 'GET',
+    //         url: `/api/projects?page=${currentPage}`,
+    //         headers: {
+    //             Accept: 'application/json',
+    //         },
+    //     };
+    //     await axios(config)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             setProjectsData(response.data.data);
+    //             setLastPage(response.data.last_page);
+    //             setLoading(false);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, [idDelete, currentPage]);
+    // console.log(projectsData);
 
     // search projects
 
