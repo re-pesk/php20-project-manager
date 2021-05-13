@@ -166,11 +166,11 @@ const Projects = () => {
                 <Button
                     className="mb-3 mr-2"
                     style={{ float: 'right' }}
-                    variant="outline-warning"
+                    variant="warning"
                     type="submit"
                     href="api/export/projects"
                 >
-                    Export Projects List
+                    Export Projects
                 </Button>
                 <Form>
                     <div className="mb-1" style={{ display: 'flex' }}>
