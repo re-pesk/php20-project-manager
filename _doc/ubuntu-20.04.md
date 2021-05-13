@@ -44,7 +44,7 @@ nvm install --lts -latest-npm
 Reopen terminal
 
 ```bash
-nvm -v // must be > 7+
+npm -v // must be > 7+
 ```
 
 If npm version is not 7+:
