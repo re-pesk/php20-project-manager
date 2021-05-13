@@ -34,11 +34,14 @@ return $request->user();
 Route::post('/logged-in', [AuthController::class, 'isLoggedIn']);
 Route::post('/log', [LogController::class, 'addToLog']);
 
-Route::get('/projects/export', [ImportExportController::class, 'exportProjectList'])->name('project.list.export');
-Route::get('/projects/{project}/export', [ImportExportController::class, 'exportProject'])->name('project.export');
-Route::get('/projects/{project}/tasks/export', [ImportExportController::class, 'exportProjectTaskList'])->name('project.task.list.export');
-Route::get('/tasks/export', [ImportExportController::class, 'exportTaskList'])->name('task.list.export');
-Route::get('/tasks/{task}/export', [ImportExportController::class, 'exportTask'])->name('task.export');
+Route::name('export.')->prefix('export')->group(function () {
+    Route::get('/projects', [ImportExportController::class, 'exportProjectList'])->name('project.list');
+    Route::get('/projects/{project}', [ImportExportController::class, 'exportProject'])->name('project');
+    Route::get('/projects/{project}/tasks', [ImportExportController::class, 'exportProjectTaskList'])->name('project.task.list');
+    Route::get('/tasks', [ImportExportController::class, 'exportTaskList'])->name('task.list');
+    Route::get('/tasks/{task}', [ImportExportController::class, 'exportTask'])->name('task');
+});
+
 
 
 Route::apiResource('projects', ProjectController::class);
