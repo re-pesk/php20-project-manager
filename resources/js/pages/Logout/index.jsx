@@ -3,11 +3,12 @@ import { Button, Container, Nav } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useUserContext } from '../../context/UserContext';
+import Log from '../../components/Log';
 
 const { axios } = window;
 
 const Logout = () => {
-    const { setUserContext } = useUserContext({});
+    const { setUserContext, userContext } = useUserContext({});
     const history = useHistory();
 
     const clearData = async () => {
@@ -22,7 +23,7 @@ const Logout = () => {
         await axios(config)
             .then((response) => {
                 // eslint-disable-next-line no-console
-                console.log(JSON.stringify(response.data));
+                console.log(response.data);
                 setUserContext({});
             })
             .catch((error) => {
@@ -34,6 +35,8 @@ const Logout = () => {
     const handleClick = async (event) => {
         event.preventDefault();
         try {
+            Log('add', `User ${userContext.user.email} logged out`);
+            Log('send');
             await clearData();
             history.push('/login');
         } catch (e) {
