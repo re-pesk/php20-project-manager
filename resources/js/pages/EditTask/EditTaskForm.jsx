@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
+import { useUserContext } from '../../context/UserContext';
 
 export default function EditTaskForm() {
-// get task id from params
+    const { userContext } = useUserContext({});
+    // get task id from params
     const history = useHistory();
     const { task } = history.location.state;
     // current task data
@@ -70,6 +73,7 @@ export default function EditTaskForm() {
                     task_state_id: '',
                 });
                 setSuccesMessage('Task updated succesfully');
+                Log('add', 'Task updated succesfully');
             })
             .catch((error) => {
                 setErrors({
@@ -85,6 +89,20 @@ export default function EditTaskForm() {
                     task_state_id: error.response.data.errors.task_state_id
                         ? error.response.data.errors.task_state_id[0]
                         : '',
+                });
+                Log('add', {
+                    name: error.response.data.errors.name
+                        ? error.response.data.errors.name[0]
+                        : 'validated',
+                    description: error.response.data.errors.description
+                        ? error.response.data.errors.description[0]
+                        : 'validated',
+                    priority_id: error.response.data.errors.priority_id
+                        ? error.response.data.errors.priority_id[0]
+                        : 'validated',
+                    task_state_id: error.response.data.errors.task_state_id
+                        ? error.response.data.errors.task_state_id[0]
+                        : 'validated',
                 });
             });
         setState(false);
@@ -119,6 +137,8 @@ export default function EditTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /project/tasks`);
+                                        Log('send');
                                         history.push({ pathname: '/project/tasks',
                                             state: {
                                                 project,
@@ -132,6 +152,8 @@ export default function EditTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /project/board`);
+                                        Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
                                                 project,

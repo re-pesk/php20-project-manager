@@ -8,6 +8,7 @@ const dotEnvPlugin = new webpack.DefinePlugin({
     'process.env': {
         APP_DEBUG: JSON.stringify(process.env.APP_DEBUG || false),
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        FRONT_LOGS: JSON.stringify(process.env.FRONT_LOGS || false),
     },
 });
 

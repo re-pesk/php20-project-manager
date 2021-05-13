@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
+import { useUserContext } from '../../context/UserContext';
 
 const UpdateProjectForm = () => {
+    const { userContext } = useUserContext({});
     // get project id from params
     const history = useHistory();
     const { project } = history.location.state;
@@ -64,6 +67,7 @@ const UpdateProjectForm = () => {
                     project_state_id: '',
                 });
                 setSuccesMessage('Project updated succesfully');
+                Log('add', 'Project updated succesfully');
             })
             .catch((error) => {
                 setErrors({
@@ -76,6 +80,17 @@ const UpdateProjectForm = () => {
                     project_state_id: error.response.data.errors.project_state_id
                         ? error.response.data.errors.project_state_id[0]
                         : '',
+                });
+                Log('add', {
+                    name: error.response.data.errors.name
+                        ? error.response.data.errors.name[0]
+                        : 'validated',
+                    description: error.response.data.errors.description
+                        ? error.response.data.errors.description[0]
+                        : 'validated',
+                    project_state_id: error.response.data.errors.project_state_id
+                        ? error.response.data.errors.project_state_id[0]
+                        : 'validated',
                 });
             });
         setState(false);
@@ -109,7 +124,8 @@ const UpdateProjectForm = () => {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
-                                        // history.push(`/task/${project.id}`);
+                                        Log('add', `User ${userContext.user.email} navigated to /project/tasks`);
+                                        Log('send');
                                         history.push({ pathname: '/project/tasks',
                                             state: {
                                                 project,
@@ -123,6 +139,8 @@ const UpdateProjectForm = () => {
                                     className="mx-2"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /project/board`);
+                                        Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
                                                 project,
@@ -135,6 +153,8 @@ const UpdateProjectForm = () => {
                                 <Button
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /projects`);
+                                        Log('send');
                                         history.push('/projects');
                                     }}
                                 >
