@@ -1,9 +1,16 @@
-import { Button, Container } from 'react-bootstrap';
+import { useEffect } from 'react';
+import React, { Button, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
 import UpdateProjectForm from './UpdateProjectForm';
+import { useUserContext } from '../../context/UserContext';
 
 const UpdateProject = () => {
     const history = useHistory();
+    const { userContext } = useUserContext({});
+    useEffect(() => {
+        Log('add', `User ${userContext.user.email} navigated to project edit page`);
+    }, []);
     return (
         <Container>
             <Button
@@ -11,6 +18,8 @@ const UpdateProject = () => {
                 variant="primary"
                 type="submit"
                 onClick={() => {
+                    Log('add', `User ${userContext.user.email} navigated to previous page`);
+                    Log('send');
                     history.goBack();
                 }}
             >
@@ -19,6 +28,6 @@ const UpdateProject = () => {
             <UpdateProjectForm />
         </Container>
     );
-}
+};
 
-export default UpdateProject
+export default UpdateProject;

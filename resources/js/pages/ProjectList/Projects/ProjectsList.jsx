@@ -163,6 +163,15 @@ const Projects = () => {
                 >
                     Create New Project
                 </Button>
+                <Button
+                    className="mb-3 mr-2"
+                    style={{ float: 'right' }}
+                    variant="warning"
+                    type="submit"
+                    href="api/export/projects"
+                >
+                    Export Projects
+                </Button>
                 <Form>
                     <div className="mb-1" style={{ display: 'flex' }}>
                         <FontAwesomeIcon

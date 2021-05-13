@@ -3,11 +3,11 @@ import { Col, Container, Row } from 'react-bootstrap';
 import DownloadButton from './DownloadButton';
 
 const buttonData = [
-    { endpoint: 'api/projects/export', title: 'Project List' },
-    { endpoint: 'api/projects/1/export', title: 'Project #1' },
-    { endpoint: 'api/projects/1/tasks/export', title: 'Project #1 Task List' },
-    { endpoint: 'api/tasks/export', title: 'Task List' },
-    { endpoint: 'api/tasks/1/export', title: 'Task #1' },
+    { endpoint: 'api/export/projects', title: 'Project List' },
+    { endpoint: 'api/export/projects/1', title: 'Project #1' },
+    { endpoint: 'api/export/projects/1/tasks', title: 'Project #1 Task List' },
+    { endpoint: 'api/export/tasks', title: 'Task List' },
+    { endpoint: 'api/export/tasks/1', title: 'Task #1' },
 ];
 
 const Buttons = () => (

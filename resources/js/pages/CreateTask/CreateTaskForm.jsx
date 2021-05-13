@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Log from '../../components/Log';
+import { useUserContext } from '../../context/UserContext';
 
 export default function CreateTaskForm() {
+    const { userContext } = useUserContext({});
     const history = useHistory();
     const { project } = history.location.state;
 
@@ -38,7 +41,7 @@ export default function CreateTaskForm() {
         await axios(config)
             .then(() => {
                 setSuccesMessage('Task created succesfully');
-
+                Log('add', 'Task created succesfully');
                 setTaskData({
                     name: '',
                     description: '',
@@ -64,6 +67,17 @@ export default function CreateTaskForm() {
                     priority_id: error.response.data.errors.priority_id
                         ? error.response.data.errors.priority_id[0]
                         : '',
+                });
+                Log('add', {
+                    name: error.response.data.errors.name
+                        ? error.response.data.errors.name[0]
+                        : 'validated',
+                    description: error.response.data.errors.description
+                        ? error.response.data.errors.description[0]
+                        : 'validated',
+                    priority_id: error.response.data.errors.priority_id
+                        ? error.response.data.errors.priority_id[0]
+                        : 'validated',
                 });
             });
         setState(false);
@@ -98,6 +112,8 @@ export default function CreateTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /project/tasks`);
+                                        Log('send');
                                         history.push({ pathname: '/project/tasks',
                                             state: {
                                                 project,
@@ -111,6 +127,8 @@ export default function CreateTaskForm() {
                                     className="m-1"
                                     variant="outline-success"
                                     onClick={() => {
+                                        Log('add', `User ${userContext.user.email} navigated to /project/board`);
+                                        Log('send');
                                         history.push({ pathname: '/project/board',
                                             state: {
                                                 project,

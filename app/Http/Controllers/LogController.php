@@ -18,6 +18,6 @@ class LogController extends Controller
 
     public function addToLog(Request $request)
     {
-        Log::channel('front')->info('User interaction with form', ['user_actions' => $request->all()]);
+        Log::channel('front')->info('User interaction info', ['user_actions' => $request->all()]);
     }
 }
