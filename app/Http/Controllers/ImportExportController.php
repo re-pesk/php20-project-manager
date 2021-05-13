@@ -32,7 +32,7 @@ class ImportExportController extends Controller
     public function exportProjectTaskList($project)
     {
         $fileName = 'project-' . $project . '-task-list.csv';
-        return (new ProjectsExport)->whereId($project)->taskList()->download($fileName, Excel::CSV);
+        return (new TasksExport)->whereProjectId($project)->download($fileName, Excel::CSV);
         // Excel::store(new DataExport, 'users-list.xlsx');
         // return response()->file(storage_path().'/exports/Filename2.xlsx');
     }

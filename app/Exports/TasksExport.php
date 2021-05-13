@@ -11,10 +11,18 @@ class TasksExport implements FromQuery
     use Exportable;
 
     protected int $id = 0;
+    protected int $projectId = 0;
 
     public function whereId(int $id = 0)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function whereProjectId(int $id = 0)
+    {
+        $this->projectId = $id;
 
         return $this;
     }
@@ -25,6 +33,10 @@ class TasksExport implements FromQuery
     public function query()
     {
         $query = Task::query();
+
+        if ($this->projectId) {
+            $query = $query->where('project_id', $this->projectId);
+        }
 
         if ($this->id) {
             $query = $query->where('id', $this->id);

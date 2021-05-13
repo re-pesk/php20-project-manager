@@ -11,19 +11,10 @@ class ProjectsExport implements FromQuery
     use Exportable;
 
     protected int $id = 0;
-    protected bool $taskList = false;
-
 
     public function whereId(int $id = 0)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function taskList()
-    {
-        $this->taskList = true;
 
         return $this;
     }
