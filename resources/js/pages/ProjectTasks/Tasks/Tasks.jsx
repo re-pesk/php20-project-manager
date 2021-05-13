@@ -26,28 +26,28 @@ const Tasks = () => {
     const { project } = history.location.state;
     // search
     const [searchVar, setSearchVar] = useState('');
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [searchInit, setSearchInit] = useState(0);
 
-    const getProjectTasks = async () => {
-        const config = {
-            method: 'GET',
-            url: `/api/projectTasks/${project}?page=${currentPage}`,
-            headers: {
-                Accept: 'Application/json',
-            },
-        };
-        await axios(config)
-            .then((response) => {
-                setTasksData(response.data.tasksData.data);
-                setLastPage(response.data.tasksData.last_page);
-                setProjectData(response.data.projectData);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        setLoading(false);
-    };
+    // const getProjectTasks = async () => {
+    //     const config = {
+    //         method: 'GET',
+    //         url: `/api/projectTasks/${project}?page=${currentPage}`,
+    //         headers: {
+    //             Accept: 'Application/json',
+    //         },
+    //     };
+    //     await axios(config)
+    //         .then((response) => {
+    //             setTasksData(response.data.tasksData.data);
+    //             setLastPage(response.data.tasksData.last_page);
+    //             setProjectData(response.data.projectData);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    //     setLoading(false);
+    // };
 
     // search
 
@@ -74,6 +74,7 @@ const Tasks = () => {
                 },
             };
         }
+        setLoading(true);
 
         await axios(config)
             .then((response) => {
@@ -86,13 +87,14 @@ const Tasks = () => {
                 console.log(error);
             });
         console.log(searchVar);
+        setLoading(false);
     }, [searchInit, idDelete, currentPage]);
 
     // delete
 
     useEffect(() => {
-        setLoading(true);
-        getProjectTasks();
+        // setLoading(true);
+        // getProjectTasks();
     }, [idDelete, currentPage]);
 
     const deleteTask = useCallback(

@@ -123,10 +123,13 @@ class ProjectTasksController extends Controller
                 )
                 ->where('project_id', $id)
                 ->where('tasks.name', 'like', "%$key%")
+                ->orWhere([
+                    ['project_id', $id],
+                    ['tasks.id', 'like', "%$key%"],
+                ])
                 ->paginate(8),
             'projectData' => Project::where('id', $id)->select('projects.id', 'projects.name')->get(),
         );
         return $dataForTasks;
     }
-
 }
