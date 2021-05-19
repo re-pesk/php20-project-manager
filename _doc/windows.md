@@ -89,13 +89,13 @@ Open Chrome browser and Add extentions:
 - Clik Apache **Config** > config.inc.php > find
 
 ```php
- $cfg['Servers'][$i]['auth_type'] = 'config';
+$cfg['Servers'][$i]['auth_type'] = 'config';
 ```
 
 line and change it to
 
 ```php
- $cfg['Servers'][$i]['auth_type'] = 'cookie';
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
 ```
 
 - Open where MySQL click **Admin** login as root **Username:** **root**
@@ -161,20 +161,18 @@ code .
   click **File** > **Open folder** and find folder **php20-project-manager**.
 - Where **PHP20-PROJECT-MANAGER** click on new file icon.
 - name it **.env**
-- Copy everything from **.env.example** file and paste into **.env** file
-  and type into
+- Copy **.env.develop** file to **.env**. Add username and password for mysql login user that you have created:
 
-```
-DB_USERNAME=
-```
-
-your username and into
-
-```
-DB_PASSWORD=
+```env
+DB_USERNAME=<username>
+DB_PASSWORD=<password>
 ```
 
-your password for mysql login user that you have created.
+Add to **C:\Windows\System32\drivers\etc\hosts**
+
+```hosts
+127.0.0.1 lieta.local
+```
 
 - Type **Ctrl+`**, terminal will open, then choose **New Git Bash**.
 - Type

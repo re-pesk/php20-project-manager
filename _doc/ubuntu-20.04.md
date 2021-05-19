@@ -1,4 +1,4 @@
-# Prepearing Ubuntu 20.04 to run PHProjectMan
+# Preparing Ubuntu 20.04 to run PHProjectMan
 
 ## Install Microsoft Chrome
 
