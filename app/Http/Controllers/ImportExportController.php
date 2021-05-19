@@ -12,7 +12,7 @@ class ImportExportController extends Controller
     public function __construct()
     {
         // $this->middleware(['cors']);
-        $this->middleware(['auth:sanctum'])->only(['export']);
+        $this->middleware(['auth:sanctum']);
         $this->middleware(['log.routes']);
     }
 
@@ -33,15 +33,14 @@ class ImportExportController extends Controller
     {
         $fileName = 'project-' . $project . '-task-list.csv';
         return (new TasksExport)->whereProjectId($project)->download($fileName, Excel::CSV);
-        // Excel::store(new DataExport, 'users-list.xlsx');
-        // return response()->file(storage_path().'/exports/Filename2.xlsx');
     }
 
     public function exportTaskList()
     {
         $fileName = 'task-list.csv';
 
-        return (new TasksExport)->download($fileName, Excel::CSV);
+        (new TasksExport)->store($fileName, Excel::CSV);
+        return response()->file($fileName);
     }
 
     public function exportTask($task)

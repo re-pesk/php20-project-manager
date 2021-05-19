@@ -9,11 +9,7 @@ import CheckedRoute from './CheckedRoute';
 const RouteList = () => (
     <Switch>
         {routeListData.map((item, index) => {
-            const { exact, path, content, page, accessibility } = item;
-            let { title } = item;
-            if (!title) {
-                title = content.name;
-            }
+            const { exact, path, content, title, accessibility, page } = item;
             const key = `id-${index + 1}`;
             if (page) {
                 return (

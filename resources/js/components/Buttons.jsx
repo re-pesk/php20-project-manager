@@ -15,7 +15,7 @@ const Buttons = () => (
         <Row className="text-center">
             {buttonData.map((item, index) => {
                 const key = `btn-${index}`;
-                return (<Col><DownloadButton key={key} endpoint={item.endpoint} title={item.title} /></Col>);
+                return (<Col key={key}><DownloadButton endpoint={item.endpoint} title={item.title} /></Col>);
             })}
         </Row>
     </Container>
