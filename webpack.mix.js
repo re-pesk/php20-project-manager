@@ -12,7 +12,7 @@ const dotEnvPlugin = new webpack.DefinePlugin({
     },
 });
 
-const PORT = process.env.SERVER_PORT;
+const { DOMAIN_NAME, SERVER_PORT } = process.env;
 
 /*
  |--------------------------------------------------------------------------
@@ -33,4 +33,4 @@ mix
     .js('resources/js/main.js', 'public/js')
     .postCss('resources/css/main.css', 'public/css', [])
     .react()
-    .browserSync({ proxy: `127.0.0.1:${PORT}`, ui: false });
+    .browserSync({ proxy: `${DOMAIN_NAME}:${SERVER_PORT}`, ui: false, open: 'external', host: DOMAIN_NAME });
