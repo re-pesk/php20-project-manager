@@ -29,7 +29,7 @@ sudo apt install mariadb-server
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
-sudo apt install php8.0 php8.0-curl php8.0-dom php8.0-mbstring php8.0-mysql php8.0-xdebug
+sudo apt install php8.0 php8.0-curl php8.0-dom php8.0-gd php8.0-mbstring php8.0-mysql php8.0-xdebug php8.0-xml
 php -v
 echo -e "output_buffering=off\nxdebug.mode=debug\nxdebug.client_port=9003\nxdebug.client_host=127.0.0.1\nxdebug.start_with_request=yes\nxdebug.discover_client_host=0\nxdebug.idekey=VSCODE\nxdebug.show_error_trace = 1\nxdebug.max_nesting_level=250\nxdebug.var_display_max_depth=10\nxdebug.log=/tmp/xdebug.log\nxdebug.log_level=0" | sudo tee -a /etc/php/8.0/mods-available/xdebug.ini
 ```
@@ -38,13 +38,13 @@ echo -e "output_buffering=off\nxdebug.mode=debug\nxdebug.client_port=9003\nxdebu
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-nvm install --lts -latest-npm
+nvm install --lts --latest-npm
 ```
 
 Reopen terminal
 
 ```bash
-npm -v // must be > 7+
+npm -v // must be 7+
 ```
 
 If npm version is not 7+:
