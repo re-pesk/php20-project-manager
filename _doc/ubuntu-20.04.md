@@ -103,6 +103,7 @@ sudo sh -c 'echo "127.0.0.1 lieta.local" >> /etc/hosts'
 
 composer install
 php artisan migrate
+php artisan db:seed
 npm install
 npm run dev
 ```
