@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         foreach ($this->toTruncate as $table) {
-            DB::table($table)->truncate();
+            if (Schema::hasTable($table)) {
+                DB::table($table)->truncate();
+            }
         }
 
         $this->call([

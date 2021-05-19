@@ -12,6 +12,8 @@ const dotEnvPlugin = new webpack.DefinePlugin({
     },
 });
 
+const { DOMAIN_NAME, SERVER_PORT } = process.env;
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -31,4 +33,4 @@ mix
     .js('resources/js/main.js', 'public/js')
     .postCss('resources/css/main.css', 'public/css', [])
     .react()
-    .browserSync({ proxy: '127.0.0.1:8000', ui: false });
+    .browserSync({ proxy: `${DOMAIN_NAME}:${SERVER_PORT}`, ui: false, open: 'external', host: DOMAIN_NAME });
