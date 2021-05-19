@@ -161,7 +161,7 @@ code .
   click **File** > **Open folder** and find folder **php20-project-manager**.
 - Where **PHP20-PROJECT-MANAGER** click on new file icon.
 - name it **.env**
-- Copy **.env.develop** file to **.env**. Add username and password for mysql login user that you have created:
+- Copy **.env.development** file to **.env**. Add username and password for mysql login user that you have created:
 
 ```env
 DB_USERNAME=<username>
