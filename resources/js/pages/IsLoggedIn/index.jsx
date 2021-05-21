@@ -25,7 +25,9 @@ const IsLoggedIn = () => {
             .catch((error) => {
                 // eslint-disable-next-line no-console
                 console.log(error);
-                setLocalData(error);
+                if (error.response.status === 401) {
+                    setLocalData(error);
+                }
             });
     };
 

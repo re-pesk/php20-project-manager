@@ -38,6 +38,9 @@ const Login = () => {
                 })
                 .catch((error) => {
                     setErrorData({ status: error.response.status, message: error.response.data.message });
+                    if (error.response.status === 401) {
+                        setUserContext({});
+                    }
                     // eslint-disable-next-line no-console
                     console.log(error.response);
                 });
