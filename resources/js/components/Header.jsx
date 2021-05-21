@@ -1,13 +1,13 @@
-import React from 'react';
-// import { Redirect } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowLeft, faArrowRight, faSignInAlt, faSignOutAlt, faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { Button, Container, Navbar, Nav } from 'react-bootstrap';
+// import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useUserContext } from '../context/UserContext';
 import { useSidebarContext } from '../context/SidebarContext';
+import { useUserContext } from '../context/UserContext';
 
 export default function Header(props) {
     const { title } = props;
@@ -23,14 +23,16 @@ export default function Header(props) {
                 className="navbar shadow-sm p-3 mb-5 text-info"
                 expand
             >
-                <Nav className="col-2" navbar>
-                    <Button
-                        variant="outline-info"
-                        onClick={toggle}
-                    >
-                        <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
-                    </Button>
-                </Nav>
+                {!isOpen ? (
+                    <Nav className="col-2" navbar>
+                        <Button
+                            variant="outline-info"
+                            onClick={toggle}
+                        >
+                            <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
+                        </Button>
+                    </Nav>
+                ) : null}
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
                 {
                     userContext.user
