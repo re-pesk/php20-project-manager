@@ -22,11 +22,12 @@ const Logout = () => {
 
         await axios(config)
             .then((response) => {
+                setUserContext({});
                 // eslint-disable-next-line no-console
                 console.log(response.data);
-                setUserContext({});
             })
             .catch((error) => {
+                setUserContext({});
                 // eslint-disable-next-line no-console
                 console.log(error);
             });
