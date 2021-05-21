@@ -1,13 +1,13 @@
-import '../css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import { debugContextDevtool } from 'react-context-devtool';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { debugContextDevtool } from 'react-context-devtool';
-import UserContextProvider from './context/UserContext';
-import SidebarContextProvider from './context/SidebarContext';
+import '../css/index.css';
 import App from './App';
 import Log from './components/Log';
+import SidebarContextProvider from './context/SidebarContext';
+import UserContextProvider from './context/UserContext';
 
 const container = document.getElementById('app');
 
