@@ -11,6 +11,16 @@ export default function App() {
     const { setSidebarContext } = useSidebarContext();
     const { isOpen } = useSidebarContext();
     const [previousWidth, setPreviousWidth] = useState(-1);
+    const body = document.querySelector('body');
+
+    useEffect(() => {
+        if (isOpen) {
+            body.classList.add('no-scroll');
+        }
+        if (isOpen === false) {
+            body.classList.remove('no-scroll');
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         const updateWidth = () => {
@@ -40,7 +50,7 @@ export default function App() {
     });
 
     return (
-        <div className="App wrapper min-vh-100">
+        <div className={classNames('App wrapper min-vh-100', { 'no-scroll': isOpen })}>
             <div className={classNames({ tint: isOpen })} />
             <Sidebar />
             <RouteList />
