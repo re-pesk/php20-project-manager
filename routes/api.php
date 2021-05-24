@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -58,3 +59,5 @@ Route::get('search-tasks/by-name/{id}/{key}', [ProjectTasksController::class, 's
 Route::get('search-tasks/by-name-anywhere/{id}/{key}', [ProjectTasksController::class, 'searchByNameAny']);
 Route::get('search-tasks/by-id/{id}/{key}', [ProjectTasksController::class, 'searchById']);
 // Route::get('search-tasks/{id}/{key}', [ProjectTasksController::class, 'search']);
+//Dashboard data
+Route::get('dashboard', [DashboardController::class, 'dashboardData']);
