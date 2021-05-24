@@ -51,6 +51,7 @@ a:focus {
 .sidebar-header {
     background: #313b4c;
     color: #adb5bd;
+    display: flex;
 }
 
 .sidebar-header h3 {
@@ -117,25 +118,27 @@ li a.dropdown-toggle::after {
 .content {
     padding: 20px 0 0 0;
     position: relative;
-    /* margin-left: 0; */
-    /* margin-right: 0; */
-    /* min-height: 100vh; */
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width: 1186px) {
     body {
         overflow: hidden;
     }
 
+    .sidebar {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 99;
+    }
+
     .content.is-open {
-        /*margin-left: 100%;*/
         display: none;
         transition: all 0.5s;
     }
 
     .sidebar.is-open {
-        min-width: 100%;
-        max-width: 100%;
         margin-left: 0;
         transition: all 0.5s, height 0s;
         height: 100vh !important;
@@ -151,4 +154,24 @@ li a.dropdown-toggle::after {
         left: 68%;
     }
 
+    .board {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .tint {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 98;
+        background: rgba(2, 2, 2, 0.5);
+    }
+}
+
+.toggle-visibility {
+    visibility: hidden;
 }

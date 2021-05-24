@@ -3,6 +3,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 // import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import React from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -23,16 +24,14 @@ export default function Header(props) {
                 className="navbar shadow-sm p-3 mb-5 text-info"
                 expand
             >
-                {!isOpen ? (
-                    <Nav className="col-2" navbar>
-                        <Button
-                            variant="outline-info"
-                            onClick={toggle}
-                        >
-                            <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
-                        </Button>
-                    </Nav>
-                ) : null}
+                <Nav className={classNames('col-2', { 'toggle-visibility': isOpen })} navbar>
+                    <Button
+                        variant="outline-info"
+                        onClick={toggle}
+                    >
+                        <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
+                    </Button>
+                </Nav>
                 <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
                 {
                     userContext.user
