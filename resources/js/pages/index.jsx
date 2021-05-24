@@ -2,7 +2,7 @@ import AuthExample from './AuthExample';
 import CreateTask from './CreateTask';
 import Dashboard from './Dashboard';
 import EditTask from './EditTask';
-import Empty from './Empty';
+import About from './About';
 import ErrorPage from './ErrorPage';
 import IsLoggedIn from './IsLoggedIn';
 import Login from './Login';
@@ -21,7 +21,7 @@ export {
     CreateTask,
     Dashboard,
     EditTask,
-    Empty,
+    About,
     ErrorPage,
     IsLoggedIn,
     Login,
@@ -40,7 +40,7 @@ export default {
     CreateTask,
     Dashboard,
     EditTask,
-    Empty,
+    About,
     ErrorPage,
     IsLoggedIn,
     Login,

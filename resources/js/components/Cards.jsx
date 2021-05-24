@@ -14,6 +14,12 @@ const images = [
         title: 'Ramybės sargas',
         text: 'Aš irgi nagiuką prikišau!',
     },
+    {
+        id: 3,
+        src: '../../img/pupiukas.jpg',
+        title: 'Pupiukas',
+        text: 'Mūsų gražuolis! :D',
+    },
 ];
 
 const Cards = () => (
