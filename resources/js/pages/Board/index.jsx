@@ -184,13 +184,8 @@ export default function Board() {
             </div>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr 1fr',
-                        margin: '24px auto',
-                        width: '90%',
-                        gap: '0',
-                    }}
+                    id="board-wrapper"
+                    className="board-wrapper-2"
                 >
                     {Object.values(columns).map((col) => (
                         <Column col={col} cols={columns} setCols={setColumns} key={col.id} />

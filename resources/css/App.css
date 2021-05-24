@@ -121,6 +121,23 @@ li a.dropdown-toggle::after {
     position: relative;
 }
 
+.board-wrapper-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 24px auto;
+    width: 90%;
+    gap: 0;
+}
+
+@media only screen and (max-width: 994px) {
+    #board-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 24px auto;
+        width: 90%;
+    }
+}
+
 @media only screen and (max-width: 1186px) {
 
     .sidebar {
