@@ -255,7 +255,7 @@ const Projects = () => {
                                     }}
                                     name="searchradio"
                                     id="formHorizontalRadios2"
-                                    onClick={() => { setSearchOption('id'); }}
+                                    onClick={() => { setSearchOption('id'); setSearchAnywhere(false); }}
                                 />
                             </div>
                             {searchOption === 'name' ? (
