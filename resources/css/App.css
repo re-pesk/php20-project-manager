@@ -40,6 +40,7 @@ a:focus {
 .sticky-sidebar {
     position: sticky;
     top: 0;
+    bottom: 0;
 }
 
 .sidebar.is-open {
@@ -121,9 +122,6 @@ li a.dropdown-toggle::after {
 }
 
 @media only screen and (max-width: 1186px) {
-    body {
-        overflow: hidden;
-    }
 
     .sidebar {
         position: absolute;
@@ -169,6 +167,11 @@ li a.dropdown-toggle::after {
         right: 0;
         z-index: 98;
         background: rgba(2, 2, 2, 0.5);
+        height: 100vh !important;
+    }
+
+    .no-scroll {
+        overflow: hidden;
     }
 }
 
