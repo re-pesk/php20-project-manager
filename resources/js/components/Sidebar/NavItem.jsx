@@ -11,7 +11,11 @@ const NavItem = (props) => {
 
     return (
         <Nav.Item className={classNames({ active: (href === window.location.pathname) })}>
-            <LinkContainer to={href} onClick={() => { setSidebarContext(!isOpen); }}>
+            <LinkContainer
+                to={href}
+                // eslint-disable-next-line no-unused-expressions
+                onClick={() => { (document.body.clientWidth <= 1186) ? setSidebarContext(!isOpen) : null; }}
+            >
                 <Nav.Link>
                     <FontAwesomeIcon icon={icon} className="mr-2" />
                     {children}
