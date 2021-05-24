@@ -96,7 +96,7 @@ FLUSH PRIVILEGES;
 ## Configure PHProjectMan
 
 ```bash
-cp .env.development .env
+cp .env-development .env
 sed -i 's/DB_USERNAME=root/DB_USERNAME=<usename>/g' .env
 sed -i 's/DB_PASSWORD=/DB_PASSWORD=<password>/g' .env
 sudo sh -c 'echo "127.0.0.1 lieta.local" >> /etc/hosts'
