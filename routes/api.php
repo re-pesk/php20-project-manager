@@ -50,6 +50,14 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('tasks', TaskController::class);
 Route::get('project/{id}/tasks', [TaskController::class, 'showAll']);
 Route::apiResource('projectTasks', ProjectTasksController::class);
-Route::get('search-projects/{key}', [ProjectController::class, 'search']);
-Route::get('search-tasks/{id}/{key}', [ProjectTasksController::class, 'search']);
+// Project Search
+Route::get('search-projects/by-name/{key}', [ProjectController::class, 'searchByNameBeg']);
+Route::get('search-projects/by-name-anywhere/{key}', [ProjectController::class, 'searchByNameAny']);
+Route::get('search-projects/by-id/{key}', [ProjectController::class, 'searchById']);
+// Task search
+Route::get('search-tasks/by-name/{id}/{key}', [ProjectTasksController::class, 'searchByNameBeg']);
+Route::get('search-tasks/by-name-anywhere/{id}/{key}', [ProjectTasksController::class, 'searchByNameAny']);
+Route::get('search-tasks/by-id/{id}/{key}', [ProjectTasksController::class, 'searchById']);
+// Route::get('search-tasks/{id}/{key}', [ProjectTasksController::class, 'search']);
+//Dashboard data
 Route::get('dashboard', [DashboardController::class, 'dashboardData']);

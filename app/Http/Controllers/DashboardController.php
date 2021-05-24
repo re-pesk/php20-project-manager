@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function dashboardData(){
         $allData = array(
             'projectCount' => Project::get()->count(),
-            'doneProjectCount' => Project::where('project_state_id', '2')->count(),
+            'finishedProjectCount' => Project::where('project_state_id', '2')->count(),
             'projectsCreatedLastWeekCount' => Project::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count(),
             'taskCount' => Task::get()->count(),
             'finishedTaskCount' => Task::where('task_state_id', '3')->count(),

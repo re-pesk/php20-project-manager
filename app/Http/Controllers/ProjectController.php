@@ -108,11 +108,25 @@ class ProjectController extends Controller
        return Project::destroy($id);
     }
 
-    public function search($key){
+    public function searchByNameBeg($key){
+        return Project::withCount(['tasks', 'unfinishedTasks'])
+            ->with('state:name,id')
+            ->where('name', 'like', "$key%")
+            ->paginate(8);
+    }
+
+    public function searchByNameAny($key){
         return Project::withCount(['tasks', 'unfinishedTasks'])
             ->with('state:name,id')
             ->where('name', 'like', "%$key%")
-            ->orWhere('id', 'like', "%$key%")
             ->paginate(8);
     }
+
+    public function searchById($key){
+        return Project::withCount(['tasks', 'unfinishedTasks'])
+            ->with('state:name,id')
+            ->Where('id', 'like', "%$key%")
+            ->paginate(8);
+    }
+
 }

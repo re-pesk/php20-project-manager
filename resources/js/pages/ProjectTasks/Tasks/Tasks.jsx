@@ -28,6 +28,8 @@ const Tasks = () => {
     const [searchVar, setSearchVar] = useState('');
     const [show, setShow] = useState(true);
     const [searchInit, setSearchInit] = useState(0);
+    const [searchOption, setSearchOption] = useState('name');
+    const [searchAnywhere, setSearchAnywhere] = useState(false);
 
     // const getProjectTasks = async () => {
     //     const config = {
@@ -58,13 +60,31 @@ const Tasks = () => {
     useEffect(async () => {
         let config = {};
         if (searchVar !== '') {
-            config = {
-                method: 'GET',
-                url: `/api/search-tasks/${project}/${searchVar}?page=${currentPage}`,
-                headers: {
-                    Accept: 'application/json',
-                },
-            };
+            if (searchOption === 'id') {
+                config = {
+                    method: 'GET',
+                    url: `/api/search-tasks/by-id/${project}/${searchVar}?page=${currentPage}`,
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                };
+            } else if (searchOption === 'name' && !searchAnywhere) {
+                config = {
+                    method: 'GET',
+                    url: `/api/search-tasks/by-name/${project}/${searchVar}?page=${currentPage}`,
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                };
+            } else {
+                config = {
+                    method: 'GET',
+                    url: `/api/search-tasks/by-name-anywhere/${project}/${searchVar}?page=${currentPage}`,
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                };
+            }
         } else {
             config = {
                 method: 'GET',
@@ -184,29 +204,76 @@ const Tasks = () => {
                             onClick={() => { setShow(!show); }}
                         />
                     </div>
-                    <div className="mb-3" style={{ display: 'flex' }}>
+                    <div className="mb-3 w-100" style={{ display: 'flex' }}>
                         {show ? (
-                            <Form.Group className="w-100" style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                                <Form.Control
-                                    type="text"
-                                    style={{ marginLeft: 'auto', order: '2' }}
-                                    placeholder="Search..."
-                                    onChange={handleInputChange}
-                                    className="w-25"
-                                />
-                                <Button
-                                    variant="primary"
-                                    type="submit"
-                                    className="ml-1 mr-2"
-                                    style={{ order: '1' }}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setSearchInit(searchInit + 1);
-                                    }}
-                                >
-                                    Submit
-                                </Button>
-                            </Form.Group>
+                            <div className="w-100">
+                                <div className="w-100">
+                                    <Form.Group
+                                        className="w-100"
+                                        style={{ display: 'flex', flexDirection: 'row-reverse' }}
+                                    >
+                                        <Form.Control
+                                            type="text"
+                                            style={{ marginLeft: 'auto', order: '2' }}
+                                            placeholder="Search..."
+                                            onChange={handleInputChange}
+                                            className="w-25"
+                                        />
+                                        <Button
+                                            variant="primary"
+                                            type="submit"
+                                            className="ml-1 mr-2"
+                                            style={{ order: '1' }}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setSearchInit(searchInit + 1);
+                                            }}
+                                        >
+                                            Submit
+                                        </Button>
+                                    </Form.Group>
+                                </div>
+                                <div className="mb-2" style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                                    <span style={{ order: '23' }} className="mr-2">
+                                        Search By:
+                                    </span>
+                                    <Form.Check
+                                        type="radio"
+                                        label="Name"
+                                        style={{
+                                            order: '2',
+                                        }}
+                                        className="mr-2"
+                                        name="searchradio"
+                                        id="formHorizontalRadios1"
+                                        defaultChecked
+                                        onClick={() => { setSearchOption('name'); }}
+                                    />
+                                    <Form.Check
+                                        type="radio"
+                                        label="ID"
+                                        style={{
+                                            order: '1',
+                                        }}
+                                        name="searchradio"
+                                        id="formHorizontalRadios2"
+                                        onClick={() => { setSearchOption('id'); }}
+                                    />
+                                </div>
+                                {searchOption === 'name' ? (
+                                    <div className="mb-3" style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                                        <Form.Check
+                                            label="Search anywhere in the name"
+                                            style={{
+                                                order: '1',
+                                            }}
+                                            id="formCheckbox1"
+                                            onClick={() => { setSearchAnywhere(!searchAnywhere); }}
+                                        />
+                                    </div>
+                                )
+                                    : null}
+                            </div>
                         )
                             : null}
                     </div>
