@@ -227,9 +227,13 @@ const Projects = () => {
                                         style={{ order: '1' }}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            setCurrentPage(0);
+                                            if (currentPage === 0) {
+                                                setCurrentPage(-1);
+                                            } else {
+                                                setCurrentPage(0);
+                                            }
                                             // eslint-disable-next-line max-len
-                                            eventFire(document.querySelector('a[aria-label="Page 1"]'), 'click');
+                                            eventFire(document.querySelector('a[aria-label^="Page 1"]'), 'click');
                                         }}
                                     >
                                         Submit
