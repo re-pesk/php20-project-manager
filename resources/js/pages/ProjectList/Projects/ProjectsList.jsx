@@ -30,7 +30,7 @@ const Projects = () => {
     // search
     const [searchVar, setSearchVar] = useState('');
     const [show, setShow] = useState(true);
-    const [searchInit, setSearchInit] = useState(0);
+    // const [searchInit, setSearchInit] = useState(0);
     const [searchOption, setSearchOption] = useState('name');
     const [searchAnywhere, setSearchAnywhere] = useState(false);
 
@@ -57,6 +57,9 @@ const Projects = () => {
 
     // search projects
 
+    // const setSearchInit = () => {
+    //     setCurrentPage(0);
+    // };
     const handleInputChange = (event) => {
         setSearchVar(event.target.value);
     };
@@ -111,7 +114,7 @@ const Projects = () => {
                 console.log(error);
             });
         console.log(searchVar);
-    }, [searchInit, idDelete, currentPage]);
+    }, [idDelete, currentPage]);
 
     // delete project
     const deleteProject = useCallback(
@@ -224,7 +227,13 @@ const Projects = () => {
                                         style={{ order: '1' }}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            setSearchInit(searchInit + 1);
+                                            if (currentPage === 0) {
+                                                setCurrentPage(-1);
+                                            } else {
+                                                setCurrentPage(0);
+                                            }
+                                            // eslint-disable-next-line max-len
+                                            eventFire(document.querySelector('a[aria-label^="Page 1"]'), 'click');
                                         }}
                                     >
                                         Submit
@@ -255,7 +264,7 @@ const Projects = () => {
                                     }}
                                     name="searchradio"
                                     id="formHorizontalRadios2"
-                                    onClick={() => { setSearchOption('id'); }}
+                                    onClick={() => { setSearchOption('id'); setSearchAnywhere(false); }}
                                 />
                             </div>
                             {searchOption === 'name' ? (

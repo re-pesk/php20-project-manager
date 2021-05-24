@@ -7,6 +7,7 @@ import { Accordion, Badge, Button, Card, Container, Form, Spinner } from 'react-
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router-dom';
 import TaskCard from './TaskCard';
+import eventFire from '../../../components/EventFire';
 
 const Tasks = () => {
     // Tasks data
@@ -27,7 +28,7 @@ const Tasks = () => {
     // search
     const [searchVar, setSearchVar] = useState('');
     const [show, setShow] = useState(true);
-    const [searchInit, setSearchInit] = useState(0);
+    // const [searchInit, setSearchInit] = useState(0);
     const [searchOption, setSearchOption] = useState('name');
     const [searchAnywhere, setSearchAnywhere] = useState(false);
 
@@ -108,7 +109,7 @@ const Tasks = () => {
             });
         console.log(searchVar);
         setLoading(false);
-    }, [searchInit, idDelete, currentPage]);
+    }, [idDelete, currentPage]);
 
     // delete
 
@@ -226,7 +227,14 @@ const Tasks = () => {
                                             style={{ order: '1' }}
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                setSearchInit(searchInit + 1);
+                                                if (currentPage === 0) {
+                                                    setCurrentPage(-1);
+                                                } else {
+                                                    setCurrentPage(0);
+                                                }
+
+                                                // eslint-disable-next-line max-len
+                                                eventFire(document.querySelector('a[aria-label^="Page 1"]'), 'click');
                                             }}
                                         >
                                             Submit
@@ -257,7 +265,7 @@ const Tasks = () => {
                                         }}
                                         name="searchradio"
                                         id="formHorizontalRadios2"
-                                        onClick={() => { setSearchOption('id'); }}
+                                        onClick={() => { setSearchOption('id'); setSearchAnywhere(false); }}
                                     />
                                 </div>
                                 {searchOption === 'name' ? (
