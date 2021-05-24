@@ -152,7 +152,7 @@ export default function Board() {
     };
 
     return (
-        <Container>
+        <Container className="board">
             {/* This is modal window */}
             <ConfirmDeleteModal
                 itemNameToDelete="task"
