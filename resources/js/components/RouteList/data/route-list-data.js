@@ -1,17 +1,19 @@
 /* eslint-disable max-len */
 import {
-    AuthExample,
-
-    Board, CreateProject, CreateTask, Dashboard,
-
+    About,
+    Board,
+    CreateProject,
+    CreateTask,
+    Dashboard,
     EditTask,
-    Empty,
-
-    ErrorPage, IsLoggedIn,
+    ErrorPage,
     Login,
-
     Logout,
-    ProjectList, ProjectTasks, Register, UpdateProject, Welcome,
+    ProjectList,
+    ProjectTasks,
+    Register,
+    UpdateProject,
+    Welcome,
 } from '../../../pages';
 
 export const accessType = Object.freeze({ requiresLogin: 1, publicOnly: 2, both: 3 });
@@ -22,9 +24,7 @@ export default [
     { exact: true, path: '/project/create-task', content: CreateTask, title: 'Create task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/project/edit-task', content: EditTask, title: 'Edit task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/project/tasks', content: ProjectTasks, title: 'Project Tasks', accessibility: accessType.requiresLogin },
-    { exact: true, path: '/empty', content: Empty, title: 'Empty', accessibility: accessType.requiresLogin },
-    { exact: true, path: '/example', content: AuthExample, title: 'Authentication Example', accessibility: accessType.requiresLogin },
-    { exact: true, path: '/logged-in', content: IsLoggedIn, title: 'Is User Logged In?', accessibility: accessType.both },
+    { exact: true, path: '/about-us', content: About, title: 'About us', accessibility: accessType.requiresLogin },
     { exact: true, path: '/login', content: Login, title: 'Login', accessibility: accessType.publicOnly },
     { exact: true, path: '/register', content: Register, title: 'Register', accessibility: accessType.publicOnly },
     { exact: true, path: '/logout', content: Logout, title: 'Logout', accessibility: accessType.requiresLogin },
