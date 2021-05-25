@@ -1,4 +1,4 @@
-﻿<div text-align="center"># User manual for PHProjectMan system</div>
+﻿# User manual for PHProjectMan system
 
 ## Home
 
