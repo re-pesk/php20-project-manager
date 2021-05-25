@@ -319,7 +319,7 @@ const Projects = () => {
                                             <b>State:&nbsp; </b>
                                             <span className={
                                                 project.state.name === 'in progress'
-                                                    ? 'text-primary' : 'text-success'
+                                                    ? 'text-primary project-state' : 'text-success project-state'
                                             }
                                             >
                                                 {project.state.name}
@@ -327,21 +327,29 @@ const Projects = () => {
                                         </div>
                                         <div className="d-flex justify-content-start">
                                             <b>Tasks Assigned:&nbsp;</b>
-                                            <span className="text-primary">{project.tasks_count}</span>
+                                            <span className="text-primary project-tasks-assigned">
+                                                {project.tasks_count}
+                                            </span>
                                         </div>
                                         <div className="d-flex justify-content-start">
                                             <b>Unfinished Tasks:&nbsp;</b>
-                                            <span className="text-danger">{project.unfinished_tasks_count}</span>
+                                            <span className="text-danger project-unfinished-tasks">
+                                                {project.unfinished_tasks_count}
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="col align-self-center ">
                                         <div className="d-flex justify-content-end">
                                             <b>Created at:&nbsp; </b>
-                                            {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            <div className="project-create-time">
+                                                {Moment(project.created_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </div>
                                         </div>
                                         <div className="d-flex justify-content-end">
                                             <b>Updated at:&nbsp; </b>
-                                            {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            <div className="project-update-time">
+                                                {Moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss')}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
