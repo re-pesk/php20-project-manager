@@ -22,7 +22,7 @@ const images = [
     },
     {
         id: 3,
-        src: '../../img/rokis.JPG',
+        src: '../../img/rokis.jpg',
         title: 'Rokis',
         text: 'Gražuolis ir taškas!',
     },
