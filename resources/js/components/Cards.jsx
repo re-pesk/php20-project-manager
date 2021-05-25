@@ -21,7 +21,7 @@ const images = [
         text: 'Mūsų gražuolis! :D',
     },
     {
-        id: 3,
+        id: 4,
         src: '../../img/rokis.jpg',
         title: 'Rokis',
         text: 'Gražuolis ir taškas!',
