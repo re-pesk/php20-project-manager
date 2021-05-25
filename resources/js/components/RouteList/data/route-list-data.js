@@ -24,7 +24,7 @@ export default [
     { exact: true, path: '/project/create-task', content: CreateTask, title: 'Create task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/project/edit-task', content: EditTask, title: 'Edit task', accessibility: accessType.requiresLogin },
     { exact: true, path: '/project/tasks', content: ProjectTasks, title: 'Project Tasks', accessibility: accessType.requiresLogin },
-    { exact: true, path: '/about-us', content: About, title: 'About us', accessibility: accessType.requiresLogin },
+    { exact: true, path: '/about-us', content: About, title: 'About us', accessibility: accessType.both },
     { exact: true, path: '/login', content: Login, title: 'Login', accessibility: accessType.publicOnly },
     { exact: true, path: '/register', content: Register, title: 'Register', accessibility: accessType.publicOnly },
     { exact: true, path: '/logout', content: Logout, title: 'Logout', accessibility: accessType.requiresLogin },
