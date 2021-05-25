@@ -20,6 +20,12 @@ const images = [
         title: 'Pupiukas',
         text: 'Mūsų gražuolis! :D',
     },
+    {
+        id: 3,
+        src: '../../img/rokis.JPG',
+        title: 'Rokis',
+        text: 'Gražuolis ir taškas!',
+    },
 ];
 
 const Cards = () => (
