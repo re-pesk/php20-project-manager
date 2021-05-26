@@ -64,7 +64,8 @@ export default function Dashboard() {
             )
                 : (
                     <div className="row">
-                        <div className="col-lg-6 col-sm-12 mt-5">
+                        {/* Projects */}
+                        <div className="col-lg-4 col-sm-12 mt-2">
                             <Card>
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
@@ -92,23 +93,15 @@ export default function Dashboard() {
                                         {' '}
                                         <strong>{projectData.projectsCreatedLastWeekCount}</strong>
                                         {' '}
-                                        in the database that has been created this week.
+                                        in the database that has been created last week.
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>
                         </div>
-                        <div className="col-lg-6 col-sm-12 mt-5">
+                        {/* Tasks */}
+                        <div className="col-lg-4 col-sm-12 mt-2">
                             <Card>
                                 <ListGroup variant="flush">
-                                    <ListGroup.Item>
-                                        There
-                                        {' '}
-                                        {projectData.projectCount === '1 task' ? ('is') : ('are')}
-                                        {' '}
-                                        <strong>{projectData.taskCount}</strong>
-                                        {' '}
-                                        in the database.
-                                    </ListGroup.Item>
                                     <ListGroup.Item>
                                         There
                                         {' '}
@@ -125,7 +118,32 @@ export default function Dashboard() {
                                         {' '}
                                         <strong>{projectData.tasksCreatedLastWeekCount}</strong>
                                         {' '}
-                                        in the database that has been created this week.
+                                        in the database that has been created last week.
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </div>
+                        {/* Users */}
+                        <div className="col-lg-4 col-sm-12 mt-2">
+                            <Card>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                        There
+                                        {' '}
+                                        {projectData.userCount === '1 user' ? ('is') : ('are')}
+                                        {' '}
+                                        <strong>{projectData.userCount}</strong>
+                                        {' '}
+                                        in the database.
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                        There
+                                        {' '}
+                                        {projectData.usersCreatedLastMonthCount === '1 user' ? ('is') : ('are')}
+                                        {' '}
+                                        <strong>{projectData.usersCreatedLastMonthCount}</strong>
+                                        {' '}
+                                        in the database that has been created last month.
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>
