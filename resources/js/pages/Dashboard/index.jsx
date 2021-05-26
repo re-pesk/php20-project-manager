@@ -105,6 +105,15 @@ export default function Dashboard() {
                                     <ListGroup.Item>
                                         There
                                         {' '}
+                                        {projectData.tasksCount === '1 task' ? ('is') : ('are')}
+                                        {' '}
+                                        <strong>{projectData.tasksCount}</strong>
+                                        {' '}
+                                        in the database.
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                        There
+                                        {' '}
                                         {projectData.finishedTaskCount === '1 finished task' ? ('is') : ('are')}
                                         {' '}
                                         <strong>{projectData.finishedTaskCount}</strong>
@@ -149,6 +158,7 @@ export default function Dashboard() {
                             </Card>
                         </div>
                     </div>
+
                 )}
         </Container>
 
