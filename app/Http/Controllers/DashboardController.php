@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -22,17 +23,19 @@ class DashboardController extends Controller
     public function dashboardData(){
         $projectCount = Project::get()->count();
         $finishedProjectCount = Project::where('project_state_id', '2')->count();
-        $projectsCreatedLastWeekCount = Project::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
-        $taskCount = Task::get()->count();
+        $projectsCreatedLastWeekCount = Project::whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])->count();
         $finishedTaskCount = Task::where('task_state_id', '3')->count();
-        $tasksCreatedLastWeekCount = Task::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $tasksCreatedLastWeekCount = Task::whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])->count();
+        $userCount = User::get()->count();
+        $usersCreatedLastMonth = User::whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])->count();
         $allData = array(
             'projectCount' => $projectCount." ".Str::plural('project', $projectCount),
             'finishedProjectCount' => $finishedProjectCount. " finished ".Str::plural('project', $finishedProjectCount),
             'projectsCreatedLastWeekCount' => $projectsCreatedLastWeekCount." ".Str::plural('project', $projectsCreatedLastWeekCount),
-            'taskCount' => $taskCount." ".Str::plural('task', $taskCount),
             'finishedTaskCount' => $finishedTaskCount." finished ".Str::plural('task', $finishedTaskCount),
             'tasksCreatedLastWeekCount' => $tasksCreatedLastWeekCount." ".Str::plural('task', $tasksCreatedLastWeekCount),
+            'userCount' => $userCount." ".Str::plural('user', $userCount),
+            'usersCreatedLastMonthCount' => $usersCreatedLastMonth." ".Str::plural('user', $usersCreatedLastMonth),
         );
         return $allData;
     }
