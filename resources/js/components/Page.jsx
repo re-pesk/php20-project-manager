@@ -11,7 +11,7 @@ const Page = ({ content, title }) => {
     return (
         <Container
             fluid
-            className={classNames('content', 'd-flex', 'flex-column', 'min-vh-100', { 'is-open': isOpen })}
+            className={classNames('content', 'd-flex', 'flex-column', 'min-vh-100', 'pt-0', { 'is-open': isOpen })}
         >
             <Header title={title} />
             {content()}
