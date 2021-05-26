@@ -20,13 +20,13 @@ class DashboardController extends Controller
 
     public function dashboardData()
     {
-        $projectCount = Project::get()->count();
+        $projectCount = Project::count();
         $finishedProjectCount = Project::where('project_state_id', '2')->count();
         $projectsCreatedLastWeekCount = Project::whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])->count();
         $finishedTaskCount = Task::where('task_state_id', '3')->count();
         $tasksCount = Task::count();
         $tasksCreatedLastWeekCount = Task::whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])->count();
-        $userCount = User::get()->count();
+        $userCount = User::count();
         $usersCreatedLastMonth = User::whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])->count();
         $allData = array(
             'projectCount' => $projectCount." ".Str::plural('project', $projectCount),
