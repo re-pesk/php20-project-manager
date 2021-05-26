@@ -55,7 +55,7 @@ a:focus {
     display: flex;
 }
 
-.sidebar-header h3 {
+.sidebar-header h3, h4, h5 {
     color: #fff;
     padding: 1em;
 }
