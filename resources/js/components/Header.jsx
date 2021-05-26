@@ -16,56 +16,55 @@ export default function Header(props) {
     const { userContext } = useUserContext({});
 
     return (
-        <>
-            <div className="d-flex align-items-start flex-column sticky-top">
-                <Button
-                    className={classNames({ invisible: isOpen })}
-                    variant="info"
-                    size="sm"
-                    onClick={toggle}
-                >
-                    <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
-                </Button>
-            </div>
-            <Container fluid>
-                <Navbar
-                    bg="light"
-                    // variant="info"
-                    // sticky="top"
-                    className="navbar shadow-sm p-3 mb-5 text-info"
-                    expand
-                >
-                    <Nav className={classNames('col-2', { 'toggle-visibility': isOpen })} navbar />
-                    <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
-                    {
-                        userContext.user
-                            ? (
-                                <Nav className="col-2 justify-content-end" navbar>
-                                    <Nav.Link><p>{userContext.user.username}</p></Nav.Link>
-                                    <LinkContainer to="/logout">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 text-info" />
-                                        </Nav.Link>
-                                    </LinkContainer>
-                                </Nav>
-                            )
-                            : (
-                                <Nav className="col-2 justify-content-end" navbar>
-                                    <LinkContainer to="/login">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faSignInAlt} className="mr-2 text-info" />
-                                        </Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/register">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faUserPlus} className="mr-2 text-info" />
-                                        </Nav.Link>
-                                    </LinkContainer>
-                                </Nav>
-                            )
-                    }
-                </Navbar>
-            </Container>
-        </>
+        <Container className="px-0" fluid>
+            <Navbar
+                bg="light"
+                // variant="info"
+                // sticky="top"
+                className="navbar shadow-sm py-3 px-0 mb-5 text-info"
+                expand
+            >
+                <Nav className={classNames('col-2', { 'toggle-visibility': isOpen })} navbar>
+                    <div className="d-flex align-items-start flex-column">
+                        <Button
+                            // className={classNames({ invisible: isOpen })}
+                            variant="info"
+                            size="sm"
+                            onClick={toggle}
+                        >
+                            <FontAwesomeIcon icon={isOpen ? faArrowLeft : faArrowRight} />
+                        </Button>
+                    </div>
+                </Nav>
+                <Nav className="text-center mx-auto" navbar><h1>{title}</h1></Nav>
+                {
+                    userContext.user
+                        ? (
+                            <Nav className="col-2 justify-content-end" navbar>
+                                <Nav.Link><p>{userContext.user.username}</p></Nav.Link>
+                                <LinkContainer to="/logout">
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 text-info" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                        )
+                        : (
+                            <Nav className="col-2 justify-content-end" navbar>
+                                <LinkContainer to="/login">
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-2 text-info" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/register">
+                                    <Nav.Link>
+                                        <FontAwesomeIcon icon={faUserPlus} className="mr-2 text-info" />
+                                    </Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                        )
+                }
+            </Navbar>
+        </Container>
     );
 }
