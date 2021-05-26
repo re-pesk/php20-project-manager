@@ -17,7 +17,7 @@ export default function Header(props) {
 
     return (
         <>
-            <div className="d-flex align-items-start flex-column">
+            <div className="d-flex align-items-start flex-column sticky-top">
                 <Button
                     className={classNames({ invisible: isOpen })}
                     variant="info"
