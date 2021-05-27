@@ -1,4 +1,4 @@
-import { faPhp, faReact } from '@fortawesome/free-brands-svg-icons';
+import { faLaravel, faReact } from '@fortawesome/free-brands-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,10 +7,6 @@ import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import '../../../css/welcome.css';
 import { useUserContext } from '../../context/UserContext';
-// import { useHistory } from 'react-router-dom';
-// import ReactComponentSample from './ReactComponentSample';
-// import LaravelLogo from './LaravelLogo';
-// import Grid from './Grid';
 
 export default function Welcome() {
     const { userContext } = useUserContext({});
@@ -26,7 +22,7 @@ export default function Welcome() {
                     </Row>
                     <Row className="pb-3 mainrow">
                         <Col className="font col-left">
-                            <Image src="../../../img/multitasking.jpeg" className="w-100" />
+                            <Image src="../../../../img/multitasking.jpeg" className="w-100" />
                         </Col>
                         {
                             userContext.user
@@ -130,7 +126,7 @@ export default function Welcome() {
                                 className="lastcolumn"
                                 style={{ fontSize: '3rem' }}
                             >
-                                <FontAwesomeIcon icon={faPhp} />
+                                <FontAwesomeIcon icon={faLaravel} />
                                 {' '}
                                 +
                                 {' '}
