@@ -26,6 +26,18 @@ const images = [
         title: 'Rokis',
         text: 'Gražuolis ir taškas!',
     },
+    {
+        id: 5,
+        src: '../../img/beeeee.jpg',
+        title: 'Striksė',
+        text: 'Ir aš noriu būti programuotoja!',
+    },
+    {
+        id: 6,
+        src: '../../img/sniege.jpg',
+        title: 'Sniegė',
+        text: 'Ant pelės miegoti patogiausia :)',
+    },
 ];
 
 const Cards = () => (
