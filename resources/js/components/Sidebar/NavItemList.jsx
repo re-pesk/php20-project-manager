@@ -5,7 +5,7 @@ import navItemListData from './data/nav-item-list-data';
 import NavItem from './NavItem';
 
 const NavItemList = () => (
-    <Nav className="flex-column ml-4">
+    <Nav className="flex-column">
         {navItemListData.map((itemData, index) => {
             const { href, icon, text } = itemData;
             const key = `id-${index}`;
