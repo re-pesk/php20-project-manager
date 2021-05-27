@@ -187,9 +187,9 @@ li a.dropdown-toggle::after {
         height: 100vh !important;
     }
 
-    /* .no-scroll {
+    .no-scroll {
         overflow: hidden;
-    } */
+    }
 }
 
 .toggle-visibility {
