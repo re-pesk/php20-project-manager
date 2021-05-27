@@ -22,7 +22,7 @@ export default function Welcome() {
                     </Row>
                     <Row className="pb-3 mainrow">
                         <Col className="font col-left">
-                            <Image src="../../../../img/multitasking.jpeg" className="w-100" />
+                            <Image src="../../../../img/multitasking.jpg" className="w-100" />
                         </Col>
                         {
                             userContext.user
