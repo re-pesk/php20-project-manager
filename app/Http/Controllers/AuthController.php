@@ -6,58 +6,57 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['cors']);
+        $this->middleware(['auth:sanctum'])->only(['logout', 'isLoggedIn']);
+        $this->middleware(['log.routes']);
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Bad credencials'], 401);
+        }
+
+        $user = auth()->user();
 
         $response = [
             'user' => $user,
-            'token' => $token,
+            'message' => 'The user is registered!'
         ];
 
-        return response($response, 201);
+        return response($response);
     }
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
-
-        $user = User::where([
-            'email' => $request->email,
-        ])->first();
-
-        if (!$user || !Hash::check($user->password, $request->password)) {
-            return response(['message' => "Bad credencials"], 401);
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'The username and password you entered does not match any account! Please try again'], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $user = auth()->user();
 
         $response = [
             'user' => $user,
-            'token' => $token,
+            'message' => 'The user is logged in!'
         ];
 
         return response($response, 201);
@@ -65,8 +64,24 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        Auth::guard('web')->logout();
 
-        return response(['message' => 'Logged out']);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response(['message' => 'The user is logged out']);
+    }
+
+    public function isLoggedIn(Request $request)
+    {
+        $user = $request->user();
+
+        $response = [
+            'user' => $user,
+            'message' => 'The user is logged in!',
+            'reloaded_at' => date('c'),
+        ];
+
+        return response($response);
     }
 }

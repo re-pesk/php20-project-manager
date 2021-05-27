@@ -1,6 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const mix = require('laravel-mix');
 const ESLintPlugin = require('eslint-webpack-plugin'); // +++
+require('dotenv').config();
+const webpack = require('webpack');
+
+const dotEnvPlugin = new webpack.DefinePlugin({
+    'process.env': {
+        APP_DEBUG: JSON.stringify(process.env.APP_DEBUG || false),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        FRONT_LOGS: JSON.stringify(process.env.FRONT_LOGS || false),
+    },
+});
+
+const { DOMAIN_NAME, SERVER_PORT } = process.env;
 
 /*
  |--------------------------------------------------------------------------
@@ -14,10 +26,11 @@ const ESLintPlugin = require('eslint-webpack-plugin'); // +++
  */
 
 mix
-    .webpackConfig({ plugins: [new ESLintPlugin()] })
+    .webpackConfig({ plugins: [new ESLintPlugin(), dotEnvPlugin] })
     .sourceMaps(false, 'source-map')
     .copyDirectory('resources/_public', 'public')
+    .copyDirectory('resources/img', 'public/img')
     .js('resources/js/main.js', 'public/js')
     .postCss('resources/css/main.css', 'public/css', [])
     .react()
-    .browserSync({ proxy: '127.0.0.1:8000', ui: false });
+    .browserSync({ proxy: `${DOMAIN_NAME}:${SERVER_PORT}`, ui: false, open: 'external', host: DOMAIN_NAME });
