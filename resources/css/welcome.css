@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+.font {
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Squada One', cursive;
+    font-size: 2.5rem;
+    /* font-weight: bold; */
+    color: rgba(205,234,238,255);
+    text-align: center;
+}
+
+.title {
+    font-size: 4rem;
+    font-family: 'Squada One', cursive;
+    color: rgba(205,234,238,255);
+    text-align: center;
+    letter-spacing: 0.5rem;
+    border-bottom: 4px solid rgba(205,234,238,255);
+}
+
+/* .mainCnt {
+    background-color: white;
+    border: 1px solid black;
+} */
+
+.white {
+    background-color: white;
+}
+
+.background {
+    background-color: rgba(26,139,171,255);
+}
+
+.intro{
+    background-color: rgb(30,78,94);
+    /* border-radius: 35%; */
+}
+
+.col-left {
+    border-right: 2px solid rgba(205,234,238,255);
+}
+
+.col-right {
+    border-left: 2px solid rgba(205,234,238,255);
+}
+
+.signup {
+    background-color: #f3f3f3;
+    color: rgb(30,78,94);
+    font-size: 3rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.sgnupbutton {
+    background-color: rgb(30,78,94);
+    color: #f3f3f3;
+    border: none;
+    width: 25%;
+}
+
+.signuptext {
+    border-bottom: 1px solid rgb(30,78,94);
+}
+
+.sgnupbutton:hover {
+    background-color: rgba(243,121,97,255);
+    color: rgb(30,78,94);
+}
+
+.logintext {
+    background-color: #f3f3f3;
+    color: rgb(30,78,94);
+    font-size: 1.6rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.loginlink {
+    cursor: pointer;
+}
+
+.loginlink:hover {
+    color: rgba(243,121,97,255);
+}
+
+.mainrow {
+    border-bottom: 4px solid rgba(205,234,238,255);;
+}
+
+.secondRowTitle {
+    font-size: 2.5rem;
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(205,234,238,255);
+    text-align: center;
+    border-bottom: 4px solid rgba(205,234,238,255);
+}
+
+.features {
+    background-color: #f3f3f3;
+    color: rgb(30,78,94);
+    font-size: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    border-bottom: 1px solid rgb(30,78,94);
+    line-height: 4rem;
+}
+
+.featurestitle {
+    font-size: 2rem;
+}
+
+.lastcolumn {
+    font-family: 'Open Sans', sans-serif;
+    color: #f3f3f3;
+    text-align: center;
+    font-weight: bold;
+}
