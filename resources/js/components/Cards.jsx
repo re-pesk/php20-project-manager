@@ -50,6 +50,18 @@ const images = [
         title: 'Ūdra',
         text: 'Yup tingim tingėt :D',
     },
+    {
+        id: 9,
+        src: '../../img/katinas.jpg',
+        title: 'Aš tai Katinas.',
+        text: 'O tu kas?',
+    },
+    {
+        id: 10,
+        src: '../../img/pilvukas.jpg',
+        title: 'Paglostyk pilvuką.',
+        text: 'Kad jau atsitraukei nuo kompo.',
+    },
 ];
 
 const Cards = () => (
