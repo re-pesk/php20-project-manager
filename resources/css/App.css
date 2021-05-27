@@ -145,7 +145,7 @@ li a.dropdown-toggle::after {
         left: 0px;
         top: 0px;
         bottom: 0px;
-        z-index: 99;
+        z-index: 1032;
     }
 
     .content.is-open {
@@ -182,7 +182,7 @@ li a.dropdown-toggle::after {
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 98;
+        z-index: 1031;
         background: rgba(2, 2, 2, 0.5);
         height: 100vh !important;
     }

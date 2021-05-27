@@ -38,6 +38,18 @@ const images = [
         title: 'Sniegė',
         text: 'Ant pelės miegoti patogiausia :)',
     },
+    {
+        id: 7,
+        src: '../../img/ponas-priuskus.png',
+        title: 'Ponas Priuškus',
+        text: 'Tingiu kaip ir šeimininkė :D',
+    },
+    {
+        id: 8,
+        src: '../../img/udra.jpg',
+        title: 'Ūdra',
+        text: 'Yup tingim tingėt :D',
+    },
 ];
 
 const Cards = () => (
