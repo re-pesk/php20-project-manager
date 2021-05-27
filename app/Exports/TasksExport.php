@@ -4,9 +4,14 @@ namespace App\Exports;
 
 use App\Models\Task;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
-class TasksExport implements FromQuery
+class TasksExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting
 {
     use Exportable;
 
@@ -43,5 +48,41 @@ class TasksExport implements FromQuery
         }
 
         return $query;
+    }
+
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Name',
+            'Description',
+            'Priority ID',
+            'State ID',
+            'Project ID',
+            'Created at',
+            'Updated at',
+        ];
+    }
+
+    public function map($task): array
+    {
+        return [
+            $task->id,
+            $task->name,
+            $task->description,
+            $task->priority_id,
+            $task->task_state_id,
+            $task->project_id,
+            Date::dateTimeToExcel($task->created_at),
+            Date::dateTimeToExcel($task->updated_at),
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'G' => NumberFormat::FORMAT_DATE_YYYYMMDD . ' ' .NumberFormat::FORMAT_DATE_TIME4,
+            'H' => NumberFormat::FORMAT_DATE_YYYYMMDD . ' ' .NumberFormat::FORMAT_DATE_TIME4,
+        ];
     }
 }
