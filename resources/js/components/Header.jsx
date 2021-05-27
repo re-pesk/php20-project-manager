@@ -16,7 +16,7 @@ export default function Header(props) {
     const { userContext } = useUserContext({});
 
     return (
-        <Container className="px-0" fluid>
+        <Container className="px-0 sticky-top" fluid>
             <Navbar
                 bg="light"
                 // variant="info"
