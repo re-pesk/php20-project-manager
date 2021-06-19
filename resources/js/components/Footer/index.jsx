@@ -28,7 +28,7 @@ export default function Footer() {
                     </Nav.Item>
                 </Nav>
             </Navbar>
-            <Modal show={show} onHide={closeModal}>
+            <Modal className="px-2" show={show} onHide={closeModal} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>PHProjectMan Team</Modal.Title>
                 </Modal.Header>
