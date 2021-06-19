@@ -169,13 +169,6 @@ li a.dropdown-toggle::after {
         left: 68%;
     }
 
-    /* .board {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 0;
-        padding-right: 0;
-    } */
-
     .tint {
         position: absolute;
         top: 0;
