@@ -1,7 +1,12 @@
-import React from 'react';
-import { Container, Navbar } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Container, Modal, Nav, Navbar } from 'react-bootstrap';
+import TeamList from '../TeamList';
 
 export default function Footer() {
+    const [show, setShow] = useState(false);
+    const closeModal = () => setShow(false);
+    const showModal = () => setShow(true);
+
     return (
         <Container
             fluid
@@ -14,14 +19,28 @@ export default function Footer() {
                 bg="info"
                 sticky="bottom"
                 className="navbar text-light shadow-sm p-3 m-0 mt-5"
+                onSelect={showModal}
                 expand
             >
-                <footer className="footer mx-auto">
-                    <span>
-                        &copy; 2021 PHProjectMan team.
-                    </span>
-                </footer>
+                <Nav className="text-center mx-auto" navbar>
+                    <Nav.Item>
+                        <Nav.Link className="text-white" eventKey="x">&copy; 2021 PHProjectMan team.</Nav.Link>
+                    </Nav.Item>
+                </Nav>
             </Navbar>
+            <Modal show={show} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>PHProjectMan Team</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TeamList />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }

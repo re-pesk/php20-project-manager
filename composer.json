@@ -57,7 +57,13 @@
         "php-artisan-serve": [
             "@php artisan serve"
         ],
-        "start": "@parallel npm-run-watch-poll php-artisan-serve"
+        "start": "@parallel npm-run-watch-poll php-artisan-serve",
+        "front": [
+            "npm run watch-poll"
+        ],
+        "back": [
+            "@php artisan serve"
+        ]
     },
     "extra": {
         "laravel": {
