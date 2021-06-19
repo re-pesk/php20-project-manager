@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 const { _ } = window;
 
@@ -8,9 +9,9 @@ const teamData = [
         members: [
             { name: 'Arnoldas Venckus', email: '' },
             { name: 'Karolis Kvatavičius', email: 'karolis(dot)kvatavicius(at)gmail(dot)com' },
-            { name: 'Marius Šerys', email: '' },
+            { name: 'Marius Šerys', email: 'marius(dot)serys(at)gmail(dot)com' },
             { name: 'Rėdas Peškaitis', email: 'redas(dot)peskaitis(at)gmail(dot).com' },
-            { name: 'Žilvinas Kazakauskas', email: '' },
+            { name: 'Žilvinas Kazakauskas', email: 'zil(dot)kazakauskas(at)gmail(dot)com' },
         ],
     },
     {
@@ -25,9 +26,13 @@ const teamData = [
 const memberList = (members) => members.map(
     (member) => (
         <li>
-            {member.name}
-            {': '}
-            {member.email}
+            <Row>
+                <Col className="col-5">
+                    {member.name}
+                    {': '}
+                </Col>
+                <Col className="col-7">{member.email}</Col>
+            </Row>
         </li>
     ),
 );
