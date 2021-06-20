@@ -35,6 +35,9 @@ export default function Footer() {
                 <Modal.Body>
                     <TeamList />
                 </Modal.Body>
+                <Modal.Body className="text-center">
+                    <p><a href="https://github.com/re-pe/php20-project-manager">Github repository</a></p>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeModal}>
                         Close

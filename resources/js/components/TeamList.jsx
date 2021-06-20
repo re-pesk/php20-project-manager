@@ -7,18 +7,18 @@ const teamData = [
     {
         memberType: 'developers',
         members: [
-            { name: 'Arnoldas Venckus', email: '' },
-            { name: 'Karolis Kvatavičius', email: 'karolis(dot)kvatavicius(at)gmail(dot)com' },
-            { name: 'Marius Šerys', email: 'marius(dot)serys(at)gmail(dot)com' },
-            { name: 'Rėdas Peškaitis', email: 'redas(dot)peskaitis(at)gmail(dot).com' },
-            { name: 'Žilvinas Kazakauskas', email: 'zil(dot)kazakauskas(at)gmail(dot)com' },
+            { name: 'Arnoldas Venckus', email: 'arnoldas (dot) venckus (at) gmail (dot) com' },
+            { name: 'Karolis Kvatavičius', email: 'karolis (dot) kvatavicius (at) gmail (dot) com' },
+            { name: 'Marius Šerys', email: 'marius (dot) serys (at) gmail (dot) com' },
+            { name: 'Rėdas Peškaitis', email: 'us<!-- abc@def -->er@domai<!-- @abc.com -->n.com  redas (dot) peskaitis (at) gmail (dot) com' },
+            { name: 'Žilvinas Kazakauskas', email: 'zil (dot) kazakauskas (at) gmail (dot) com' },
         ],
     },
     {
         memberType: 'testers',
         members: [
-            { name: 'Akvilė Gurskaitė-Rutkauskienė', email: '' },
-            { name: 'Julius Činčikas', email: '' },
+            { name: 'Akvilė Gurskaitė-Rutkauskienė', email: 'akvile (dot) gurskaite (at) gmail (dot) com' },
+            { name: 'Julius Činčikas', email: 'julius (dot) cincikas (at) gmail (dot) com' },
         ],
     },
 ];
