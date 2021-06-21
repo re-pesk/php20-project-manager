@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
+import ContactEmail from './ContactEmail';
 
 const { _ } = window;
 
@@ -7,39 +8,41 @@ const teamData = [
     {
         memberType: 'developers',
         members: [
-            { name: 'Arnoldas Venckus', email: '' },
-            { name: 'Karolis Kvatavičius', email: 'karolis(dot)kvatavicius(at)gmail(dot)com' },
-            { name: 'Marius Šerys', email: 'marius(dot)serys(at)gmail(dot)com' },
-            { name: 'Rėdas Peškaitis', email: 'redas(dot)peskaitis(at)gmail(dot).com' },
-            { name: 'Žilvinas Kazakauskas', email: 'zil(dot)kazakauskas(at)gmail(dot)com' },
+            { name: 'Arnoldas Venckus', emailKey: 'arnoldas' },
+            { name: 'Karolis Kvatavičius', emailKey: 'karolis' },
+            { name: 'Marius Šerys', emailKey: 'marius' },
+            { name: 'Rėdas Peškaitis', emailKey: 'redas' },
+            { name: 'Žilvinas Kazakauskas', emailKey: 'zilvinas' },
         ],
     },
     {
         memberType: 'testers',
         members: [
-            { name: 'Akvilė Gurskaitė-Rutkauskienė', email: '' },
-            { name: 'Julius Činčikas', email: '' },
+            { name: 'Akvilė Gurskaitė-Rutkauskienė', emailKey: 'akvile' },
+            { name: 'Julius Činčikas', emailKey: 'julius' },
         ],
     },
 ];
 
 const memberList = (members) => members.map(
-    (member) => (
-        <li>
-            <Row>
+    (member, index) => (
+        <li key={`key${index + 1}`}>
+            <Row style={{ height: '2rem' }}>
                 <Col className="col-5">
                     {member.name}
                     {': '}
                 </Col>
-                <Col className="col-7">{member.email}</Col>
+                <Col className="col-7">
+                    <ContactEmail emailKey={member.emailKey} />
+                </Col>
             </Row>
         </li>
     ),
 );
 
 const TeamList = () => teamData.map(
-    (item) => (
-        <div>
+    (item, index) => (
+        <div key={`key${index + 1}`}>
             <h5>
                 {_.upperFirst(item.memberType)}
                 :
