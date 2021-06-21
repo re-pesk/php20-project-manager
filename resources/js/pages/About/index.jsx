@@ -9,7 +9,9 @@ const Content = () => (
             <Col className="mx-auto col-8">
                 <h1 className="text-center my-5">PHProjectMan Team</h1>
                 <TeamList />
-                <p><a href="https://github.com/re-pe/php20-project-manager">Github repository</a></p>
+                <p className="text-center">
+                    <a href="https://github.com/re-pe/php20-project-manager">Github repository</a>
+                </p>
             </Col>
         </Row>
         <Cards />
