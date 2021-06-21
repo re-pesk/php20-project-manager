@@ -108,6 +108,12 @@ npm install
 npm run dev
 ```
 
+If you don't like to use `browserSync`, remove or comment
+
+`.browserSync({ proxy: \`${DOMAIN_NAME}:${SERVER_PORT}\`, ui: false, open: 'external', host: DOMAIN_NAME })`
+
+in webpack.mix.js. Don't forget to place `;` after `.react()`.
+
 ## Run PHProjectMan
 
 ```bash
