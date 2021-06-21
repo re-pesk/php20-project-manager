@@ -25,4 +25,4 @@
 
 ## Instrukcijos
 
-Instrukcijas galima rasti [`_doc` kataloge](_doc/instrukcijos.md)
+[Instrukcijas](_doc/instrukcijos.md) galima rasti `_doc` kataloge
